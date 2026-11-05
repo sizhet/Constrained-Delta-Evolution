@@ -1,0 +1,35 @@
+{
+  "title": "Constrained Delta Evolution (CDE): A General Framework for Structural Search, Optimization, Metric Evolution, and Distributed Intelligence",
+  "upload_type": "publication",
+  "publication_type": "report",
+  "creators": [
+    {
+      "name": "Tan, Sizhe"
+    },
+    {
+      "name": "GPT-Obot"
+    }
+  ],
+  "description": "<p>Constrained Delta Evolution (CDE) is a proposed specifications-first research framework for exploring state spaces through generated deltas governed by explicit constraints, evaluation policies, and path semantics. It generalizes ideas from Bucket Tree of Permutation (BTP) and Dynamic Bucket Tree of Permutation (D-BTP) into a state–delta–constraint approach supporting adaptive M-to-N branching, path memory and loop control, multi-scale directional exploration, and integration with established search, dynamic programming, and branch-and-bound methods.</p><p>The v1.0.0 research corpus includes 12 foundations papers, six specifications, five illustrative cases, four research extensions, and accompanying glossaries, open questions, testable hypotheses, and a validation roadmap. It also examines solution–metric co-evolution, distributed exploration, typed structural relay, collective learning, and controlled recursive generator evolution. This release presents theoretical proposals and research protocols, not empirical demonstrations of superior performance, generalization, or recursive self-improvement. Such claims require independent, reproducible validation.</p>",
+  "keywords": [
+    "constrained delta evolution",
+    "structural intelligence",
+    "state delta constraint",
+    "adaptive M-to-N branching",
+    "structural search",
+    "combinatorial optimization",
+    "dynamic programming",
+    "branch and bound",
+    "directional exploration",
+    "metric co-evolution",
+    "distributed exploration",
+    "structural relay",
+    "collective learning",
+    "recursive self-improvement"
+  ],
+  "license": "Apache-2.0",
+  "access_right": "open",
+  "version": "1.0.0",
+  "language": "eng",
+  "notes": "Initial proposed research release. No DOI, publication date, or repository URL is asserted in this metadata. Verify author attribution, final repository URL, independent figure assets, and release contents before Zenodo publication. The included experiments are research plans unless separately documented as completed."
+}
