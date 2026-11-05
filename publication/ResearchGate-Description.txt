@@ -1,0 +1,12 @@
+Constrained Delta Evolution (CDE): A General Framework for Structural Search, Optimization, Metric Evolution, and Distributed Intelligence
+
+Authors: Sizhe Tan and GPT-Obot
+Version: v1.0.0 — Initial Research Framework
+License: Apache-2.0
+
+Constrained Delta Evolution (CDE) is a proposed general framework for exploring and improving structured solution spaces through explicit state representations, candidate changes (Deltas), and constraint-governed transitions. Extending ideas developed in Bucket Tree of Permutation (BTP) and Dynamic BTP (D-BTP), CDE studies adaptive M-to-N branching, path memory and loop control, multi-scale and directional exploration, and integration with established search, dynamic programming, and branch-and-bound methods. The framework also considers the co-evolution of solutions and evaluation metrics, distributed exploration contracts, typed Structural Relay for collective learning, and independently validated evolution of generators and policies. Its aim is not to replace proven optimization techniques or claim universal performance advantages, but to provide a common language and modular research architecture for comparing, combining, and evolving exploration methods across applications. The v1.0.0 repository presents 12 foundational papers, six specifications, five illustrative cases, four extensions, and supporting research questions, testable hypotheses, and a validation roadmap. Empirical performance, generalization, and recursive-improvement claims remain open for testing. Contributions, critical evaluations, counterexamples, and reproducible experiments are welcome.
+
+Research repository: GitHub — Constrained-Delta-Evolution (repository URL to be added after confirmation)
+DOI: Pending GitHub Release and Zenodo archival; no DOI has been assigned yet.
+
+Keywords: Constrained Delta Evolution; Structural Intelligence; State–Delta–Constraint; Adaptive Branching; Structural Search; Optimization; Metric Co-Evolution; Distributed Exploration; Structural Relay; Collective Learning; Recursive Self-Improvement.
