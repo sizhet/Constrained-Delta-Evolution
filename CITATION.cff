@@ -1,0 +1,41 @@
+cff-version: 1.2.0
+message: >-
+  If you use or build upon the Constrained Delta Evolution (CDE) research
+  framework, please cite this repository and the relevant versioned manuscript.
+  A DOI and formal release date will be added after publication is confirmed.
+type: software
+title: >-
+  Constrained Delta Evolution (CDE): A General Framework for Structural
+  Search, Optimization, Metric Evolution, and Distributed Intelligence
+authors:
+  - family-names: Tan
+    given-names: Sizhe
+  - name: GPT-Obot
+abstract: >-
+  Constrained Delta Evolution (CDE) is a proposed specifications-first
+  research framework for exploring state spaces through generated deltas
+  governed by explicit constraints, evaluation policies, and path semantics.
+  It investigates adaptive M-to-N branching, multi-scale directional
+  exploration, integration with search, dynamic programming and
+  branch-and-bound, solution-metric co-evolution, distributed exploration,
+  typed structural relay, and controlled recursive generator evolution.
+  The research corpus comprises conceptual foundations, contracts,
+  illustrative cases, open questions, testable hypotheses, and a validation
+  roadmap. Claims of superior performance, generalization, or recursive
+  self-improvement remain unverified until supported by reproducible evidence.
+keywords:
+  - constrained delta evolution
+  - structural intelligence
+  - state delta constraint
+  - adaptive branching
+  - structural search
+  - combinatorial optimization
+  - dynamic programming
+  - branch and bound
+  - metric co-evolution
+  - distributed exploration
+  - structural relay
+  - collective learning
+  - recursive self-improvement
+license: Apache-2.0
+version: 1.0.0
