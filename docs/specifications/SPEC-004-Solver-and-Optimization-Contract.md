@@ -18,6 +18,12 @@ This proposed specification defines an interoperable, solver-neutral **Solver an
 
 ---
 
+![Fig-006-Search-DP-and-Branch-and-Bound-Integration.png](../../figures/Fig-006-Search-DP-and-Branch-and-Bound-Integration.png)
+
+*Figure 6. CDE acts as a contract-driven exploration interface over solver families. General search proposes candidates; dynamic programming requires valid future-equivalence keys; branch-and-bound requires admissible bounds and sound pruning. Solver-specific certificates remain distinct from heuristic best-known solutions.*
+
+---
+
 ## 1. Normative language and scope
 
 The terms **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** express requirements for the declared conformance profile. The baseline profile is **CDE-Solver-Core-v1**. Optional profiles are identified in Section 31.

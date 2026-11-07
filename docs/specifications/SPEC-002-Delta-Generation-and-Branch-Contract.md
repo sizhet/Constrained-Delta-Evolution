@@ -18,6 +18,18 @@ This specification defines the proposed interoperable contract for **Delta gener
 
 ---
 
+![Fig-003-State-Container-and-Constraint-Governed-Delta.png](../../figures/Fig-003-State-Container-and-Constraint-Governed-Delta.png)
+
+*Figure 3. A typed Delta proposes a transition from a versioned State Container to a candidate successor. Hard-constraint checks and coherent-version validation determine whether the transition may be committed; directional scores may prioritize attempts but cannot substitute for feasibility.*
+
+---
+
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+
+*Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
+
+---
+
 ## 1. Normative Language and Conformance Scope
 
 The terms **MUST**, **MUST NOT**, **REQUIRED**, **SHOULD**, **SHOULD NOT**, and **MAY** have normative meaning within the declared conformance profile.

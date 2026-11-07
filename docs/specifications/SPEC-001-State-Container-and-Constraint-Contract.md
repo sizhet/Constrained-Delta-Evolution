@@ -17,6 +17,12 @@ This specification defines the minimum interoperable **State Container and Const
 
 ---
 
+![Fig-003-State-Container-and-Constraint-Governed-Delta.png](../../figures/Fig-003-State-Container-and-Constraint-Governed-Delta.png)
+
+*Figure 3. A typed Delta proposes a transition from a versioned State Container to a candidate successor. Hard-constraint checks and coherent-version validation determine whether the transition may be committed; directional scores may prioritize attempts but cannot substitute for feasibility.*
+
+---
+
 ## 1. Normative Language and Scope
 
 The terms **MUST**, **MUST NOT**, **REQUIRED**, **SHOULD**, **SHOULD NOT**, and **MAY** express requirement strength in this proposed contract.

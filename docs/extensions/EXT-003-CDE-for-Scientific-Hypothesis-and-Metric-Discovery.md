@@ -20,6 +20,12 @@ The paper defines canonical Hypothesis, Experiment, Evidence, Question, and Metr
 
 ---
 
+![Fig-008-Solution-and-Metric-Co-Evolution.png](../../figures/Fig-008-Solution-and-Metric-Co-Evolution.png)
+
+*Figure 8. Solutions and metrics evolve through separate, versioned candidate loops. Improved solution scores under a metric do not certify that the metric itself is better; metric changes require independent decision-utility validation, held-out evidence, and governance before promotion.*
+
+---
+
 ## 1. Motivation and Research Position
 
 Scientific discovery is not merely optimization of a known objective. The researcher must decide what to ask, which hypotheses deserve attention, what observations would distinguish them, which instruments are trustworthy, and whether the chosen metric measures the phenomenon of interest. CDE provides a candidate coordination language for these interacting searches, not a replacement for scientific reasoning or domain expertise.

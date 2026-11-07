@@ -18,6 +18,12 @@ This specification proposes a versioned, auditable **Path Memory and Loop Contro
 
 ---
 
+![Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png](../../figures/Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png)
+
+*Figure 5. Path-local accepted and excluded decision sets support constructive NoSubtree semantics under fixed-context assumptions. Deferred, infeasible, and pruned branches remain distinct; controlled Loop Back may be legitimate in reconfiguration, cyclic, or representation-evolving searches.*
+
+---
+
 ## 1. Normative Language
 
 **MUST**, **MUST NOT**, **REQUIRED**, **SHOULD**, **SHOULD NOT**, and **MAY** are normative within a declared conformance profile. A MUST requirement is required for the stated profile; a SHOULD requirement permits a documented exception; MAY denotes optional behavior.

@@ -16,6 +16,14 @@
 
 This proposed specification defines a versioned, auditable, solver-neutral **Distributed Exploration and Structural Relay Contract** for Constrained Delta Evolution (CDE). It covers task envelopes, immutable context snapshots, task partitioning and coverage, leases and retries, at-least-once delivery and idempotent effects, worker trust, result verification, globally coupled constraints, shared incumbents and certified bounds, partial results, checkpoint/restart, failure recovery, termination detection, and typed Structural Relay artifacts. It distinguishes receipt of information from validation, applicability, assimilation, and measured collective learning. It offers required and optional conformance profiles, formal conditional invariants, a 60-case test suite, algorithms, and concrete case studies. It does not claim that distributed execution necessarily accelerates a task, that local solutions always compose, or that shared evidence is inherently correct.
 
+---
+
+![Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png](../../figures/Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png)
+
+*Figure 9. A logical CDE orchestrator dispatches version-pinned exploration contracts to heterogeneous workers, reconciles global constraints and evidence, and publishes typed Structural Relay artifacts. Shared results and methods require target-side validation before being counted as transferable capabilities.*
+
+---
+
 ## 1. Normative language, dependencies, and purpose
 
 **MUST**, **MUST NOT**, **SHOULD**, **SHOULD NOT**, and **MAY** denote normative requirements for the declared profile. Baseline: **CDE-Distributed-Relay-Core-v1**. Normative dependencies: SPEC-001 (state/constraint/commit), SPEC-002 (Delta/proposal/branch accounting), SPEC-003 (path memory/Loop Back), SPEC-004 (solver/optimization/verification). The present contract defines inter-agent orchestration and evidence exchange, not a network transport, programming language, consensus protocol, cryptographic scheme, or universal solver. SPEC-006 governs promotion of metrics and recursive policies. A conforming system MUST declare its actual consistency boundary and trust model. Distributed work MAY be centrally orchestrated, federated, or hierarchical; the control plane is logical, not necessarily a single physical server.

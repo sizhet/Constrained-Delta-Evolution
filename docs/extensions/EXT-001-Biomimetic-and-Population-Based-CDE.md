@@ -20,6 +20,19 @@ The paper formalizes individual and population State Containers, typed mutation/
 **Key thesis:** A population becomes a potentially useful *collective structural search system* only when its proposals, constraints, evidence, transfer conditions, costs, and learning outcomes are explicitly represented and independently validated.
 
 ---
+
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+
+*Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
+
+---
+
+![Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png](../../figures/Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png)
+
+*Figure 7. Local, regional, long-range, and Relay-guided Delta generators explore complementary neighborhoods. Directional fields and weak evidence guide proposal ranking while maintaining uncertainty, diversity, counterexample probes, and hard-constraint checks.*
+
+---
+
 ## 1. Scope and Research Position
 
 This extension examines how population-based and biologically motivated search mechanisms can be expressed as **typed, constrained Delta exploration** within CDE. The term *biomimetic* identifies a source of hypotheses about exploration, communication, diversity, and adaptation; it does not imply biological fidelity or superiority. Evolutionary algorithms, particle swarms, ant-colony optimization, artificial bee colony methods, novelty search, quality-diversity algorithms, and island models already provide substantial prior art. CDE proposes a common contract for coordinating such methods with explicit state transitions, evidence, governance, and Relay.

@@ -21,6 +21,12 @@ The proposed laboratory combines typed matching hypotheses, directional weak evi
 
 ---
 
+![Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png](../../figures/Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png)
+
+*Figure 7. Local, regional, long-range, and Relay-guided Delta generators explore complementary neighborhoods. Directional fields and weak evidence guide proposal ranking while maintaining uncertainty, diversity, counterexample probes, and hard-constraint checks.*
+
+---
+
 ## 1. Motivation: From Matching Scores to Structural Hypotheses
 
 Conventional matching often computes a similarity score between two objects and chooses the highest-scoring correspondence. This works well in many applications, but can be inadequate when the correct interpretation depends on relationships, context, missing observations, competing explanations, or constraints across several matches.

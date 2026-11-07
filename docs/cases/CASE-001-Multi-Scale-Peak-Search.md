@@ -20,6 +20,24 @@ The case formalizes a two-dimensional benchmark family with multiple peaks, infe
 
 ---
 
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+
+*Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
+
+---
+
+![Fig-006-Search-DP-and-Branch-and-Bound-Integration.png](../../figures/Fig-006-Search-DP-and-Branch-and-Bound-Integration.png)
+
+*Figure 6. CDE acts as a contract-driven exploration interface over solver families. General search proposes candidates; dynamic programming requires valid future-equivalence keys; branch-and-bound requires admissible bounds and sound pruning. Solver-specific certificates remain distinct from heuristic best-known solutions.*
+
+---
+
+![Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png](../../figures/Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png)
+
+*Figure 7. Local, regional, long-range, and Relay-guided Delta generators explore complementary neighborhoods. Directional fields and weak evidence guide proposal ranking while maintaining uncertainty, diversity, counterexample probes, and hard-constraint checks.*
+
+---
+
 ## 1. Research Motivation
 
 A search algorithm can find a nearby local maximum yet miss a distant, higher one. The challenge is not simply to move farther. The algorithm must decide **when to intensify local exploration, when to broaden its radius, when to start from a different region, and when weak directional evidence is worth following**.

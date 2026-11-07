@@ -17,6 +17,18 @@ This specification defines versioned contracts for **metric evolution**, **Delta
 
 ---
 
+![Fig-008-Solution-and-Metric-Co-Evolution.png](../../figures/Fig-008-Solution-and-Metric-Co-Evolution.png)
+
+*Figure 8. Solutions and metrics evolve through separate, versioned candidate loops. Improved solution scores under a metric do not certify that the metric itself is better; metric changes require independent decision-utility validation, held-out evidence, and governance before promotion.*
+
+---
+
+![Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png](../../figures/Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png)
+
+*Figure 10. Controlled recursive evolution separates task exploration (L0), generator/operator evolution (L1), policy/representation adaptation (L2), and independent validation and governance (L3). Structural Relay can transmit validated methods and evidence across tasks, but recursive improvement and collective learning must be established empirically.*
+
+---
+
 ## 1. Normative Language
 
 The terms **MUST**, **MUST NOT**, **REQUIRED**, **SHOULD**, **SHOULD NOT**, and **MAY** are normative within the declared conformance profile. MUST identifies an indispensable condition; SHOULD identifies a recommendation whose exception requires a documented rationale; MAY identifies an optional feature.

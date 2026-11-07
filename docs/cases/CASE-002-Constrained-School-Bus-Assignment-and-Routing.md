@@ -20,6 +20,12 @@ The case defines a versioned State Container, a hierarchy of route and assignmen
 
 ---
 
+![Fig-006-Search-DP-and-Branch-and-Bound-Integration.png](../../figures/Fig-006-Search-DP-and-Branch-and-Bound-Integration.png)
+
+*Figure 6. CDE acts as a contract-driven exploration interface over solver families. General search proposes candidates; dynamic programming requires valid future-equivalence keys; branch-and-bound requires admissible bounds and sound pruning. Solver-specific certificates remain distinct from heuristic best-known solutions.*
+
+---
+
 ## 1. Motivation and Research Position
 
 A school district may transport many students from dispersed stops to multiple schools with different bell times, vehicle capacities, accessibility requirements, and operational restrictions. The problem is not merely to shorten each bus route. The district may care most about reducing the number of buses and drivers required, while preventing excessively long rides and maintaining safe, reliable service.

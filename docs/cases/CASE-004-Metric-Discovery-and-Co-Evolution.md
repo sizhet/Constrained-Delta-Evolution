@@ -22,6 +22,12 @@ The proposed framework combines classical multiobjective optimization, surrogate
 
 ---
 
+![Fig-008-Solution-and-Metric-Co-Evolution.png](../../figures/Fig-008-Solution-and-Metric-Co-Evolution.png)
+
+*Figure 8. Solutions and metrics evolve through separate, versioned candidate loops. Improved solution scores under a metric do not certify that the metric itself is better; metric changes require independent decision-utility validation, held-out evidence, and governance before promotion.*
+
+---
+
 ## 1. Why Metrics Must Sometimes Be Explored
 
 Optimization is typically described as finding:

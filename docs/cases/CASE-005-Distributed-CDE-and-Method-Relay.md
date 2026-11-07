@@ -21,6 +21,12 @@ Five benchmark families connect the preceding CDE cases: multi-scale peak search
 
 ---
 
+![Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png](../../figures/Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png)
+
+*Figure 9. A logical CDE orchestrator dispatches version-pinned exploration contracts to heterogeneous workers, reconciles global constraints and evidence, and publishes typed Structural Relay artifacts. Shared results and methods require target-side validation before being counted as transferable capabilities.*
+
+---
+
 ## 1. Purpose and Position in the CDE Case Series
 
 CASE-001 examines multi-scale exploration. CASE-002 introduces tightly coupled hard constraints and fleet-first optimization. CASE-003 studies uncertain evidence and competing matching hypotheses. CASE-004 makes the metric itself an evolving candidate. CASE-005 integrates their mechanisms into a distributed exploration and learning environment.

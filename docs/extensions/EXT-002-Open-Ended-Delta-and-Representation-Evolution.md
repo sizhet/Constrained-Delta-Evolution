@@ -22,6 +22,30 @@ This manuscript defines typed **Representation Deltas**, **Operator-Genesis Delt
 
 ---
 
+![Fig-003-State-Container-and-Constraint-Governed-Delta.png](../../figures/Fig-003-State-Container-and-Constraint-Governed-Delta.png)
+
+*Figure 3. A typed Delta proposes a transition from a versioned State Container to a candidate successor. Hard-constraint checks and coherent-version validation determine whether the transition may be committed; directional scores may prioritize attempts but cannot substitute for feasibility.*
+
+---
+
+![Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png](../../figures/Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png)
+
+*Figure 5. Path-local accepted and excluded decision sets support constructive NoSubtree semantics under fixed-context assumptions. Deferred, infeasible, and pruned branches remain distinct; controlled Loop Back may be legitimate in reconfiguration, cyclic, or representation-evolving searches.*
+
+---
+
+![Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png](../../figures/Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png)
+
+*Figure 7. Local, regional, long-range, and Relay-guided Delta generators explore complementary neighborhoods. Directional fields and weak evidence guide proposal ranking while maintaining uncertainty, diversity, counterexample probes, and hard-constraint checks.*
+
+---
+
+![Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png](../../figures/Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png)
+
+*Figure 10. Controlled recursive evolution separates task exploration (L0), generator/operator evolution (L1), policy/representation adaptation (L2), and independent validation and governance (L3). Structural Relay can transmit validated methods and evidence across tasks, but recursive improvement and collective learning must be established empirically.*
+
+---
+
 ## 1. Motivation: The Boundary of a Fixed Delta Vocabulary
 
 Consider a search engine that can change the assignment of one student to a bus, swap two stops, and merge two routes. It may search those neighborhoods thoroughly while missing a strategy that requires a new abstraction: grouping compatible trips into reusable vehicle blocks before assigning physical vehicles.

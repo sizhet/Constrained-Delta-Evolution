@@ -21,6 +21,24 @@ This document defines the state and relay contracts, distributed coordination mo
 
 ---
 
+![Fig-001-CDE-Grand-Architecture.png](../../figures/Fig-001-CDE-Grand-Architecture.png)
+
+*Figure 1. Conceptual architecture of Constrained Delta Evolution. A versioned State–Delta–Constraint core supports adaptive proposal generation and solver portfolios; optional orchestration, independent validation, Structural Relay, and controlled meta-evolution extend the system without weakening hard-constraint governance.*
+
+---
+
+![Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png](../../figures/Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png)
+
+*Figure 9. A logical CDE orchestrator dispatches version-pinned exploration contracts to heterogeneous workers, reconciles global constraints and evidence, and publishes typed Structural Relay artifacts. Shared results and methods require target-side validation before being counted as transferable capabilities.*
+
+---
+
+![Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png](../../figures/Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png)
+
+*Figure 10. Controlled recursive evolution separates task exploration (L0), generator/operator evolution (L1), policy/representation adaptation (L2), and independent validation and governance (L3). Structural Relay can transmit validated methods and evidence across tasks, but recursive improvement and collective learning must be established empirically.*
+
+---
+
 ## 1. Research Motivation
 
 A single solver may discover a useful search path. A population of solvers may cover more territory. A distributed system may execute more trials. None of these facts alone establishes that the system has learned collectively. For collective learning, a discovery made in one context must improve subsequent behavior elsewhere, under appropriate validation and cost accounting.
