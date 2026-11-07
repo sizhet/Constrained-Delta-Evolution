@@ -13,6 +13,20 @@ Constrained Delta Evolution (CDE) generalizes a binary, decision-oriented branch
 
 **Keywords:** Constrained Delta Evolution; Delta semantics; adaptive branching; M-to-N expansion; candidate generation; constraint propagation; path memory; state graphs; search policy; structural localization; distributed exploration
 
+---
+
+![Fig-002-From-BTP-and-D-BTP-to-CDE.png](../../figures/Fig-002-From-BTP-and-D-BTP-to-CDE.png)
+
+*Figure 2. Research lineage from BTP's binary constructive decisions, through D-BTP's dynamic and directional Delta generation, to CDE's representation-independent State–Delta–Constraint framework. The diagram expresses a conceptual generalization, not a claim of strict algorithmic superiority.*
+
+---
+
+![Fig-003-State-Container-and-Constraint-Governed-Delta.png](../../figures/Fig-003-State-Container-and-Constraint-Governed-Delta.png)
+
+*Figure 3. A typed Delta proposes a transition from a versioned State Container to a candidate successor. Hard-constraint checks and coherent-version validation determine whether the transition may be committed; directional scores may prioritize attempts but cannot substitute for feasibility.*
+
+---
+
 ## 1. Motivation: The Branching Structure Is Not the Problem
 
 The original Bucket Tree of Permutation (BTP) made an important computational choice explicit: a candidate assignment or structural decision could be accepted (Yes) or excluded (No). Dynamic BTP (D-BTP) enlarged the space of possible decisions through dynamically generated, directionally informed transformations. Yet neither a bucket nor a binary node is required by the more general computation. In a scheduling system, one state may offer dozens of reassignment moves. In scientific discovery, one hypothesis may suggest many distinct experiments. In metric learning, one metric may admit alternative feature additions, weight updates, and representation changes. In distributed search, different workers may explore different parts of the same state space using heterogeneous methods.
@@ -118,6 +132,10 @@ N_{\mathrm{nodes}}=|\{[q']_\sim:(q,\delta,a,q',\pi)\in E_t\}|\le N.
 \]
 
 The distinction between **candidate count**, **transition-edge count**, and **unique successor-node count** prevents an otherwise subtle ambiguity in “M-to-N branching.”
+
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+
+*Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
 
 ### 4.1 Illustrative example
 

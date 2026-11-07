@@ -17,6 +17,25 @@ Constrained Delta Evolution (CDE) proposes a common structural language for expl
 
 ---
 
+![Fig-001-CDE-Grand-Architecture.png](../../figures/Fig-001-CDE-Grand-Architecture.png)
+
+*Figure 1. Conceptual architecture of Constrained Delta Evolution. A versioned State–Delta–Constraint core supports adaptive proposal generation and solver portfolios; optional orchestration, independent validation, Structural Relay, and controlled meta-evolution extend the system without weakening hard-constraint governance.*
+
+---
+
+![Fig-002-From-BTP-and-D-BTP-to-CDE.png](../../figures/Fig-002-From-BTP-and-D-BTP-to-CDE.png)
+
+*Figure 2. Research lineage from BTP's binary constructive decisions, through D-BTP's dynamic and directional Delta generation, to CDE's representation-independent State–Delta–Constraint framework. The diagram expresses a conceptual generalization, not a claim of strict algorithmic superiority.*
+
+---
+
+![Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png](../../figures/Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png)
+
+*Figure 5. Path-local accepted and excluded decision sets support constructive NoSubtree semantics under fixed-context assumptions. Deferred, infeasible, and pruned branches remain distinct; controlled Loop Back may be legitimate in reconfiguration, cyclic, or representation-evolving searches.*
+
+---
+
+
 ## 1. Purpose: Closing the Foundations without Closing the Questions
 
 The first eleven CDE foundations move from a particular family of constructive decision trees toward a proposed general-purpose exploration architecture. CDE-001 connects Bucket Tree of Permutation (BTP) and Dynamic BTP (D-BTP) to constrained Delta transitions. CDE-002 and CDE-003 establish logical state and branching semantics. CDE-004 clarifies path memory and Loop Back. CDE-005 integrates conventional solvers; CDE-006 adds directional, multi-scale generation; CDE-007 examines solution–metric co-evolution; CDE-008 and CDE-009 develop orchestration and distributed task contracts; CDE-010 formalizes Structural Relay and Collective Learning; CDE-011 introduces controlled generator and policy evolution.

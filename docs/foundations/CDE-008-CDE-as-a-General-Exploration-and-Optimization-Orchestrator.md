@@ -75,6 +75,14 @@ A compact decomposition is:
 \text{CDE System}=\text{Core Contracts}+\text{Solver Portfolio}+\text{Optional Orchestration}.
 \]
 
+---
+
+![Fig-001-CDE-Grand-Architecture.png](../../figures/Fig-001-CDE-Grand-Architecture.png)
+
+*Figure 1. Conceptual architecture of Constrained Delta Evolution. A versioned State–Delta–Constraint core supports adaptive proposal generation and solver portfolios; optional orchestration, independent validation, Structural Relay, and controlled meta-evolution extend the system without weakening hard-constraint governance.*
+
+---
+
 ## 4. State Containers and the Orchestrator's View
 
 A State Container is a logical collection of all information relevant to a transition, not necessarily a single memory object or a tree node. A useful operational state is
@@ -177,6 +185,11 @@ Check provenance, uncertainty, proof certificates, counterexamples, and conflict
 Propose, test, approve, and roll back generator or policy changes. Improvement is a measured hypothesis, not an entitlement of recursive modification.
 
 ## 8. Solver Portfolio and Algorithm Selection
+
+
+![Fig-006-Search-DP-and-Branch-and-Bound-Integration.png](../../figures/Fig-006-Search-DP-and-Branch-and-Bound-Integration.png)
+
+*Figure 6. CDE acts as a contract-driven exploration interface over solver families. General search proposes candidates; dynamic programming requires valid future-equivalence keys; branch-and-bound requires admissible bounds and sound pruning. Solver-specific certificates remain distinct from heuristic best-known solutions.*
 
 Different workers may use different algorithms over a shared task space. A portfolio policy can select a solver according to features such as branching factor, constraint tightness, known bounds, subproblem overlap, objective smoothness, and historical evidence.
 

@@ -17,6 +17,18 @@ Constrained Delta Evolution (CDE) represents exploration as constraint-governed 
 
 ---
 
+![Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png](../../figures/Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png)
+
+*Figure 9. A logical CDE orchestrator dispatches version-pinned exploration contracts to heterogeneous workers, reconciles global constraints and evidence, and publishes typed Structural Relay artifacts. Shared results and methods require target-side validation before being counted as transferable capabilities.*
+
+---
+
+![Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png](../../figures/Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png)
+
+*Figure 10. Controlled recursive evolution separates task exploration (L0), generator/operator evolution (L1), policy/representation adaptation (L2), and independent validation and governance (L3). Structural Relay can transmit validated methods and evidence across tasks, but recursive improvement and collective learning must be established empirically.*
+
+---
+
 ## 1. Motivation: From Parallel Work to Collective Learning
 
 An exploration worker may discover a feasible solution, a useful heuristic, a counterexample, a tighter bound, or a previously unknown constraint. A second worker can benefit only if the discovery is expressed in a form it can interpret and if its relevance to the second worker's task can be established. Merely transmitting a score or a final answer is often insufficient.

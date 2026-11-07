@@ -15,6 +15,12 @@ Constrained Delta Evolution (CDE) models exploration as constraint-governed tran
 
 ---
 
+![Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png](../../figures/Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png)
+
+*Figure 9. A logical CDE orchestrator dispatches version-pinned exploration contracts to heterogeneous workers, reconciles global constraints and evidence, and publishes typed Structural Relay artifacts. Shared results and methods require target-side validation before being counted as transferable capabilities.*
+
+---
+
 ## 1. Research Motivation
 
 A single CDE state may generate a set of candidate Deltas and expand into a selected set of successor transitions. Those transitions can be explored by separate processes, machines, organizations, or agents. A useful analogy is dispatching multiple exploratory swarms to different regions and collecting their observations. The analogy highlights parallelism, but its apparent simplicity hides several distinct computational problems:

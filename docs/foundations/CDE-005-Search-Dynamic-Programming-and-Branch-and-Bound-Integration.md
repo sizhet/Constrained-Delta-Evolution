@@ -14,6 +14,20 @@ Constrained Delta Evolution (CDE) separates a general model of constraint-govern
 
 **Keywords:** Constrained Delta Evolution; CDE; state-space search; dynamic programming; memoization; branch-and-bound; admissible bounds; constraint propagation; solver interoperability; adaptive branching; structural relay; exploratory localization
 
+---
+
+![Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png](../../figures/Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png)
+
+*Figure 5. Path-local accepted and excluded decision sets support constructive NoSubtree semantics under fixed-context assumptions. Deferred, infeasible, and pruned branches remain distinct; controlled Loop Back may be legitimate in reconfiguration, cyclic, or representation-evolving searches.*
+
+---
+
+![Fig-006-Search-DP-and-Branch-and-Bound-Integration.png](../../figures/Fig-006-Search-DP-and-Branch-and-Bound-Integration.png)
+
+*Figure 6. CDE acts as a contract-driven exploration interface over solver families. General search proposes candidates; dynamic programming requires valid future-equivalence keys; branch-and-bound requires admissible bounds and sound pruning. Solver-specific certificates remain distinct from heuristic best-known solutions.*
+
+---
+
 ## 1. Motivation: A Framework Is Not a Solver
 
 The transition from Bucket Tree of Permutation (BTP) to Dynamic BTP (D-BTP) and then CDE enlarges the family of possible states, Deltas, and exploration topologies. A constructive assignment may naturally produce a binary Yes/No tree. A dynamic routing problem may use multiple reassignment operations and revisit earlier states. A metric-discovery problem may evolve both a solution and the metric used to assess it. None of these facts determines *how* the search should be conducted.

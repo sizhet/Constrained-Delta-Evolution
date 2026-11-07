@@ -95,6 +95,14 @@ m_{k+1}\succ_{V,\mathcal D_{\rm test}}m_k.
 
 The criterion \(V\) may assess predictive validity, decision regret, calibration, stability, fairness, measurement error, or other externally chosen properties. If \(V\) itself changes, its version and authorization must also be tracked.
 
+---
+
+![Fig-008-Solution-and-Metric-Co-Evolution.png](../../figures/Fig-008-Solution-and-Metric-Co-Evolution.png)
+
+*Figure 8. Solutions and metrics evolve through separate, versioned candidate loops. Improved solution scores under a metric do not certify that the metric itself is better; metric changes require independent decision-utility validation, held-out evidence, and governance before promotion.*
+
+---
+
 ### 3.1 A joint state
 
 One possible logical CDE Container is

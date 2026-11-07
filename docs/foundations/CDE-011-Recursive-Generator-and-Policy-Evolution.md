@@ -17,6 +17,12 @@ Constrained Delta Evolution (CDE) treats exploration as constraint-governed tran
 
 ---
 
+![Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png](../../figures/Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png)
+
+*Figure 10. Controlled recursive evolution separates task exploration (L0), generator/operator evolution (L1), policy/representation adaptation (L2), and independent validation and governance (L3). Structural Relay can transmit validated methods and evidence across tasks, but recursive improvement and collective learning must be established empirically.*
+
+---
+
 ## 1. Motivation: The Search Mechanism Is Also a Search Object
 
 A CDE worker explores a problem by generating candidate Deltas, checking constraints, applying permitted transitions, evaluating outcomes, and allocating further effort. A fixed generator can be effective in one region yet ineffective elsewhere. A fixed selection policy can waste budget on low-value branches. A solver portfolio can allocate work to an algorithm poorly suited to the current state. A control plane can persist with stale assumptions even after evidence suggests a better method.

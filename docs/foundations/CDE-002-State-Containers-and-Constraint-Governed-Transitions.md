@@ -61,6 +61,10 @@ such that \(s_0\in I\) and every edge satisfies the relevant transition and cons
 
 **Important separation:** the model defines *possible* transitions; a solver or orchestrator decides which transitions to generate, evaluate, retain, defer, or explore. Neither exhaustive enumeration nor any particular optimization algorithm is built into CDE-Core.
 
+![Fig-003-State-Container-and-Constraint-Governed-Delta.png](../../figures/Fig-003-State-Container-and-Constraint-Governed-Delta.png)
+
+*Figure 3. A typed Delta proposes a transition from a versioned State Container to a candidate successor. Hard-constraint checks and coherent-version validation determine whether the transition may be committed; directional scores may prioritize attempts but cannot substitute for feasibility.*
+
 ## 3. The Logical State Container
 
 A useful conceptual state view is

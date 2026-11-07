@@ -12,6 +12,14 @@ Bucket Tree of Permutation (BTP) and Dynamic Bucket Tree of Permutation (D-BTP) 
 
 **Keywords:** constrained delta evolution; structural intelligence; state-space search; constraint programming; dynamic branching; metric evolution; localization; distributed optimization; structural relay
 
+---
+
+![Fig-001-CDE-Grand-Architecture.png](../../figures/Fig-001-CDE-Grand-Architecture.png)
+
+*Figure 1. Conceptual architecture of Constrained Delta Evolution. A versioned State–Delta–Constraint core supports adaptive proposal generation and solver portfolios; optional orchestration, independent validation, Structural Relay, and controlled meta-evolution extend the system without weakening hard-constraint governance.*
+
+---
+
 ## 1. Motivation: From a Specific Search Structure to a General Computational Model
 
 BTP offers a useful way to express constructive decisions, including assignment and matching, through structured branching. In its familiar binary form, a candidate decision may produce a **Yes** branch that accepts it and a **No** branch that excludes it. D-BTP broadens this setting by introducing dynamically generated candidate transformations, directional guidance, structural feedback, and evolving exploration strategies.
@@ -49,6 +57,10 @@ This arrow denotes **abstraction and inheritance**, not a proof that every imple
 | Learning | Not essential | Feedback and relay opportunities | Optional metric, generator, policy, and method evolution |
 
 **Scope discipline.** CDE is not defined as an algorithm that automatically solves all constrained problems. It is a framework for expressing and coordinating constrained transitions. A particular CDE solver must still specify its search strategy, objective, resources, admissible pruning rules, and stopping criteria.
+
+![Fig-002-From-BTP-and-D-BTP-to-CDE.png](../../figures/Fig-002-From-BTP-and-D-BTP-to-CDE.png)
+
+*Figure 2. Research lineage from BTP's binary constructive decisions, through D-BTP's dynamic and directional Delta generation, to CDE's representation-independent State–Delta–Constraint framework. The diagram expresses a conceptual generalization, not a claim of strict algorithmic superiority.*
 
 ## 3. A Minimal CDE Problem Model
 

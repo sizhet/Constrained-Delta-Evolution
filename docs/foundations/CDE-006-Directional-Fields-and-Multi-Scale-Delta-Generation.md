@@ -14,6 +14,21 @@ Constrained Delta Evolution (CDE) treats state transitions as constraint-governe
 
 **Keywords:** Constrained Delta Evolution; CDE; directional field; Delta generation; multi-scale exploration; reachability; adaptive search; exploration–exploitation; Structural Intelligence Framework; localization; distributed relay; collective learning
 
+---
+
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+
+*Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
+
+---
+
+![Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png](../../figures/Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png)
+
+*Figure 7. Local, regional, long-range, and Relay-guided Delta generators explore complementary neighborhoods. Directional fields and weak evidence guide proposal ranking while maintaining uncertainty, diversity, counterexample probes, and hard-constraint checks.*
+
+---
+
+
 ## 1. Motivation: Candidate Generation Is a First-Class Problem
 
 An optimizer cannot select a transformation that its generator never proposes. This simple observation is especially consequential in structural search, where candidate transformations may range from changing one assignment to replacing an entire decomposition, revising a metric, or transferring a method from another domain.
