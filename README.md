@@ -28,6 +28,10 @@ CDE grows out of **Bucket Tree of Permutation (BTP)** and **Dynamic Bucket Tree 
 
 This is a **research architecture and integration proposal**, not a claim that search, dynamic programming, branch-and-bound, constraint programming, or evolutionary computation are newly invented here. Their established methods remain important components and baselines.
 
+![Fig-002-From-BTP-and-D-BTP-to-CDE.png](figures/Fig-002-From-BTP-and-D-BTP-to-CDE.png)
+
+*Figure 2. Research lineage from BTP's binary constructive decisions, through D-BTP's dynamic and directional Delta generation, to CDE's representation-independent State–Delta–Constraint framework. The diagram expresses a conceptual generalization, not a claim of strict algorithmic superiority.*
+
 ## 2. The minimal computational model
 
 A simplified CDE problem can be written as:
@@ -112,6 +116,10 @@ A CDE exploration may form a tree, DAG, or cyclic state graph. Path-local **NoSu
 ```
 
 The orchestrator is optional: the minimal CDE core does not require a distributed system, a learning agent, or recursive evolution. The more ambitious layers are research extensions with additional contracts and validation obligations.
+
+![Fig-001-CDE-Grand-Architecture.png](figures/Fig-001-CDE-Grand-Architecture.png)
+
+*Figure 1. Conceptual architecture of Constrained Delta Evolution. A versioned State–Delta–Constraint core supports adaptive proposal generation and solver portfolios; optional orchestration, independent validation, Structural Relay, and controlled meta-evolution extend the system without weakening hard-constraint governance.*
 
 ## 4. Ten central design principles
 
@@ -308,7 +316,14 @@ No general-purpose runtime or benchmark leaderboard is implied by the manuscript
 **Version:** v1.0.0 research draft.  
 **DOI:** Not yet assigned; do not invent a DOI or cite one until a release has been archived and a DOI confirmed.
 
-Use the repository's `CITATION.cff` and `.zenodo.json` only after verifying their metadata against the actual publication release. For reproducible scholarly use, cite the relevant individual manuscript, version, and repository release in addition to any future DOI.
+---
+
+## 📚 DBM-SI Series Navigation
+
+See:\
+[./docs/DBM-SI-Series-of-gitHub-Repositories/DBM-SI-Series-of-gitHub-Repositories.md](./docs/DBM-SI-Series-of-gitHub-Repositories/DBM-SI-Series-of-gitHub-Repositories.md)
+
+---
 
 ### Research transparency
 

@@ -10,6 +10,12 @@
 
 ---
 
+![Fig-001-CDE-Grand-Architecture.png](figures/Fig-001-CDE-Grand-Architecture.png)
+
+*Figure 1. Conceptual architecture of Constrained Delta Evolution. A versioned State–Delta–Constraint core supports adaptive proposal generation and solver portfolios; optional orchestration, independent validation, Structural Relay, and controlled meta-evolution extend the system without weakening hard-constraint governance.*
+
+---
+
 ## 1. What should I read first?
 
 If you have **10 minutes**, read this page and [`README.md`](README.md). Focus on the model in Section 2 and the research boundaries in Section 4.
