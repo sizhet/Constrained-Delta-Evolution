@@ -391,7 +391,7 @@ Scale is structural, not necessarily Euclidean. A cross-cluster probe can be lon
 
 ### 11.3 Candidate generation limits
 
-A generator MUST declare whether it enumerates all admissible correspondences or samples a subset. A heuristic top-$k$ generator cannot claim exhaustive coverage without a valid proof.
+A generator MUST declare whether it enumerates all admissible correspondences or samples a subset. A heuristic top-k generator cannot claim exhaustive coverage without a valid proof.
 
 ## 12. Adaptive M-to-N Branching
 
