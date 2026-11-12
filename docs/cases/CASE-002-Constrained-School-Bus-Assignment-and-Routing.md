@@ -127,7 +127,7 @@ Other measures may include maximum ride time $R_{\max}=\max_i r_i$, excess ride 
 A default research profile uses a **lexicographic objective**:
 
 1. Satisfy all hard constraints.
-2. Minimize feasible fleet size $F$.
+2. Minimize feasible fleet size F.
 3. Among equal-$F$ solutions, minimize a declared ride-time objective.
 4. Among remaining ties, minimize operating cost and improve robustness.
 
