@@ -128,7 +128,7 @@ A default research profile uses a **lexicographic objective**:
 
 1. Satisfy all hard constraints.
 2. Minimize feasible fleet size F.
-3. Among equal-$F$ solutions, minimize a declared ride-time objective.
+3. Among equal-F solutions, minimize a declared ride-time objective.
 4. Among remaining ties, minimize operating cost and improve robustness.
 
 This avoids trading a whole additional bus against an arbitrarily chosen small ride-time score difference. However, districts may legitimately choose an epsilon-constraint formulation with a hard ride-time cap and a fleet-cost budget. The objective hierarchy is a policy decision, not a universal mandate.
