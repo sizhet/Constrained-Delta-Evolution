@@ -35,29 +35,29 @@ This paper addresses five questions:
 
 Define a CDE problem instance as
 
-\[
+$$
 \mathcal P=(\mathcal S,\mathcal D,\mathcal K,G,T,I,\mathcal O),
-\]
+$$
 
 where:
 
-- \(\mathcal S\): a set of admissible **state representations**, not necessarily all feasible states;
-- \(\mathcal D\): a universe of typed Delta descriptions;
-- \(\mathcal K\): a family of constraint predicates and policies with explicit scope;
-- \(G(s,c)\subseteq\mathcal D\): a candidate Delta generator for state \(s\) and relevant context \(c\);
-- \(T\subseteq\mathcal S\times\mathcal D\times\mathcal S\): a transition relation;
-- \(I\subseteq\mathcal S\): permitted initial states;
-- \(\mathcal O\): optional objectives, observations, and evaluation protocols.
+- $\mathcal S$: a set of admissible **state representations**, not necessarily all feasible states;
+- $\mathcal D$: a universe of typed Delta descriptions;
+- $\mathcal K$: a family of constraint predicates and policies with explicit scope;
+- $G(s,c)\subseteq\mathcal D$: a candidate Delta generator for state $s$ and relevant context $c$;
+- $T\subseteq\mathcal S\times\mathcal D\times\mathcal S$: a transition relation;
+- $I\subseteq\mathcal S$: permitted initial states;
+- $\mathcal O$: optional objectives, observations, and evaluation protocols.
 
-The transition relation is deliberately more general than a deterministic function. It can express multiple successors from one Delta, nondeterministic outcomes, and partial knowledge. In deterministic cases, \(T(s,\delta)=s'\) is convenient shorthand for \((s,\delta,s')\in T\).
+The transition relation is deliberately more general than a deterministic function. It can express multiple successors from one Delta, nondeterministic outcomes, and partial knowledge. In deterministic cases, $T(s,\delta)=s'$ is convenient shorthand for $(s,\delta,s')\in T$.
 
 A run is a sequence
 
-\[
+$$
 \rho=s_0\xrightarrow{\delta_0}s_1\xrightarrow{\delta_1}s_2\xrightarrow{\delta_2}\cdots
-\]
+$$
 
-such that \(s_0\in I\) and every edge satisfies the relevant transition and constraint contracts.
+such that $s_0\in I$ and every edge satisfies the relevant transition and constraint contracts.
 
 **Important separation:** the model defines *possible* transitions; a solver or orchestrator decides which transitions to generate, evaluate, retain, defer, or explore. Neither exhaustive enumeration nor any particular optimization algorithm is built into CDE-Core.
 
@@ -69,18 +69,18 @@ such that \(s_0\in I\) and every edge satisfies the relevant transition and cons
 
 A useful conceptual state view is
 
-\[
+$$
 S=(X,C,E,H,M;v),
-\]
+$$
 
 with:
 
-- \(X\): domain configuration (assignments, route plan, graph, hypothesis, metric, etc.);
-- \(C\): constraint references or locally materialized constraint information;
-- \(E\): observations, evidence, and uncertainty relevant to decisions;
-- \(H\): history or path-dependent decision information, **when future behavior depends on it**;
-- \(M\): operational metadata, including budgets or policy context **when semantically relevant**;
-- \(v\): versions of schemas, constraints, metrics, or relevant models.
+- $X$: domain configuration (assignments, route plan, graph, hypothesis, metric, etc.);
+- $C$: constraint references or locally materialized constraint information;
+- $E$: observations, evidence, and uncertainty relevant to decisions;
+- $H$: history or path-dependent decision information, **when future behavior depends on it**;
+- $M$: operational metadata, including budgets or policy context **when semantically relevant**;
+- $v$: versions of schemas, constraints, metrics, or relevant models.
 
 This tuple is a **conceptual decomposition**, not a mandate that every state physically duplicate all six fields. Global immutable constraints may be referenced by version; evidence may live in a separate store; a solver may keep path history outside the domain state. The central requirement is that every transition can access the context needed to determine its validity and continuation semantics.
 
@@ -88,9 +88,9 @@ This tuple is a **conceptual decomposition**, not a mandate that every state phy
 
 It is useful to distinguish:
 
-1. **Domain state** \(X\): the actual problem configuration.
-2. **Search state** \(\hat S=(X,H,B,\ldots)\): the domain configuration plus future-relevant search memory and budgets.
-3. **System state** \(\Sigma\): a collection of search states, workers, queues, shared incumbents, policies, and evidence repositories.
+1. **Domain state** $X$: the actual problem configuration.
+2. **Search state** $\hat S=(X,H,B,\ldots)$: the domain configuration plus future-relevant search memory and budgets.
+3. **System state** $\Sigma$: a collection of search states, workers, queues, shared incumbents, policies, and evidence repositories.
 
 Two workers can hold the same domain state yet have different search states. A distributed orchestrator can manage many search states without making its entire global system state part of each domain transition.
 
@@ -111,28 +111,28 @@ The last row is typically a **meta-state** transition, not the same operation as
 
 A Delta is an *intended change* described independently of whether it is executed. For example,
 
-\[
-\delta=\operatorname{Assign}(\text{vehicle}_3,\text{route}_7).
-\]
+$$
+\delta=\mathrm{Assign}(\text{vehicle}_3,\text{route}_7).
+$$
 
 A Delta record may include a type, operands, preconditions, estimated cost, provenance, and generator identity. The canonical identity of a Delta should reflect its **meaningful operation**, not an arbitrary newly assigned UUID.
 
 Distinguish four events:
 
-1. **Generate:** a generator proposes \(\delta\).
+1. **Generate:** a generator proposes $\delta$.
 2. **Check:** feasibility and policy checks classify the proposal.
 3. **Decide:** a search policy selects an action such as apply, exclude, or defer.
-4. **Realize:** an accepted action produces an actual transition \((s,\delta,s')\).
+4. **Realize:** an accepted action produces an actual transition $(s,\delta,s')$.
 
-A rejected proposal need not produce a new domain state. In constructive Yes/No BTP, the No decision *does* create a new search state because the exclusion changes the set of future permitted decisions. This is a search-state transition even if \(X\) is unchanged.
+A rejected proposal need not produce a new domain state. In constructive Yes/No BTP, the No decision *does* create a new search state because the exclusion changes the set of future permitted decisions. This is a search-state transition even if $X$ is unchanged.
 
 A useful edge record is
 
-\[
+$$
 e=(\mathrm{parent\_id},\delta,a,\mathrm{successor\_id},\pi),
-\]
+$$
 
-where \(a\) denotes transition/decision semantics and \(\pi\) captures provenance and validation information. The Delta belongs naturally to the **edge**, not necessarily to the successor node: multiple distinct edges can lead to the same state.
+where $a$ denotes transition/decision semantics and $\pi$ captures provenance and validation information. The Delta belongs naturally to the **edge**, not necessarily to the successor node: multiple distinct edges can lead to the same state.
 
 ## 5. Constraints: Scope, Hardness, and Time
 
@@ -148,13 +148,13 @@ The term “constraint” can hide several distinct meanings. CDE should disting
 | Soft preference | desirable but violable | shorter average travel time | include in objective, not feasibility |
 | Exploration policy | allocates search effort | try top 20 candidates first | schedule or defer; not a proof of impossibility |
 
-Let \(K_h(s,c)\) be hard state feasibility and \(K_t(s,\delta,s',c)\) transition admissibility. A committed edge must satisfy
+Let $K_h(s,c)$ be hard state feasibility and $K_t(s,\delta,s',c)$ transition admissibility. A committed edge must satisfy
 
-\[
+$$
 (s,\delta,s')\in T\ \land\ K_h(s',c')\ \land\ K_t(s,\delta,s',c).
-\]
+$$
 
-Here \(c'\) is the applicable post-transition context. If constraints can change, their effective version and time must be recorded. A result feasible under constraint version \(v_1\) is not automatically feasible under \(v_2\).
+Here $c'$ is the applicable post-transition context. If constraints can change, their effective version and time must be recorded. A result feasible under constraint version $v_1$ is not automatically feasible under $v_2$.
 
 **Soft scores are not hard constraints.** A low-scoring candidate can be deprioritized; it cannot be safely removed from an exhaustive search unless an independent sound pruning argument exists.
 
@@ -195,27 +195,27 @@ The pipeline is logical; an optimized solver may fuse operations or propagate co
 
 If
 
-\[
+$$
 G(s,c)=\{\delta_1,\ldots,\delta_M\},
-\]
+$$
 
 then the realized successor-edge set is
 
-\[
+$$
 B(s)=\{(s,\delta_j,a_j,s'_j):\text{selected and valid}\}.
-\]
+$$
 
-Let \(N=|B(s)|\). **In general, \(N\) need not equal \(M\)**: candidates may be invalid, deferred, or collapsed through equivalent successors; conversely a nondeterministic Delta can have multiple successors, so \(N>M\) is also possible. Thus \(N\le M\) requires the extra assumption of at most one realized edge per candidate.
+Let $N=|B(s)|$. **In general, $N$ need not equal $M$**: candidates may be invalid, deferred, or collapsed through equivalent successors; conversely a nondeterministic Delta can have multiple successors, so $N>M$ is also possible. Thus $N\le M$ requires the extra assumption of at most one realized edge per candidate.
 
-A finite branching budget is an engineering policy, not a universal mathematical requirement. If \(G\) can enumerate infinitely many candidates, a solver needs a computable scheduling or sampling discipline to make finite progress.
+A finite branching budget is an engineering policy, not a universal mathematical requirement. If $G$ can enumerate infinitely many candidates, a solver needs a computable scheduling or sampling discipline to make finite progress.
 
 ## 7. State Identity, Equivalence, and Canonicalization
 
 A domain snapshot is not necessarily a complete search-state key. Define a canonical key
 
-\[
-\kappa(\hat S)=\operatorname{Canonicalize}(X,H_{\mathrm{relevant}},C_{\mathrm{version}},E_{\mathrm{relevant}},B_{\mathrm{relevant}}).
-\]
+$$
+\kappa(\hat S)=\mathrm{Canonicalize}(X,H_{\mathrm{relevant}},C_{\mathrm{version}},E_{\mathrm{relevant}},B_{\mathrm{relevant}}).
+$$
 
 Two states may be merged for a given algorithm only if their future behavior is equivalent for that algorithm's purposes. For exact dynamic programming, a strong condition is that equivalent states have the same feasible continuations and compatible future costs/objective values, accounting for any accumulated cost needed for dominance comparisons.
 
@@ -234,19 +234,19 @@ The equivalence relation and its proof obligations belong to the solver contract
 
 In constructive BTP, a candidate assignment can be decided Yes or No. Let
 
-\[
+$$
 A_t=\{\text{accepted canonical decisions}\},\quad
 R_t=\{\text{excluded canonical decisions}\},\quad
 U_t=A_t\cup R_t.
-\]
+$$
 
 For a one-time-decision constructive search, require
 
-\[
-\operatorname{key}(\delta_{t+1})\notin U_t.
-\]
+$$
+\mathrm{key}(\delta_{t+1})\notin U_t.
+$$
 
-The No branch must update \(R_t\), even when the underlying assignment configuration \(X\) does not change. Otherwise a solver may repeatedly propose a decision it already excluded along that path.
+The No branch must update $R_t$, even when the underlying assignment configuration $X$ does not change. Otherwise a solver may repeatedly propose a decision it already excluded along that path.
 
 However, this is a **subfamily contract**, not a universal CDE invariant. In reconfiguration or cyclic systems, applying the same operation again can be legitimate. Moreover:
 
@@ -261,9 +261,9 @@ These statuses must not be conflated. Canonical Delta keys must include the cont
 
 Nonrepetition of Delta descriptions does **not** imply nonrepetition of states. Different sequences may reach the same configuration:
 
-\[
+$$
 S_0\xrightarrow{\delta_a}S_1\xrightarrow{\delta_b}S_0.
-\]
+$$
 
 Some problems require such reconfiguration. CDE therefore permits a **Delta-labeled state graph** rather than requiring a tree. A solver may adopt one of several explicit policies:
 
@@ -277,11 +277,11 @@ Finite state space alone does not ensure termination if cycles may be revisited 
 
 ## 10. Feasibility, Reachability, and Optimality Are Different Claims
 
-Define the reachable set under a generator/policy pair \((G,P)\):
+Define the reachable set under a generator/policy pair $(G,P)$:
 
-\[
-\operatorname{Reach}(I;G,P)=\{s:\text{there is a permitted finite run from }I\text{ to }s\}.
-\]
+$$
+\mathrm{Reach}(I;G,P)=\{s:\text{there is a permitted finite run from }I\text{ to }s\}.
+$$
 
 Three distinctions matter:
 
@@ -289,13 +289,13 @@ Three distinctions matter:
 - **Reachable:** permitted Delta transitions can generate a path to it.
 - **Discoverable within budget:** the actual algorithm can find it under specified computational limits.
 
-If a globally optimal solution lies outside \(\operatorname{Reach}(I;G,P)\), better scoring cannot recover it. Generator evolution may enlarge reachability, but does not automatically make the search complete.
+If a globally optimal solution lies outside $\mathrm{Reach}(I;G,P)$, better scoring cannot recover it. Generator evolution may enlarge reachability, but does not automatically make the search complete.
 
-For an objective \(f\), the statement
+For an objective $f$, the statement
 
-\[
-\max_{s\in\operatorname{Reach}(I;G,P)} f(s)
-\]
+$$
+\max_{s\in\mathrm{Reach}(I;G,P)} f(s)
+$$
 
 is not necessarily the same as optimization over all feasible states. Any completeness or global optimality claim must identify its feasible domain, generator coverage, pruning soundness, and stopping rule.
 
@@ -366,7 +366,7 @@ Two paths produce identical visible assignment sets but different permanent No-b
 
 ### 12.5 Counterexample: unsafe heuristic pruning
 
-A directional score ranks Delta \(\delta_a\) above \(\delta_b\). Permanently discarding \(\delta_b\) on that basis alone can remove the globally optimal solution. Prioritization is not a mathematical upper bound.
+A directional score ranks Delta $\delta_a$ above $\delta_b$. Permanently discarding $\delta_b$ on that basis alone can remove the globally optimal solution. Prioritization is not a mathematical upper bound.
 
 ## 13. CDE as an Exploratory Localization Method in SIF
 
@@ -374,9 +374,9 @@ Structural Intelligence Framework (SIF) includes localization/addressing as a ma
 
 A localization process can be expressed as:
 
-\[
+$$
 S_0\xrightarrow{\delta_0}S_1\xrightarrow{\delta_1}\cdots\xrightarrow{\delta_k}S_k,
-\]
+$$
 
 where each state represents a current localization hypothesis, search region, structural mapping, or evidence configuration. Deltas refine, expand, redirect, or restructure the search. Constraints rule out incompatible candidates; directional scores prioritize promising regions; evidence relay updates the shared map.
 

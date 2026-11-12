@@ -43,27 +43,27 @@ The distinction is essential. An unexpanded candidate is not necessarily impossi
 
 Following CDE-002, let a problem instance be
 
-\[
+$$
 \mathcal P=(\mathcal S,\mathcal D,\mathcal K,G,T,I,\mathcal O),
-\]
+$$
 
-where \(\mathcal S\) is a space of state representations, \(\mathcal D\) is a universe of Delta descriptions, \(\mathcal K\) contains scoped constraints, \(G(s,c)\) proposes candidate Deltas, \(T\subseteq\mathcal S\times\mathcal D\times\mathcal S\) is a transition relation, \(I\) is the initial-state set, and \(\mathcal O\) provides optional objectives and evaluation protocols.
+where $\mathcal S$ is a space of state representations, $\mathcal D$ is a universe of Delta descriptions, $\mathcal K$ contains scoped constraints, $G(s,c)$ proposes candidate Deltas, $T\subseteq\mathcal S\times\mathcal D\times\mathcal S$ is a transition relation, $I$ is the initial-state set, and $\mathcal O$ provides optional objectives and evaluation protocols.
 
 A **search configuration** should be distinguished from a domain state:
 
-\[
+$$
 q=(s,h,c,v,b),
-\]
+$$
 
-where \(s\) is the domain state, \(h\) is relevant path or decision history, \(c\) is the constraint and observation context, \(v\) identifies applicable schema/policy versions, and \(b\) records any budget or resource information that can change future behavior. These fields are conceptual: implementations may store references, hashes, immutable snapshots, or compact sufficient statistics. Fields that do not affect future legality, reward, or behavior need not be included in the equivalence key.
+where $s$ is the domain state, $h$ is relevant path or decision history, $c$ is the constraint and observation context, $v$ identifies applicable schema/policy versions, and $b$ records any budget or resource information that can change future behavior. These fields are conceptual: implementations may store references, hashes, immutable snapshots, or compact sufficient statistics. Fields that do not affect future legality, reward, or behavior need not be included in the equivalence key.
 
 A transition edge is represented as
 
-\[
+$$
 e=(q_i,\delta,a,q_j,\pi),
-\]
+$$
 
-where \(\delta\) is the originating Delta, \(a\) is its transition or decision semantics, and \(\pi\) is provenance (e.g., generator identity, validation evidence, source state/version, and execution result). For ordinary applied transformations, \(a=\mathrm{Apply}\). For constructive Yes/No decision trees, \(a\) can denote \(\mathrm{Include}\) or \(\mathrm{Exclude}\), with explicit rules for what each decision changes. A deferred candidate ordinarily does not create a state-transition edge.
+where $\delta$ is the originating Delta, $a$ is its transition or decision semantics, and $\pi$ is provenance (e.g., generator identity, validation evidence, source state/version, and execution result). For ordinary applied transformations, $a=\mathrm{Apply}$. For constructive Yes/No decision trees, $a$ can denote $\mathrm{Include}$ or $\mathrm{Exclude}$, with explicit rules for what each decision changes. A deferred candidate ordinarily does not create a state-transition edge.
 
 ## 3. What Is a Delta?
 
@@ -94,46 +94,46 @@ These identities can disagree. `Swap(A,B)` and `Swap(B,A)` may be semantically e
 
 Define a contextual key, when needed, as
 
-\[
-K_\delta=\operatorname{Canonicalize}(\delta,\operatorname{RelevantContext}(q),\nu),
-\]
+$$
+K_\delta=\mathrm{Canonicalize}(\delta,\mathrm{RelevantContext}(q),\nu),
+$$
 
-where \(\nu\) is the **semantic identity policy**, not simply the latest software revision. A safe key must retain any context needed to distinguish future-relevant decisions. Overly coarse keys risk suppressing valid exploration; overly fine keys weaken deduplication and may permit repeated equivalent work.
+where $\nu$ is the **semantic identity policy**, not simply the latest software revision. A safe key must retain any context needed to distinguish future-relevant decisions. Overly coarse keys risk suppressing valid exploration; overly fine keys weaken deduplication and may permit repeated equivalent work.
 
 ## 4. From M Candidates to N Realized Branches
 
 Let
 
-\[
+$$
 D_t=G(q_t)=\{\delta_1,\ldots,\delta_M\}
-\]
+$$
 
-be the finite candidate batch generated at a particular expansion step. The generator may represent a bounded sample from a much larger or even infinite Delta universe; thus \(M\) refers to the **materialized batch**, not necessarily all possible Deltas.
+be the finite candidate batch generated at a particular expansion step. The generator may represent a bounded sample from a much larger or even infinite Delta universe; thus $M$ refers to the **materialized batch**, not necessarily all possible Deltas.
 
 A generic expansion pipeline is:
 
-\[
+$$
 D_t\xrightarrow{\text{normalize/deduplicate}}D_t^0
 \xrightarrow{\text{eligibility}}D_t^1
 \xrightarrow{\text{selection/budget}}D_t^2
 \xrightarrow{\text{transition}}E_t.
-\]
+$$
 
 The resulting edge multiset is
 
-\[
+$$
 E_t=\{(q_t,\delta,a,q',\pi):\delta\in D_t^2,\; (q_t,\delta,a,q')\text{ is valid}\}.
-\]
+$$
 
-Let \(N=|E_t|\). **There is no universal requirement that \(N=M\), or even \(N\le M\)**: one nondeterministic Delta can yield multiple successor edges. In the special case of deterministic, one-successor-per-selected-Delta execution, \(N\le M\) after filtering, assuming no additional branches are introduced. If equivalent successor states are merged, the number of distinct successor nodes can be smaller still:
+Let $N=|E_t|$. **There is no universal requirement that $N=M$, or even $N\le M$**: one nondeterministic Delta can yield multiple successor edges. In the special case of deterministic, one-successor-per-selected-Delta execution, $N\le M$ after filtering, assuming no additional branches are introduced. If equivalent successor states are merged, the number of distinct successor nodes can be smaller still:
 
-\[
+$$
 N_{\mathrm{nodes}}=|\{[q']_\sim:(q,\delta,a,q',\pi)\in E_t\}|\le N.
-\]
+$$
 
 The distinction between **candidate count**, **transition-edge count**, and **unique successor-node count** prevents an otherwise subtle ambiguity in “M-to-N branching.”
 
-![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](../../figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
 
 *Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
 
@@ -163,13 +163,13 @@ The original BTP Yes/No mechanism is a **specialized decision semantics**, not t
 
 ## 6. Path-Local Memory: Yes and No Both Count
 
-For a fixed-context constructive decision problem, let \(A_t\) be accepted decisions and \(R_t\) be excluded decisions on the current path. Define
+For a fixed-context constructive decision problem, let $A_t$ be accepted decisions and $R_t$ be excluded decisions on the current path. Define
 
-\[
+$$
 U_t=A_t\cup R_t.
-\]
+$$
 
-A fresh binary decision with canonical key \(k\) requires \(k\notin U_t\); either branch then adds \(k\) to \(U_{t+1}\). This prevents an already rejected question from reappearing later on the same path, just as an accepted question should not reappear.
+A fresh binary decision with canonical key $k$ requires $k\notin U_t$; either branch then adds $k$ to $U_{t+1}$. This prevents an already rejected question from reappearing later on the same path, just as an accepted question should not reappear.
 
 This rule is **not universal CDE law**. A reconfiguration problem may legitimately revisit the same move after other moves change the context; a cyclic controller may repeat actions; and an evidence-driven search may reopen an earlier decision when its semantics explicitly permit revision. Each solver must declare its own path-memory and redecision policy.
 
@@ -185,7 +185,7 @@ The expansion process can be **unfolded** as a tree of search histories, even wh
 **DAG:** multiple paths share a successor only when their future-relevant configurations are equivalent.  
 **Cyclic graph:** repeated states or reconfiguration loops are permitted; loop-control and termination policies become explicit.
 
-For state merging, equality of domain payload alone is generally insufficient. A sound equivalence \(q_i\sim q_j\) must preserve whatever is relevant to future admissible actions, transition outcomes, objective accumulation, and required outputs. A safe merge can be defined through an appropriate continuation equivalence or solver-specific dominance relation. When path constraints or accumulated costs matter, their sufficient statistics must be retained.
+For state merging, equality of domain payload alone is generally insufficient. A sound equivalence $q_i\sim q_j$ must preserve whatever is relevant to future admissible actions, transition outcomes, objective accumulation, and required outputs. A safe merge can be defined through an appropriate continuation equivalence or solver-specific dominance relation. When path constraints or accumulated costs matter, their sufficient statistics must be retained.
 
 **Important:** the graph edge can retain its Delta even if its successor node is shared. Conversely, a merged node may need multiple predecessor/provenance records. Deduplicating states is not equivalent to deduplicating Deltas.
 
@@ -193,16 +193,16 @@ For state merging, equality of domain payload alone is generally insufficient. A
 
 Let the selection policy depend on state, evidence, direction, available resources, and current search objectives:
 
-\[
+$$
 D_t^2=\Pi(q_t,D_t^1,\mathcal E_t,\mathcal R_t,\mathcal O_t).
-\]
+$$
 
 The branch budget may be adaptive:
 
-\[
-B_t=\operatorname{BudgetPolicy}(q_t,\mathcal E_t,\mathcal R_t),
+$$
+B_t=\mathrm{BudgetPolicy}(q_t,\mathcal E_t,\mathcal R_t),
 \qquad |D_t^2|\le B_t.
-\]
+$$
 
 A policy might allocate more branches near promising regions, reserve a fraction for long-range exploration, or spend additional effort where uncertainty is high. The policy should distinguish:
 
@@ -244,16 +244,16 @@ This pseudocode is a **contract illustration**, not a complete solver. It omits 
 
 A single generator need not monopolize exploration. Let a portfolio of typed generators be
 
-\[
+$$
 \mathbb G=\{G_{\mathrm{local}},G_{\mathrm{regional}},G_{\mathrm{long-range}},G_{\mathrm{relay}}\}.
-\]
+$$
 
 Local operators refine a nearby solution; regional operators alter larger components; long-range operators jump between distant representations or basins; relay operators use discoveries transferred from other workers or domains. A generator portfolio policy chooses which generators receive resources:
 
-\[
-\alpha_t=\operatorname{Allocate}(q_t,\mathcal E_t,\mathcal R_t),
+$$
+\alpha_t=\mathrm{Allocate}(q_t,\mathcal E_t,\mathcal R_t),
 \qquad \sum_k\alpha_{t,k}\le1.
-\]
+$$
 
 The “bee swarms searching for mountain peaks” example illustrates exploration/exploitation, but CDE is not limited to spatial search, scalar maxima, or bee-inspired algorithms. In many applications the object being improved is a **metric**, an evaluation procedure, a constraint representation, or an exploration strategy. Long-range Delta generation expands the *potentially reachable* region only if it actually introduces valid transitions outside the previous generator's support.
 
@@ -261,11 +261,11 @@ The “bee swarms searching for mountain peaks” example illustrates exploratio
 
 Feedback may update a generator's parameters or structure:
 
-\[
+$$
 G_{t+1}=U(G_t,F_t).
-\]
+$$
 
-Here \(F_t\) should include externally checked evidence when available, not only self-reported scores. The updated generator must retain a versioned contract. Improvements in training performance do not imply generalization; independent validation and rollback should be specified. CDE-006 and CDE-011 study these questions in depth.
+Here $F_t$ should include externally checked evidence when available, not only self-reported scores. The updated generator must retain a versioned contract. Improvements in training performance do not imply generalization; independent validation and rollback should be specified. CDE-006 and CDE-011 study these questions in depth.
 
 ## 10. Directional Fields and Exploratory Localization
 
@@ -273,11 +273,11 @@ Within the Structural Intelligence Framework (SIF), localization can mean identi
 
 A directional score can guide candidate ordering:
 
-\[
-\rho(q,\delta\mid p)=\operatorname{DirectionalScore}(q,\delta,p),
-\]
+$$
+\rho(q,\delta\mid p)=\mathrm{DirectionalScore}(q,\delta,p),
+$$
 
-where \(p\) is an explicitly declared perspective or objective. Directional scoring is not necessarily a distance metric, a feasibility proof, or a reliable gradient. It can be uncertain, misleading, and context-dependent. An exploratory localization system should retain uncertainty estimates, counterevidence, and fallback exploration to avoid confusing directional preference with proven reachability.
+where $p$ is an explicitly declared perspective or objective. Directional scoring is not necessarily a distance metric, a feasibility proof, or a reliable gradient. It can be uncertain, misleading, and context-dependent. An exploratory localization system should retain uncertainty estimates, counterevidence, and fallback exploration to avoid confusing directional preference with proven reachability.
 
 **Research proposition:** CDE may serve as an additional localization pillar within SIF by providing a constrained, Delta-driven mechanism for searching beyond pre-existing addresses. The scope, comparative effectiveness, and integration costs of this proposition require experimental validation.
 
@@ -285,11 +285,11 @@ where \(p\) is an explicitly declared perspective or objective. Directional scor
 
 An outgoing branch can become a distributable exploration contract:
 
-\[
+$$
 W_i=(q_t,\delta_i,\mathcal K_i,\Pi_i,B_i,V_i),
-\]
+$$
 
-where \(\mathcal K_i\) specifies the relevant constraints, \(\Pi_i\) the local search policy, \(B_i\) a resource budget, and \(V_i\) the validation and versioning rules. Workers may run different algorithms while returning results under a common evidence and transition contract.
+where $\mathcal K_i$ specifies the relevant constraints, $\Pi_i$ the local search policy, $B_i$ a resource budget, and $V_i$ the validation and versioning rules. Workers may run different algorithms while returning results under a common evidence and transition contract.
 
 Distribution creates obligations beyond ordinary branching:
 
@@ -306,10 +306,10 @@ For independent peak-search tasks, aggregation may be as simple as selecting the
 
 The branch label is a natural carrier of structural provenance, but it is not the entire relay artifact. A useful relay record includes:
 
-\[
+$$
 R=(\mathrm{TaskID},\mathrm{StateRef},\delta,\mathrm{Outcome},\mathrm{MetricRef},
 \mathrm{Evidence},\mathrm{MethodRef},\mathrm{Versions}).
-\]
+$$
 
 Relay can transfer at least four distinct products:
 
@@ -333,17 +333,17 @@ CDE's M-to-N expansion is compatible with multiple solver families, but does not
 | Local search | Apply neighborhood Deltas, possibly revisiting states | Cycling policy; stopping rule; neighborhood coverage |
 | Population search | Explore many states and generator portfolios | Diversity, evaluation comparability, resource allocation |
 
-For a minimization problem, a branch may be safely pruned against incumbent \(U\) only if a sound lower bound \(L(q)\) satisfies \(L(q)\ge U\), subject to the objective and constraint assumptions. A directional score or predicted quality estimate is not automatically such a bound.
+For a minimization problem, a branch may be safely pruned against incumbent $U$ only if a sound lower bound $L(q)$ satisfies $L(q)\ge U$, subject to the objective and constraint assumptions. A directional score or predicted quality estimate is not automatically such a bound.
 
 ## 14. Metric Evolution as a Special Delta Domain
 
-A metric definition can itself be a state component. Let \(m\in\mathcal M\) be a versioned metric, and define metric Deltas such as `AddFeature`, `RemoveFeature`, `AdjustWeight`, `ChangeAggregation`, and `ReplaceMetric`:
+A metric definition can itself be a state component. Let $m\in\mathcal M$ be a versioned metric, and define metric Deltas such as `AddFeature`, `RemoveFeature`, `AdjustWeight`, `ChangeAggregation`, and `ReplaceMetric`:
 
-\[
+$$
 m_{t+1}=T_m(m_t,\delta_m).
-\]
+$$
 
-A CDE orchestrator may therefore explore both solutions \(x\in\mathcal X\) and metrics \(m\in\mathcal M\). The joint configuration can be represented as \(q=(x,m,\ldots)\), with separate constraints and validation protocols for each component. This does **not** mean scores computed under different metrics are automatically comparable. A candidate result should carry its metric identity, metric version, validation set, and external evaluation criteria. Optimizing a metric against its own score invites circular validation and reward hacking.
+A CDE orchestrator may therefore explore both solutions $x\in\mathcal X$ and metrics $m\in\mathcal M$. The joint configuration can be represented as $q=(x,m,\ldots)$, with separate constraints and validation protocols for each component. This does **not** mean scores computed under different metrics are automatically comparable. A candidate result should carry its metric identity, metric version, validation set, and external evaluation criteria. Optimizing a metric against its own score invites circular validation and reward hacking.
 
 CDE-007 develops solution–metric co-evolution and the requirements for meaningful cross-metric comparison.
 
@@ -351,11 +351,11 @@ CDE-007 develops solution–metric co-evolution and the requirements for meaning
 
 ### 15.1 Termination under a restricted constructive profile
 
-If (i) there is a finite set of \(K\) canonical decision keys, (ii) each path commits to a previously undecided key at each step, (iii) no step removes a committed key, and (iv) expansion is finitely branching, then every decision path has depth at most \(K\). If the search exhaustively expands this finite tree, it terminates. This result is **profile-specific**, not a property of all CDE systems.
+If (i) there is a finite set of $K$ canonical decision keys, (ii) each path commits to a previously undecided key at each step, (iii) no step removes a committed key, and (iv) expansion is finitely branching, then every decision path has depth at most $K$. If the search exhaustively expands this finite tree, it terminates. This result is **profile-specific**, not a property of all CDE systems.
 
 ### 15.2 Reachability and completeness
 
-A solution may be expressible in \(\mathcal S\) but unreachable under the available generator support and transition relation. Completeness additionally depends on fair or exhaustive exploration, sound pruning, and appropriate treatment of cycles. Adaptive policies may improve practical coverage without guaranteeing it.
+A solution may be expressible in $\mathcal S$ but unreachable under the available generator support and transition relation. Completeness additionally depends on fair or exhaustive exploration, sound pruning, and appropriate treatment of cycles. Adaptive policies may improve practical coverage without guaranteeing it.
 
 ### 15.3 Common failure modes
 

@@ -44,11 +44,11 @@ The paper does not establish a universal optimality theorem, universal speedup, 
 
 A minimal CDE problem can be represented by
 
-\[
+$$
 \mathcal P=(\mathcal S,\mathcal D,G,T,C,E,L),
-\]
+$$
 
-where \(\mathcal S\) is the logical state space, \(\mathcal D\) is the Delta space, \(G\) proposes Deltas, \(T\) defines transitions, \(C\) determines constraint validity, \(E\) defines evaluation under a versioned regime, and \(L\) defines termination or progress conditions. Implementations may require richer context, stochastic transitions, and observations.
+where $\mathcal S$ is the logical state space, $\mathcal D$ is the Delta space, $G$ proposes Deltas, $T$ defines transitions, $C$ determines constraint validity, $E$ defines evaluation under a versioned regime, and $L$ defines termination or progress conditions. Implementations may require richer context, stochastic transitions, and observations.
 
 CDE-Core specifies **what constitutes a legal transition**, how a Delta and its provenance are recorded, and which history or identity conditions must be respected. It does not mandate DFS, B&B, DP, or a central scheduler.
 
@@ -71,9 +71,9 @@ The orchestrator manages the exploration portfolio: which tasks to generate, whi
 
 A compact decomposition is:
 
-\[
+$$
 \text{CDE System}=\text{Core Contracts}+\text{Solver Portfolio}+\text{Optional Orchestration}.
-\]
+$$
 
 ---
 
@@ -87,11 +87,11 @@ A compact decomposition is:
 
 A State Container is a logical collection of all information relevant to a transition, not necessarily a single memory object or a tree node. A useful operational state is
 
-\[
+$$
 S_t=(X_t,C_t,M_t,H_t,E_t,P_t,R_t),
-\]
+$$
 
-where \(X_t\) denotes domain state, \(C_t\) constraint context, \(M_t\) metric regime, \(H_t\) path/decision history, \(E_t\) evidence, \(P_t\) policy, and \(R_t\) resources and provenance.
+where $X_t$ denotes domain state, $C_t$ constraint context, $M_t$ metric regime, $H_t$ path/decision history, $E_t$ evidence, $P_t$ policy, and $R_t$ resources and provenance.
 
 The orchestrator should not copy all state data into every worker. A task can refer to immutable snapshots, content-addressed artifacts, or authorized data services. However, any information affecting future legal actions, evaluation, or pruning must be recoverable through the task's declared dependencies.
 
@@ -99,25 +99,25 @@ The orchestrator should not copy all state data into every worker. A task can re
 
 ## 5. Delta-Labeled Adaptive M-to-N Exploration
 
-At state \(S\), a generator may propose \(M\) candidate Deltas:
+At state $S$, a generator may propose $M$ candidate Deltas:
 
-\[
+$$
 G(S)=\{\delta_1,\ldots,\delta_M\}.
-\]
+$$
 
-Constraint checking, branching policy, deduplication, and stochastic outcomes may yield \(N\) realized transition edges. In general,
+Constraint checking, branching policy, deduplication, and stochastic outcomes may yield $N$ realized transition edges. In general,
 
-\[
-M\neq N\neq |\operatorname{UniqueSuccessors}(S)|.
-\]
+$$
+M\neq N\neq |\mathrm{UniqueSuccessors}(S)|.
+$$
 
 A realized edge is identified by
 
-\[
+$$
 e=(S_i,\delta,a,S_j,\pi),
-\]
+$$
 
-where \(a\) is the decision/transition semantics and \(\pi\) is provenance. This representation supports trees, DAGs, and cyclic state graphs. The **Delta belongs to the transition edge**, not necessarily to the successor state.
+where $a$ is the decision/transition semantics and $\pi$ is provenance. This representation supports trees, DAGs, and cyclic state graphs. The **Delta belongs to the transition edge**, not necessarily to the successor state.
 
 The orchestrator can allocate exploration budgets per Delta family, region, uncertainty class, solver, or domain. It must distinguish a *deferred* candidate from a permanently excluded one; neither is automatically a realized state transition.
 
@@ -125,9 +125,9 @@ The orchestrator can allocate exploration budgets per Delta family, region, unce
 
 A proposed unit of distributed work is
 
-\[
+$$
 W=(\mathrm{id},S_0,\Delta_{\rm scope},C_v,M_v,P_v,B,V,\Gamma,\pi),
-\]
+$$
 
 with:
 
@@ -144,7 +144,7 @@ with:
 | `Gamma` | Authorization, privacy, and execution governance |
 | `pi` | Parent task, provenance, dependencies, and lineage |
 
-A worker may subdivide \(W\) into child units if policy permits. Subdivision should retain sufficient ancestry to enforce path-local decisions and prevent duplicate assignment of exclusive work. It should not assume that a globally identical Delta is invalid in all contexts.
+A worker may subdivide $W$ into child units if policy permits. Subdivision should retain sufficient ancestry to enforce path-local decisions and prevent duplicate assignment of exclusive work. It should not assume that a globally identical Delta is invalid in all contexts.
 
 ### 6.1 Minimal task lifecycle
 
@@ -193,12 +193,12 @@ Propose, test, approve, and roll back generator or policy changes. Improvement i
 
 Different workers may use different algorithms over a shared task space. A portfolio policy can select a solver according to features such as branching factor, constraint tightness, known bounds, subproblem overlap, objective smoothness, and historical evidence.
 
-\[
-\operatorname{SelectSolver}(W,\mathcal A,\mathcal H)
+$$
+\mathrm{SelectSolver}(W,\mathcal A,\mathcal H)
 \rightarrow (A_i,B_i),
-\]
+$$
 
-where \(\mathcal A\) is the available solver set and \(\mathcal H\) contains validated performance history. Selection may itself be adaptive, but cross-problem transfer of performance estimates must be tested.
+where $\mathcal A$ is the available solver set and $\mathcal H$ contains validated performance history. Selection may itself be adaptive, but cross-problem transfer of performance estimates must be tested.
 
 ### 8.1 Search
 
@@ -210,7 +210,7 @@ DP workers exploit equivalent subproblems. The orchestrator must preserve the eq
 
 ### 8.3 Branch-and-bound
 
-B&B workers maintain valid objective-specific bounds and incumbents. A bound derived for metric version \(m_k\) cannot automatically prune under \(m_{k+1}\). A shared incumbent must be feasible under the exact governing constraint and objective regime.
+B&B workers maintain valid objective-specific bounds and incumbents. A bound derived for metric version $m_k$ cannot automatically prune under $m_{k+1}$. A shared incumbent must be feasible under the exact governing constraint and objective regime.
 
 ### 8.4 Approximate and learning-based solvers
 
@@ -236,11 +236,11 @@ If the generator's support excludes a useful region, perfect ranking of generate
 
 ## 10. Solution and Metric Co-Evolution in the Orchestrator
 
-A traditional solver optimizes \(x\) under a fixed metric \(m\). CDE may also explore candidate metrics:
+A traditional solver optimizes $x$ under a fixed metric $m$. CDE may also explore candidate metrics:
 
-\[
+$$
 \delta_x:\ x\mapsto x',\qquad \delta_m:\ m\mapsto m'.
-\]
+$$
 
 These are distinct transition types. A better score under a metric is not evidence that the metric itself is better. Metric promotion requires a separate validation objective or authorized decision process, as developed in CDE-007.
 
@@ -276,9 +276,9 @@ For a maximum-of-independent-candidates problem, aggregation may be as simple as
 
 Thus:
 
-\[
-\operatorname{Merge}(R_1,\ldots,R_k;C_{\rm global})
-\]
+$$
+\mathrm{Merge}(R_1,\ldots,R_k;C_{\rm global})
+$$
 
 is an operation with its own correctness obligations, not an unconditional union.
 
@@ -299,7 +299,7 @@ A distributed CDE deployment may have many autonomous workers, each with local q
 
 ### 12.2 Shared incumbent example
 
-A worker discovers a feasible solution with objective value \(u\) under metric version \(m_v\) and constraint version \(c_v\). It submits `(solution, u, m_v, c_v, proof_of_feasibility)`. The control plane checks the versions and feasibility before publishing a new incumbent. Other workers may use the incumbent for pruning only if their bound contracts are compatible.
+A worker discovers a feasible solution with objective value $u$ under metric version $m_v$ and constraint version $c_v$. It submits `(solution, u, m_v, c_v, proof_of_feasibility)`. The control plane checks the versions and feasibility before publishing a new incumbent. Other workers may use the incumbent for pruning only if their bound contracts are compatible.
 
 ### 12.3 What is and is not embarrassingly parallel
 
@@ -309,9 +309,9 @@ Independent peak-search regions can be distributed with low reconciliation cost.
 
 The orchestrator must preserve the distinctions established in CDE-004:
 
-\[
+$$
 \text{Delta uniqueness}\ne\text{Decision uniqueness}\ne\text{State uniqueness}.
-\]
+$$
 
 In a constructive Yes/No search, both accepted and excluded decisions belong in path memory. In reconfigurable search, revisiting a state can be legitimate when costs, evidence, or resources differ. In cyclic graphs, a bounded revisit policy, ranking function, or another termination mechanism may be necessary.
 
@@ -319,14 +319,14 @@ A global cache should not prune a branch merely because a visible state appears 
 
 ## 14. Orchestrator Policy as an Explicit Object
 
-Define a policy \(P\) that maps system observations to scheduling and exploration actions:
+Define a policy $P$ that maps system observations to scheduling and exploration actions:
 
-\[
+$$
 P:(\mathcal Q,\mathcal E,\mathcal B,\mathcal V)
 \longrightarrow\{\text{dispatch, defer, cancel, validate, relay, promote}\},
-\]
+$$
 
-where \(\mathcal Q\) is the task queue, \(\mathcal E\) is evidence, \(\mathcal B\) is resource state, and \(\mathcal V\) is the active version registry.
+where $\mathcal Q$ is the task queue, $\mathcal E$ is evidence, $\mathcal B$ is resource state, and $\mathcal V$ is the active version registry.
 
 Possible strategies include static partitions, work stealing, bandit-style portfolio allocation, uncertainty-aware sampling, priority queues, and policy-learning agents. Each introduces different bias and overhead.
 
@@ -342,12 +342,12 @@ Validation itself consumes resources. The orchestrator should reserve budget for
 
 CDE may evolve the mechanisms that produce Deltas or select tasks:
 
-\[
+$$
 G_{t+1}=U_G(G_t,F_t),\qquad
 P_{t+1}=U_P(P_t,F_t),
-\]
+$$
 
-where \(F_t\) is validated feedback. This supports a research path toward Structural RSI, but it is essential to distinguish three levels:
+where $F_t$ is validated feedback. This supports a research path toward Structural RSI, but it is essential to distinguish three levels:
 
 1. **Parameter adaptation:** tune weights, probabilities, or budgets.
 2. **Structural method evolution:** add or replace Delta operators, decompositions, or solver combinations.

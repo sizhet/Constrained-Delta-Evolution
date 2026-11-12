@@ -58,34 +58,34 @@ We propose a taxonomy of generality, a matrix of conditional guarantees, counter
 
 A compact CDE problem can be written as
 
-\[
+$$
 \mathcal P=(\mathcal S,\Delta,T,C,G,L),
-\]
+$$
 
 where:
 
-- \(\mathcal S\) is the logical State Container space;
-- \(\Delta\) is the universe or family of typed Delta proposals;
-- \(T\) is a transition relation or function;
-- \(C\) specifies constraints and permitted transitions;
-- \(G\) is a candidate Delta generator;
-- \(L\) is an evaluation, preference, or selection mechanism.
+- $\mathcal S$ is the logical State Container space;
+- $\Delta$ is the universe or family of typed Delta proposals;
+- $T$ is a transition relation or function;
+- $C$ specifies constraints and permitted transitions;
+- $G$ is a candidate Delta generator;
+- $L$ is an evaluation, preference, or selection mechanism.
 
 A transition is admissible when its type, preconditions, authorization, and hard constraints are satisfied:
 
-\[
+$$
 S\xrightarrow{\delta}S'
 \quad\text{only if}\quad
-\operatorname{Admissible}(S,\delta,S';C).
-\]
+\mathrm{Admissible}(S,\delta,S';C).
+$$
 
 The candidate generator may be context-dependent:
 
-\[
+$$
 G(S,z,B)=\{\delta_1,\ldots,\delta_M\},
-\]
+$$
 
-with context \(z\) and budget \(B\). After filtering, deferral, execution, and coalescence, the number of realized edges and distinct successor states need not equal \(M\).
+with context $z$ and budget $B$. After filtering, deferral, execution, and coalescence, the number of realized edges and distinct successor states need not equal $M$.
 
 The state may be a bucket assignment, graph, schedule, matching, metric definition, scientific hypothesis, generator configuration, or distributed task record. **Logical State Container** does not prescribe a tree or any fixed storage format.
 
@@ -93,9 +93,9 @@ The state may be a bucket assignment, graph, schedule, matching, metric definiti
 
 In stochastic or nondeterministic settings, use
 
-\[
+$$
 T:\mathcal S\times\Delta\longrightarrow 2^{\mathcal S}
-\]
+$$
 
 or a probability kernel, not necessarily a deterministic function. The transition semantics must identify which uncertainty is environmental, which is algorithmic, and which is due to incomplete information.
 
@@ -150,16 +150,16 @@ If the system cannot observe the full environment state, the State Container may
 
 ## 5. Constraint Semantics and Soundness
 
-Let \(C(S)\) denote a state feasibility predicate, and \(C_T(S,\delta,S')\) a transition-level predicate.
+Let $C(S)$ denote a state feasibility predicate, and $C_T(S,\delta,S')$ a transition-level predicate.
 
 **Proposition 1 — Conditional feasibility preservation.** If:
 
-1. the initial committed state \(S_0\) satisfies \(C\);
+1. the initial committed state $S_0$ satisfies $C$;
 2. every committed transition is checked against a sound transition contract;
-3. that contract implies \(C(S')\) whenever \(C(S)\) holds; and
+3. that contract implies $C(S')$ whenever $C(S)$ holds; and
 4. the applicable constraint version remains fixed or changes only through a separately validated migration,
 
-then all committed states reached by finite transition sequences satisfy \(C\).
+then all committed states reached by finite transition sequences satisfy $C$.
 
 **Proof sketch.** Induct on the number of committed transitions. The base state is feasible. The transition implication preserves feasibility from each state to its successor.
 
@@ -181,15 +181,15 @@ A constraint Delta may invalidate previous feasibility, cached states, or optima
 
 A candidate Delta is not necessarily an executed transition. CDE-003 distinguishes:
 
-- proposed Delta count \(M\);
-- realized transition-edge count \(N\);
-- distinct successor-state count \(K\).
+- proposed Delta count $M$;
+- realized transition-edge count $N$;
+- distinct successor-state count $K$.
 
 In general,
 
-\[
+$$
 M\neq N,\qquad N\neq K.
-\]
+$$
 
 Filtering, infeasibility, deferral, stochastic outcomes, and state coalescence explain the differences.
 
@@ -199,15 +199,15 @@ Filtering, infeasibility, deferral, stochastic outcomes, and state coalescence e
 
 ### 6.2 Generator reachability
 
-Let \(R_G(S_0)\) denote states reachable using generated and admissible Deltas. A target outside \(R_G(S_0)\) cannot be found by a search restricted to those Deltas, regardless of ranking quality.
+Let $R_G(S_0)$ denote states reachable using generated and admissible Deltas. A target outside $R_G(S_0)$ cannot be found by a search restricted to those Deltas, regardless of ranking quality.
 
 This is a fundamental limitation:
 
-\[
+$$
 \text{Excellent selection policy}
 \not\Rightarrow
 \text{adequate generation coverage}.
-\]
+$$
 
 Directional fields and multi-scale generation may improve coverage in selected domains, but their advantage must be measured.
 
@@ -215,7 +215,7 @@ Directional fields and multi-scale generation may improve coverage in selected d
 
 In a constructive fixed-context BTP profile, a decision on the same Delta should not be repeated on one path after it has been accepted or excluded.
 
-Let \(A_t\) and \(R_t\) denote accepted and rejected decisions, with \(U_t=A_t\cup R_t\). The next decision must be fresh relative to \(U_t\).
+Let $A_t$ and $R_t$ denote accepted and rejected decisions, with $U_t=A_t\cup R_t$. The next decision must be fresh relative to $U_t$.
 
 But three identities must remain distinct:
 
@@ -227,9 +227,9 @@ A no-repeat Delta rule does **not** imply that state cycles are impossible. Two 
 
 ### 7.1 Conditional finite termination
 
-**Proposition 2 — Finite constructive path depth.** Suppose the candidate decision universe has fixed finite size \(m\), every nonterminal expansion resolves a previously unresolved decision, and no new decision identities are introduced. Then each path has at most \(m\) decision expansions.
+**Proposition 2 — Finite constructive path depth.** Suppose the candidate decision universe has fixed finite size $m$, every nonterminal expansion resolves a previously unresolved decision, and no new decision identities are introduced. Then each path has at most $m$ decision expansions.
 
-**Proof sketch.** The ranking function \(\rho_t=m-|U_t|\) is a nonnegative integer that strictly decreases after every expansion.
+**Proof sketch.** The ranking function $\rho_t=m-|U_t|$ is a nonnegative integer that strictly decreases after every expansion.
 
 This does not establish termination of open-ended generator evolution, recursive method creation, or unrestricted cyclic reconfiguration. It also does not prove search completeness if the generator omits required decisions.
 
@@ -255,7 +255,7 @@ The statement is standard search theory. CDE can host such a search but does not
 
 ### 8.1 Counterexample: missing Delta
 
-Suppose the only path to a goal requires Delta \(\delta^*\), but \(G(S)\) never proposes \(\delta^*\). No scoring function or solver scheduling policy can discover that goal through the restricted transition system.
+Suppose the only path to a goal requires Delta $\delta^*$, but $G(S)$ never proposes $\delta^*$. No scoring function or solver scheduling policy can discover that goal through the restricted transition system.
 
 ### 8.2 Counterexample: unsafe heuristic pruning
 
@@ -271,13 +271,13 @@ DP-style caching is valid only when merged subproblems have equivalent future-re
 
 Two states with the same visible assignment may differ in path exclusions, remaining resources, metric version, or governance context. A cache key that ignores such distinctions can return incorrect results.
 
-A sound equivalence relation \(\sim\) should preserve the continuation problem relevant to the solver:
+A sound equivalence relation $\sim$ should preserve the continuation problem relevant to the solver:
 
-\[
+$$
 S_1\sim S_2
 \Longrightarrow
 \text{equivalent feasible continuations and objective semantics}.
-\]
+$$
 
 The precise condition depends on the task and Bellman decomposition.
 
@@ -291,15 +291,15 @@ A change in constraints, metric, representation, or generator semantics may inva
 
 ## 10. Branch-and-Bound: Proof-Based Pruning
 
-For maximization, suppose \(U(S)\) is a valid upper bound on every feasible completion from state \(S\), and \(I\) is the best known feasible incumbent score under the same fixed objective.
+For maximization, suppose $U(S)$ is a valid upper bound on every feasible completion from state $S$, and $I$ is the best known feasible incumbent score under the same fixed objective.
 
 Then a branch may be safely pruned when
 
-\[
+$$
 U(S)\le I.
-\]
+$$
 
-This rule is sound only if \(U\) is truly an upper bound, the incumbent is feasible, and both use compatible objective and constraint versions.
+This rule is sound only if $U$ is truly an upper bound, the incumbent is feasible, and both use compatible objective and constraint versions.
 
 ### 10.1 Counterexample: predicted score as a bound
 
@@ -307,7 +307,7 @@ A learned model predicts a branch cannot exceed score 80, but a feasible complet
 
 ### 10.2 Changing metrics
 
-An optimality certificate under \(m_k\) does not automatically survive promotion of \(m_{k+1}\). Scores, bounds, dominance relations, and incumbents may require re-evaluation.
+An optimality certificate under $m_k$ does not automatically survive promotion of $m_{k+1}$. Scores, bounds, dominance relations, and incumbents may require re-evaluation.
 
 ## 11. Optimality, Approximation, and Heuristic Success
 
@@ -337,13 +337,13 @@ These are useful design options, not correctness guarantees.
 
 ### 12.1 A separation principle
 
-\[
+$$
 \text{Generation}
 \neq
 \text{Evaluation}
 \neq
 \text{Proof}.
-\]
+$$
 
 Generation determines which candidates are exposed. Evaluation ranks or compares them. Proof establishes conditional guarantees. A system can perform one well and another poorly.
 
@@ -357,25 +357,25 @@ Broadening the Delta neighborhood may improve reachability but increase computat
 
 ## 13. Solution–Metric Co-Evolution: The Evaluation Boundary
 
-CDE-007 extends exploration to the metric space. Let \(x\in\mathcal X\) be a solution and \(m\in\mathcal M\) a metric candidate.
+CDE-007 extends exploration to the metric space. Let $x\in\mathcal X$ be a solution and $m\in\mathcal M$ a metric candidate.
 
 Solution improvement is relative to a fixed metric version:
 
-\[
+$$
 x_{t+1}\succ_{m_k}x_t.
-\]
+$$
 
 Metric improvement requires independent evidence:
 
-\[
+$$
 m_{k+1}\succ_{V}m_k,
-\]
+$$
 
-where \(V\) is a validation criterion with its own provenance and governance.
+where $V$ is a validation criterion with its own provenance and governance.
 
 ### 13.1 Counterexample: score inflation
 
-A metric changes from \(m(x)=f(x)\) to \(m'(x)=100f(x)\). Every score becomes larger, but no solution or decision quality improves. Comparing raw scores across versions would falsely suggest progress.
+A metric changes from $m(x)=f(x)$ to $m'(x)=100f(x)$. Every score becomes larger, but no solution or decision quality improves. Comparing raw scores across versions would falsely suggest progress.
 
 ### 13.2 Goodhart effects
 
@@ -413,13 +413,13 @@ CDE-010 distinguishes Result, Evidence, Constraint, Method, Policy, Metric, and 
 
 The crucial distinction is:
 
-\[
+$$
 \text{Artifact sharing}
 \neq
 \text{validated transfer}
 \neq
 \text{measured collective learning}.
-\]
+$$
 
 A transferred method may fail because the receiving problem has different constraints or structural properties. Negative transfer must be reported.
 
@@ -439,10 +439,10 @@ A credible Collective Learning claim should demonstrate that receiving agents or
 
 CDE-011 treats generators and exploration policies as versioned meta-states:
 
-\[
+$$
 G_{k+1}=T_G(G_k,\delta_G),\qquad
 P_{k+1}=T_P(P_k,\delta_P).
-\]
+$$
 
 A candidate improvement should pass through proposal, sandbox testing, independent evaluation, authorization, rollout, and monitoring.
 
@@ -545,7 +545,7 @@ Each counterexample suggests a corresponding conformance or benchmark test.
 
 CDE is not a single optimizer. A useful decomposition is:
 
-\[
+$$
 \text{CDE deployment}
 =
 \text{Core contracts}
@@ -553,7 +553,7 @@ CDE is not a single optimizer. A useful decomposition is:
 \text{chosen solver(s)}
 +
 \text{optional orchestration}.
-\]
+$$
 
 The framework supplies a common way to describe transitions, constraints, evidence, and handoffs. The solver supplies the actual search strategy and, where applicable, mathematical guarantees.
 
@@ -949,7 +949,7 @@ The first twelve CDE foundations establish a coherent research proposal, but coh
 
 The most important boundary is:
 
-\[
+$$
 \boxed{
 \text{Representability}
 \neq
@@ -963,7 +963,7 @@ The most important boundary is:
 \neq
 \text{Validated Generalization}
 }
-\]
+$$
 
 Maintaining these distinctions strengthens rather than weakens the CDE research program. It turns broad architectural ambition into explicit proof obligations, conformance tests, and reproducible experiments.
 

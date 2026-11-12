@@ -71,37 +71,37 @@ A single logical task registry can be implemented by replicated services. A logi
 
 Let the CDE problem be
 
-\[
+$$
 \mathcal P=(\mathcal S,\Delta,T,C,G,E,L),
-\]
+$$
 
-where \(\mathcal S\) is the logical state space, \(\Delta\) the Delta space, \(T\) the transition relation, \(C\) the constraint regime, \(G\) the candidate generator, \(E\) the evaluation regime, and \(L\) the lifecycle and stopping semantics.
+where $\mathcal S$ is the logical state space, $\Delta$ the Delta space, $T$ the transition relation, $C$ the constraint regime, $G$ the candidate generator, $E$ the evaluation regime, and $L$ the lifecycle and stopping semantics.
 
-At state \(s\), a generator proposes \(M\) candidates:
+At state $s$, a generator proposes $M$ candidates:
 
-\[
+$$
 G(s)=\{\delta_1,\ldots,\delta_M\}.
-\]
+$$
 
-A branch policy selects and realizes \(N\) transition edges, potentially with \(N\neq M\). The number of *distinct* successor states may differ from both counts. A distributed worker need not receive an entire branch subtree; it may receive a Delta scope, a state region, a metric family, or a solver portfolio assignment.
+A branch policy selects and realizes $N$ transition edges, potentially with $N\neq M$. The number of *distinct* successor states may differ from both counts. A distributed worker need not receive an entire branch subtree; it may receive a Delta scope, a state region, a metric family, or a solver portfolio assignment.
 
-Let \(W_i\) denote a portable exploration task:
+Let $W_i$ denote a portable exploration task:
 
-\[
+$$
 W_i=(I_i,S_i,\Omega_i,C_i,E_i,P_i,B_i,V_i,H_i),
-\]
+$$
 
 where:
 
-- \(I_i\): task identity, lineage, and attempt identity;
-- \(S_i\): starting state or immutable state reference;
-- \(\Omega_i\): authorized Delta or search-region scope;
-- \(C_i\): versioned constraints and authority;
-- \(E_i\): evaluation regime, metric, and validation protocol;
-- \(P_i\): allowed solver and search policy;
-- \(B_i\): resource, time, and exploration budget;
-- \(V_i\): verification and acceptance obligations;
-- \(H_i\): relevant path decisions, history, and loop-control context.
+- $I_i$: task identity, lineage, and attempt identity;
+- $S_i$: starting state or immutable state reference;
+- $\Omega_i$: authorized Delta or search-region scope;
+- $C_i$: versioned constraints and authority;
+- $E_i$: evaluation regime, metric, and validation protocol;
+- $P_i$: allowed solver and search policy;
+- $B_i$: resource, time, and exploration budget;
+- $V_i$: verification and acceptance obligations;
+- $H_i$: relevant path decisions, history, and loop-control context.
 
 The tuple is a conceptual model. Implementations may reference large immutable artifacts by content hash rather than copying them.
 
@@ -159,9 +159,9 @@ This example is illustrative, not an implementation-ready universal schema. A pr
 
 Distributed execution magnifies distinctions established in CDE-003 and CDE-004:
 
-\[
+$$
 \text{Task Identity}\neq\text{Delta Identity}\neq\text{Decision Identity}\neq\text{State Identity}.
-\]
+$$
 
 Two tasks may explore the same state under different budgets or metrics. Two Deltas may lead to equivalent states. One logical task may be attempted several times after failure. A repeated No decision may be forbidden within a constructive path while the same proposal remains legitimate in another independent path.
 
@@ -207,29 +207,29 @@ A central engineering distinction is the semantics of combining distributed work
 
 When every worker returns a complete feasible candidate evaluated under the same objective, the orchestrator may select
 
-\[
+$$
 x^*\in\arg\max_i f(x_i),
-\]
+$$
 
 provided feasibility, metric versions, and evaluation contexts are comparable. This resembles independent peak search. It does not imply global optimality unless search coverage and bounds establish it.
 
 ### 7.2 Composable partial results
 
-When workers solve independent components with a proven composition operator \(\oplus\), the orchestrator may construct
+When workers solve independent components with a proven composition operator $\oplus$, the orchestrator may construct
 
-\[
+$$
 x=x_1\oplus\cdots\oplus x_k.
-\]
+$$
 
-This is safe only if component compatibility and global constraints are preserved by \(\oplus\). A proof or explicit global validation is required. Partitioning by geography or data shard alone does not establish composability.
+This is safe only if component compatibility and global constraints are preserved by $\oplus$. A proof or explicit global validation is required. Partitioning by geography or data shard alone does not establish composability.
 
 ### 7.3 Globally coupled results
 
 When tasks share resources or constraints, the orchestrator must solve a reconciliation problem:
 
-\[
-x^*=\operatorname{Reconcile}(x_1,\ldots,x_k;C_{\mathrm{global}}).
-\]
+$$
+x^*=\mathrm{Reconcile}(x_1,\ldots,x_k;C_{\mathrm{global}}).
+$$
 
 Reconciliation may be as hard as the original problem. For example, two locally optimal school-bus schedules may both allocate the same vehicle or exceed a shared fleet limit. Their local scores cannot simply be summed to produce a feasible global solution.
 
@@ -239,11 +239,11 @@ Even when partial solutions cannot be merged, counterexamples, learned constrain
 
 ## 8. Global Constraints and Local Autonomy
 
-A distributed task may have local constraints \(C_i\) and global constraints \(C_G\). A locally feasible state satisfies \(C_i\), but a globally acceptable solution must satisfy
+A distributed task may have local constraints $C_i$ and global constraints $C_G$. A locally feasible state satisfies $C_i$, but a globally acceptable solution must satisfy
 
-\[
+$$
 C_G(x)\land\bigwedge_i C_i(x).
-\]
+$$
 
 Not every global constraint can be checked locally. Options include:
 
@@ -270,9 +270,9 @@ Publishing a context-conditional exclusion as a global fact can destroy complete
 
 A distributed incumbent is meaningful only relative to a declared metric and constraint version. Define an evaluation record:
 
-\[
+$$
 R=(x,m_v,C_v,D_v,\mathrm{score},\mathrm{evidence},\mathrm{provenance}).
-\]
+$$
 
 Results under incompatible versions cannot be compared by raw score alone. A metric change may require re-evaluating archived candidates and invalidating B&B bounds tied to the old objective.
 
@@ -290,7 +290,7 @@ A stale worker may return a valuable candidate, but its score should be recomput
 
 ### 9.2 Certified bounds
 
-In a maximization B&B system, an upper bound \(U(R)\) for region \(R\) permits pruning when \(U(R)\le f(x_{\rm incumbent})\), assuming the bound is sound under the same objective and constraints. Heuristic estimates are not substitutes for certified bounds. Distributed bound updates must carry the problem, region, metric, and constraint versions on which they depend.
+In a maximization B&B system, an upper bound $U(R)$ for region $R$ permits pruning when $U(R)\le f(x_{\rm incumbent})$, assuming the bound is sound under the same objective and constraints. Heuristic estimates are not substitutes for certified bounds. Distributed bound updates must carry the problem, region, metric, and constraint versions on which they depend.
 
 ## 10. Heterogeneous Solver Portfolios
 
@@ -312,13 +312,13 @@ A worker declaration should distinguish **claimed capabilities** from **verified
 
 ### 10.2 Portfolio policy
 
-An allocation policy \(\pi\) chooses workers and budgets:
+An allocation policy $\pi$ chooses workers and budgets:
 
-\[
+$$
 \pi(W_i,\mathcal R_t)\rightarrow(\mathrm{worker},\mathrm{budget},\mathrm{priority}),
-\]
+$$
 
-where \(\mathcal R_t\) summarizes current resources and evidence. Policy adaptation should be evaluated on system-level outcomes, including scheduling overhead and communication costs.
+where $\mathcal R_t$ summarizes current resources and evidence. Policy adaptation should be evaluated on system-level outcomes, including scheduling overhead and communication costs.
 
 ## 11. Asynchronous Distributed Exploration
 
@@ -362,11 +362,11 @@ A worker that samples 1,000 candidates has not necessarily exhausted a region. A
 
 A worker exploring a constructive BTP-derived path must inherit the path's accepted and rejected decisions. For a one-time decision model, both Yes and No choices count toward the decided set:
 
-\[
+$$
 D_t=A_t\cup R_t.
-\]
+$$
 
-A new decision on \(\delta\) may be disallowed if its canonical decision key is already in \(D_t\). This rule is specific to constructive semantics; reconfigurable and cyclic CDE modes may allow legitimate revisits.
+A new decision on $\delta$ may be disallowed if its canonical decision key is already in $D_t$. This rule is specific to constructive semantics; reconfigurable and cyclic CDE modes may allow legitimate revisits.
 
 **Critical rule:** a path-local No decision is not automatically a global prohibition. Propagating it to unrelated workers can incorrectly remove feasible solutions.
 
@@ -405,11 +405,11 @@ A reusable artifact should carry its type, scope, dependencies, version, provena
 
 Collective Learning is more than pooling final answers. Workers can exchange improvements to the way they search:
 
-\[
+$$
 G_{t+1}=U(G_t,F_t),\qquad P_{t+1}=V(P_t,F_t),
-\]
+$$
 
-where \(G_t\) is a Delta generator, \(P_t\) a coordination policy, and \(F_t\) validated feedback. These updates may be local, global, or domain-specific.
+where $G_t$ is a Delta generator, $P_t$ a coordination policy, and $F_t$ validated feedback. These updates may be local, global, or domain-specific.
 
 A useful **Method Relay** should include:
 
@@ -503,9 +503,9 @@ The key limitation is **reachability**: if the available generators cannot produ
 
 ## 21. Worked Case A — Independent Multi-Region Peak Search
 
-Consider a finite collection of regions \(R_1,\ldots,R_k\) with a common scalar objective \(f\). Each worker returns a feasible candidate \(x_i\in R_i\), its score, and its coverage status.
+Consider a finite collection of regions $R_1,\ldots,R_k$ with a common scalar objective $f$. Each worker returns a feasible candidate $x_i\in R_i$, its score, and its coverage status.
 
-A coordinator can select the best returned candidate by comparing \(f(x_i)\). If every region has been exhaustively explored and the regions cover the full feasible domain, the result can support a global optimum claim. If workers use heuristic sampling, the same aggregation yields only the best *observed* candidate.
+A coordinator can select the best returned candidate by comparing $f(x_i)$. If every region has been exhaustively explored and the regions cover the full feasible domain, the result can support a global optimum claim. If workers use heuristic sampling, the same aggregation yields only the best *observed* candidate.
 
 **Learning opportunity:** workers can relay effective long-range Delta generators or region-selection heuristics. Their transfer value should be tested on new landscapes, not assumed from the originating region.
 

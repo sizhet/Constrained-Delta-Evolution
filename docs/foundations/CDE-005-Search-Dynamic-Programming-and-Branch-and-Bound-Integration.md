@@ -46,50 +46,50 @@ CDE does not replace these methods. Its proposed contribution is a shared **Stat
 
 Let a problem instance be represented as
 
-\[
+$$
 \mathcal{P}=(Q,\Delta,G,T,C,F,J,\mathcal{O}),
-\]
+$$
 
 where:
 
-- \(Q\) is the set of **exploration configurations**, not merely domain states;
-- \(\Delta\) is a typed universe of candidate transformations;
-- \(G(q)\subseteq\Delta\) generates candidates applicable to configuration \(q\);
-- \(T(q,\delta,o)\) yields successor configurations for a Delta and outcome \(o\);
-- \(C\) specifies feasibility, transition, path, and global constraints;
-- \(F(q)\) is a terminal/goal predicate or a terminal-outcome relation;
-- \(J\) evaluates complete solutions or paths under a declared metric version;
-- \(\mathcal{O}\) is an observation/outcome model, including nondeterministic outcomes when needed.
+- $Q$ is the set of **exploration configurations**, not merely domain states;
+- $\Delta$ is a typed universe of candidate transformations;
+- $G(q)\subseteq\Delta$ generates candidates applicable to configuration $q$;
+- $T(q,\delta,o)$ yields successor configurations for a Delta and outcome $o$;
+- $C$ specifies feasibility, transition, path, and global constraints;
+- $F(q)$ is a terminal/goal predicate or a terminal-outcome relation;
+- $J$ evaluates complete solutions or paths under a declared metric version;
+- $\mathcal{O}$ is an observation/outcome model, including nondeterministic outcomes when needed.
 
 A configuration may be written
 
-\[
+$$
 q=(s,c,e,h,m,g,b),
-\]
+$$
 
-with domain state \(s\), constraint context \(c\), evidence \(e\), relevant path history \(h\), metric identity \(m\), generator/policy context \(g\), and remaining resources \(b\). Not every application needs every field. A field may be omitted from an equivalence key **only if it is provably irrelevant to future feasibility, reachable outcomes, and objective values**.
+with domain state $s$, constraint context $c$, evidence $e$, relevant path history $h$, metric identity $m$, generator/policy context $g$, and remaining resources $b$. Not every application needs every field. A field may be omitted from an equivalence key **only if it is provably irrelevant to future feasibility, reachable outcomes, and objective values**.
 
 ### 2.1 Edge and decision records
 
 A realized transition edge is
 
-\[
+$$
 e=(q_i,\delta,a,o,q_j,\pi),
-\]
+$$
 
-where \(a\) is a disposition such as `Apply` or `Exclude`, \(o\) identifies the realized outcome, and \(\pi\) contains provenance. `Exclude` can change decision history without changing the domain state. A deferred candidate is ordinarily a scheduler record rather than a committed transition.
+where $a$ is a disposition such as `Apply` or `Exclude`, $o$ identifies the realized outcome, and $\pi$ contains provenance. `Exclude` can change decision history without changing the domain state. A deferred candidate is ordinarily a scheduler record rather than a committed transition.
 
-Let \(M(q)=|G(q)|\) be the number of generated candidate Deltas and let \(N(q)\) be the number of realized outgoing transition edges. In general,
+Let $M(q)=|G(q)|$ be the number of generated candidate Deltas and let $N(q)$ be the number of realized outgoing transition edges. In general,
 
-\[
-M(q)\neq N(q)\neq |\operatorname{UniqueSuccessors}(q)|.
-\]
+$$
+M(q)\neq N(q)\neq |\mathrm{UniqueSuccessors}(q)|.
+$$
 
 A single Delta can have several stochastic outcomes, and distinct Deltas can lead to the same successor. A solver adapter must not infer one-to-one correspondence from a branch count.
 
 ### 2.2 Optimization direction and path cost
 
-For clarity, most propositions below use **minimization**. A complete solution \(z\) has cost \(J_m(z)\), evaluated under metric \(m\). Maximization requires reversing the appropriate inequalities. Path-dependent costs, resource limits, or histories must be retained in the search configuration unless a valid sufficient statistic exists.
+For clarity, most propositions below use **minimization**. A complete solution $z$ has cost $J_m(z)$, evaluated under metric $m$. Maximization requires reversing the appropriate inequalities. Path-dependent costs, resource limits, or histories must be retained in the search configuration unless a valid sufficient statistic exists.
 
 ## 3. Solver-Neutral Exploration Interface
 
@@ -122,7 +122,7 @@ These quantities may be correlated but are not interchangeable. Only a bound wit
 
 ## 4. Search as a CDE Solver Family
 
-A generic search solver maintains a frontier \(\mathcal{F}\) of configurations and repeatedly selects an entry, generates Deltas, checks constraints, and expands accepted transitions. Depth-first search (DFS), breadth-first search (BFS), uniform-cost search, and best-first search differ primarily in frontier discipline and assumptions about edge costs and heuristics.
+A generic search solver maintains a frontier $\mathcal{F}$ of configurations and repeatedly selects an entry, generates Deltas, checks constraints, and expands accepted transitions. Depth-first search (DFS), breadth-first search (BFS), uniform-cost search, and best-first search differ primarily in frontier discipline and assumptions about edge costs and heuristics.
 
 ```text
 procedure CDE_SEARCH(initial, policy, budget):
@@ -151,7 +151,7 @@ This is a **schema**, not an executable reference implementation. A constructive
 
 ### 4.1 Completeness depends on the generator
 
-If the Delta generator never proposes a necessary transition, no frontier policy can recover the missing solution. Let \(R_G(q_0)\) be the states reachable under generated and retained transitions. An optimal solution \(q^*\notin R_G(q_0)\) is inaccessible to that solver configuration.
+If the Delta generator never proposes a necessary transition, no frontier policy can recover the missing solution. Let $R_G(q_0)$ be the states reachable under generated and retained transitions. An optimal solution $q^*\notin R_G(q_0)$ is inaccessible to that solver configuration.
 
 **Proposition S1 (finite exhaustive search, conditional).** If the reachable exploration graph is finite, all relevant successors are enumerated, the solver uses a fair frontier policy, no valid path is unsoundly pruned, and termination checks are correct, exhaustive search can find every reachable goal (or certify none exists). A finite domain state space alone is insufficient when path histories or metric versions generate infinitely many distinct configurations.
 
@@ -163,21 +163,21 @@ CDE also supports hypothesis discovery, evidence acquisition, and exploratory SI
 
 DP is not simply “search with a cache.” Its defining opportunity is that distinct histories can lead to the *same future subproblem*. A safe reuse key must preserve all information relevant to future feasibility and value.
 
-For configurations \(q_1,q_2\), define a task-relative relation
+For configurations $q_1,q_2$, define a task-relative relation
 
-\[
+$$
 q_1\equiv_{\mathcal P,m}q_2
-\]
+$$
 
-when their admissible continuations and continuation costs are equivalent for the declared objective \(m\), after accounting for any accumulated cost represented outside the key. This is a semantic requirement; an implementation may use a more conservative equivalence test.
+when their admissible continuations and continuation costs are equivalent for the declared objective $m$, after accounting for any accumulated cost represented outside the key. This is a semantic requirement; an implementation may use a more conservative equivalence test.
 
 For an acyclic, additive-cost problem, a Bellman-style recurrence is
 
-\[
+$$
 V(q)=\min_{\delta\in A(q)}\left[c(q,\delta)+V(T(q,\delta))\right],
-\]
+$$
 
-with terminal boundary condition \(V(q)=J_{\mathrm{terminal}}(q)\). Here \(A(q)\) includes only legal actions, and the recurrence assumes deterministic successors. For stochastic transitions, an expectation, risk operator, or other declared objective replaces the simple successor value.
+with terminal boundary condition $V(q)=J_{\mathrm{terminal}}(q)$. Here $A(q)$ includes only legal actions, and the recurrence assumes deterministic successors. For stochastic transitions, an expectation, risk operator, or other declared objective replaces the simple successor value.
 
 ### 5.1 DP state-key obligations
 
@@ -194,20 +194,20 @@ A cache entry must also identify whether it stores an exact value, an admissible
 
 ### 5.2 Counterexample: identical visible state, different No history
 
-Suppose two constructive paths reach the same partial assignment \(s\). Path A has permanently rejected `Assign(Alice, Route1)`; Path B has not. If this exclusion remains binding, their future feasible continuation sets differ. Merging them under a key that contains only \(s\) may incorrectly remove a feasible solution or permit a forbidden decision.
+Suppose two constructive paths reach the same partial assignment $s$. Path A has permanently rejected `Assign(Alice, Route1)`; Path B has not. If this exclusion remains binding, their future feasible continuation sets differ. Merging them under a key that contains only $s$ may incorrectly remove a feasible solution or permit a forbidden decision.
 
 Thus
 
-\[
-\operatorname{Hash}(s_A)=\operatorname{Hash}(s_B)
+$$
+\mathrm{Hash}(s_A)=\mathrm{Hash}(s_B)
 \not\Rightarrow q_A\equiv_{\mathcal P,m}q_B.
-\]
+$$
 
 The NoSubtree rule is not a universal mandate to keep full histories forever; rather, a DP compression must preserve the **future-relevant consequences** of those histories.
 
 ### 5.3 Dominance is weaker than equivalence
 
-A state \(q_1\) may dominate \(q_2\) when every continuation feasible from \(q_2\) can be matched or improved from \(q_1\) at no greater total cost. If proven, \(q_2\) may be discarded for an optimization objective even though the states are not equivalent. Dominance certificates should be separately typed and scoped.
+A state $q_1$ may dominate $q_2$ when every continuation feasible from $q_2$ can be matched or improved from $q_1$ at no greater total cost. If proven, $q_2$ may be discarded for an optimization objective even though the states are not equivalent. Dominance certificates should be separately typed and scoped.
 
 ### 5.4 Cyclic graphs
 
@@ -215,17 +215,17 @@ For cyclic state spaces, naive recursive memoization may loop indefinitely. Vali
 
 ## 6. Branch-and-Bound: Correctness Comes from Valid Bounds
 
-For minimization, let \(U\) be the cost of the best verified feasible complete solution (the incumbent). For a search region \(R\), let \(L(R)\) be a **certified lower bound** satisfying
+For minimization, let $U$ be the cost of the best verified feasible complete solution (the incumbent). For a search region $R$, let $L(R)$ be a **certified lower bound** satisfying
 
-\[
-L(R)\le \inf_{z\in\operatorname{Feasible}(R)}J_m(z).
-\]
+$$
+L(R)\le \inf_{z\in\mathrm{Feasible}(R)}J_m(z).
+$$
 
-If \(L(R)\ge U\), the region cannot improve the incumbent and may be pruned for the purpose of finding a strictly better solution. Equality handling must be adjusted if the task requires enumerating all optima or preserving tied alternatives.
+If $L(R)\ge U$, the region cannot improve the incumbent and may be pruned for the purpose of finding a strictly better solution. Equality handling must be adjusted if the task requires enumerating all optima or preserving tied alternatives.
 
-**Proposition B1 (sound incumbent pruning).** Assume a fixed objective \(m\), a feasible incumbent of value \(U\), and a valid lower bound \(L(R)\) over every feasible completion in region \(R\). Then pruning \(R\) when \(L(R)\ge U\) cannot remove a solution with objective value strictly less than \(U\).
+**Proposition B1 (sound incumbent pruning).** Assume a fixed objective $m$, a feasible incumbent of value $U$, and a valid lower bound $L(R)$ over every feasible completion in region $R$. Then pruning $R$ when $L(R)\ge U$ cannot remove a solution with objective value strictly less than $U$.
 
-*Proof sketch.* For every feasible \(z\in R\), \(J_m(z)\ge L(R)\ge U\). Hence no such \(z\) improves the incumbent. QED.
+*Proof sketch.* For every feasible $z\in R$, $J_m(z)\ge L(R)\ge U$. Hence no such $z$ improves the incumbent. QED.
 
 ### 6.1 Bound certificates
 
@@ -247,7 +247,7 @@ This is an illustrative contract sketch, not a finalized schema. If the objectiv
 
 ### 6.2 Directional scoring is not a lower bound
 
-A learned directional score \(D(q,\delta)\) can prioritize promising regions, but it cannot prune a region unless a sound mathematical relationship to the true objective has been established. An impressive historical correlation is not a proof of admissibility.
+A learned directional score $D(q,\delta)$ can prioritize promising regions, but it cannot prune a region unless a sound mathematical relationship to the true objective has been established. An impressive historical correlation is not a proof of admissibility.
 
 ### 6.3 Constraint propagation versus heuristic exclusion
 
@@ -288,7 +288,7 @@ Recommended statuses:
 
 ## 8. Adaptive M-to-N Branching Meets Solver Guarantees
 
-CDE may generate \(M\) candidates and realize \(N\) branches based on constraint checks, deduplication, solver policy, and resources. The critical question is whether the missing candidates are:
+CDE may generate $M$ candidates and realize $N$ branches based on constraint checks, deduplication, solver policy, and resources. The critical question is whether the missing candidates are:
 
 - **proved infeasible**;
 - **proved dominated**;
@@ -300,13 +300,13 @@ Only the first three categories can justify irreversible removal under their sta
 
 ### 8.1 Budgeted branching
 
-Let \(B_t\) be an expansion budget and \(\rho_t\) the selection policy. Then
+Let $B_t$ be an expansion budget and $\rho_t$ the selection policy. Then
 
-\[
-E_t=\operatorname{Select}_{\rho_t}(G(q_t),B_t,C_t)
-\]
+$$
+E_t=\mathrm{Select}_{\rho_t}(G(q_t),B_t,C_t)
+$$
 
-is the selected expansion set. The existence of \(E_t\) does not imply that unselected Deltas are invalid. An orchestrator should record the **reason** for nonexpansion, not merely the absence of an edge.
+is the selected expansion set. The existence of $E_t$ does not imply that unselected Deltas are invalid. An orchestrator should record the **reason** for nonexpansion, not merely the absence of an edge.
 
 ### 8.2 A useful dual ledger
 
@@ -348,17 +348,17 @@ CDE-007 will examine solution–metric co-evolution in depth. For solver integra
 
 Suppose a routing solution was evaluated under
 
-\[
+$$
 J_{m_1}=\text{number of vehicles},
-\]
+$$
 
 and a revised objective is
 
-\[
+$$
 J_{m_2}=\alpha\,\text{vehicles}+\beta\,\text{student travel time}.
-\]
+$$
 
-A bound valid for \(m_1\) is not automatically a bound for \(m_2\). An incumbent under \(m_1\) cannot be compared numerically to an incumbent under \(m_2\) without re-evaluation or a proven transformation.
+A bound valid for $m_1$ is not automatically a bound for $m_2$. An incumbent under $m_1$ cannot be compared numerically to an incumbent under $m_2$ without re-evaluation or a proven transformation.
 
 ### 10.1 Metric-aware cache keys
 
@@ -382,13 +382,13 @@ The Structural Intelligence Framework (SIF) includes Localization as a functiona
 
 A CDE Localization workflow can be expressed as:
 
-\[
+$$
 \text{Target description}
 \rightarrow\text{candidate state region}
 \rightarrow\text{constraint-guided Delta expansion}
 \rightarrow\text{evidence update}
 \rightarrow\text{refined localization}.
-\]
+$$
 
 This is distinct from deterministic lookup. It may combine retrieval, constraint satisfaction, directional search, DP reuse, or B&B elimination depending on the problem. A negative result should carry a coverage qualification: “not found in explored region” is not equivalent to “does not exist.”
 
@@ -398,11 +398,11 @@ This is distinct from deterministic lookup. It may combine retrieval, constraint
 
 A distributed CDE worker receives an exploration contract
 
-\[
+$$
 W=(q_0,\Delta_{\mathrm{scope}},C,m,P,B,V),
-\]
+$$
 
-where \(P\) specifies a solver/policy, \(B\) a resource budget, and \(V\) a validation protocol. It returns typed artifacts rather than an unqualified scalar score.
+where $P$ specifies a solver/policy, $B$ a resource budget, and $V$ a validation protocol. It returns typed artifacts rather than an unqualified scalar score.
 
 ### 12.1 Relay artifact classes
 
@@ -434,7 +434,7 @@ For independent best-candidate search, combining verified candidates by minimum 
 
 ## 13. Worked Example A: Assignment with NoSubtree Memory
 
-Consider two workers \(A,B\) and two jobs \(1,2\), with each job assigned exactly once and each worker used at most once. Deltas are `Assign(worker, job)`.
+Consider two workers $A,B$ and two jobs $1,2$, with each job assigned exactly once and each worker used at most once. Deltas are `Assign(worker, job)`.
 
 A constructive solver may branch on `Assign(A,1)`:
 
@@ -447,7 +447,7 @@ A DFS solver can traverse both branches. A DP solver may merge partial states on
 
 ## 14. Worked Example B: School-Bus Routing and Multiobjective Scoring
 
-Let \(s\) represent bus routes and assignments, with capacity, pickup windows, and student ride-time constraints. Deltas include:
+Let $s$ represent bus routes and assignments, with capacity, pickup windows, and student ride-time constraints. Deltas include:
 
 - `MoveStudent(student, routeA, routeB)`;
 - `SwapStops(routeA, routeB)`;
@@ -463,7 +463,7 @@ A local-search worker may rapidly improve feasible routes. A B&B worker may opti
 
 ## 15. Worked Example C: Multi-Scale Peak Search
 
-Let \(x\) denote a location in a bounded terrain and \(f(x)\) its elevation. Candidate Deltas include short local steps, regional jumps, and long-range relocation. Independent workers explore different areas.
+Let $x$ denote a location in a bounded terrain and $f(x)$ its elevation. Candidate Deltas include short local steps, regional jumps, and long-range relocation. Independent workers explore different areas.
 
 - A best-first worker orders candidate locations by a heuristic score.
 - A local-search worker climbs from a starting point.
@@ -496,11 +496,11 @@ The following table states claims that may be made only after checking their ass
 
 ### 16.2 Counterexample: unsound heuristic pruning
 
-Assume two candidate branches \(\delta_a,\delta_b\) have heuristic scores 0.9 and 0.1. The policy keeps only \(\delta_a\). Suppose the true optimal solution is reachable only through \(\delta_b\). Then the solver can report a feasible solution but cannot claim completeness or optimality. Increasing the number of workers exploring \(\delta_a\) does not repair the missing branch.
+Assume two candidate branches $\delta_a,\delta_b$ have heuristic scores 0.9 and 0.1. The policy keeps only $\delta_a$. Suppose the true optimal solution is reachable only through $\delta_b$. Then the solver can report a feasible solution but cannot claim completeness or optimality. Increasing the number of workers exploring $\delta_a$ does not repair the missing branch.
 
 ### 16.3 Counterexample: objective version mismatch
 
-A worker finds a solution of cost 10 under metric \(m_1\). Another worker finds cost 8 under metric \(m_2\). Selecting 8 as “better” is invalid unless both results are re-evaluated under a common criterion or a valid cross-metric ordering is established.
+A worker finds a solution of cost 10 under metric $m_1$. Another worker finds cost 8 under metric $m_2$. Selecting 8 as “better” is invalid unless both results are re-evaluated under a common criterion or a valid cross-metric ordering is established.
 
 ## 17. Reference Integration Algorithm
 

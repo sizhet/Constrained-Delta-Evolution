@@ -40,9 +40,9 @@ CDE is the proposed abstraction obtained by separating these general mechanisms 
 
 The conceptual progression is:
 
-\[
+$$
 \mathrm{BTP}\;\longrightarrow\;\mathrm{D\!\text{-}\!BTP}\;\longrightarrow\;\mathrm{CDE}.
-\]
+$$
 
 This arrow denotes **abstraction and inheritance**, not a proof that every implementation is a strict superset of every preceding implementation.
 
@@ -66,27 +66,27 @@ This arrow denotes **abstraction and inheritance**, not a proof that every imple
 
 Let a CDE problem instance be described by:
 
-\[
+$$
 \mathcal P=(\mathcal S,\mathcal D,G,T,C,E,L),
-\]
+$$
 
 where:
 
-- \(\mathcal S\) is the space of logically meaningful states;
-- \(\mathcal D\) is the space of possible Delta descriptions;
-- \(G(s,h,b)\) generates or proposes candidate Deltas given state \(s\), relevant history \(h\), and resource budget \(b\);
-- \(T(s,\delta,\omega)\) describes a successor transition, with \(\omega\) optionally representing stochastic outcomes or observations;
-- \(C(s,\delta,s')\) specifies hard feasibility and transition constraints;
-- \(E(s,m,e)\) evaluates a state or outcome under metric definition \(m\) and evidence \(e\);
-- \(L\) specifies terminal conditions, convergence criteria, or a stopping policy.
+- $\mathcal S$ is the space of logically meaningful states;
+- $\mathcal D$ is the space of possible Delta descriptions;
+- $G(s,h,b)$ generates or proposes candidate Deltas given state $s$, relevant history $h$, and resource budget $b$;
+- $T(s,\delta,\omega)$ describes a successor transition, with $\omega$ optionally representing stochastic outcomes or observations;
+- $C(s,\delta,s')$ specifies hard feasibility and transition constraints;
+- $E(s,m,e)$ evaluates a state or outcome under metric definition $m$ and evidence $e$;
+- $L$ specifies terminal conditions, convergence criteria, or a stopping policy.
 
 An individual candidate transition is:
 
-\[
+$$
  e_i=(s,\delta_i,a_i,s'_i,\kappa_i),
-\]
+$$
 
-where \(a_i\) identifies the transition or decision action and \(\kappa_i\) carries necessary provenance, context, or version information. In deterministic settings, \(s'=T(s,\delta)\); in stochastic settings, a Delta may admit multiple possible successors.
+where $a_i$ identifies the transition or decision action and $\kappa_i$ carries necessary provenance, context, or version information. In deterministic settings, $s'=T(s,\delta)$; in stochastic settings, a Delta may admit multiple possible successors.
 
 The core invariants are:
 
@@ -103,27 +103,27 @@ A state may include assignments, routes, graphs, symbolic hypotheses, partial pr
 
 A useful implementation view is:
 
-\[
+$$
  s=(x,c,e,h,\mu),
-\]
+$$
 
-with domain configuration \(x\), applicable constraint context \(c\), evidence \(e\), relevant history \(h\), and metadata \(\mu\). These fields need not all be stored inside the state object; the contract must only make their effects explicit.
+with domain configuration $x$, applicable constraint context $c$, evidence $e$, relevant history $h$, and metadata $\mu$. These fields need not all be stored inside the state object; the contract must only make their effects explicit.
 
 ### 3.2 Adaptive M-to-N Delta Branching
 
 For a given state, let:
 
-\[
+$$
  G(s)=\{\delta_1,\ldots,\delta_M\}.
-\]
+$$
 
-After feasibility checking, selection, deduplication, and budget allocation, the solver realizes a set of \(N\) successor **transitions**:
+After feasibility checking, selection, deduplication, and budget allocation, the solver realizes a set of $N$ successor **transitions**:
 
-\[
- \operatorname{Expand}(s)=\{e_1,\ldots,e_N\}.
-\]
+$$
+ \mathrm{Expand}(s)=\{e_1,\ldots,e_N\}.
+$$
 
-Neither \(N=M\) nor binary branching is required. A single Delta can produce more than one outcome in nondeterministic models; several Deltas can lead to the same canonical state. Thus **M counts proposed Delta descriptions; N counts realized transitions**, not necessarily unique successor states. An implementation must specify finite expansion budgets or a productive enumeration policy when the candidate space is unbounded.
+Neither $N=M$ nor binary branching is required. A single Delta can produce more than one outcome in nondeterministic models; several Deltas can lead to the same canonical state. Thus **M counts proposed Delta descriptions; N counts realized transitions**, not necessarily unique successor states. An implementation must specify finite expansion budgets or a productive enumeration policy when the candidate space is unbounded.
 
 ### 3.3 Delta Identity Is Not State Identity
 
@@ -137,13 +137,13 @@ Canonical Delta identity may depend on the operation, operands, and relevant con
 
 ## 4. Path Memory, Yes/No Decisions, and Loop Back
 
-A constructive BTP subfamily may impose **path-local decision uniqueness**. If a candidate assignment \(\delta\) has already been accepted or permanently rejected along a path, that same decision should not be made again on that path:
+A constructive BTP subfamily may impose **path-local decision uniqueness**. If a candidate assignment $\delta$ has already been accepted or permanently rejected along a path, that same decision should not be made again on that path:
 
-\[
+$$
  U_t=A_t\cup R_t,\qquad \delta_{t+1}\notin U_t.
-\]
+$$
 
-Here \(A_t\) and \(R_t\) are accepted and permanently rejected decisions. This explicitly includes **No-subtree** decisions; otherwise a rejected assignment could be proposed again indefinitely.
+Here $A_t$ and $R_t$ are accepted and permanently rejected decisions. This explicitly includes **No-subtree** decisions; otherwise a rejected assignment could be proposed again indefinitely.
 
 However, the rule is **not universal to CDE**. A temporary failure, deferred candidate, or context-dependent infeasibility may legitimately be reconsidered after the state or evidence changes. Likewise, reconfiguration and iterative-improvement problems may require undoing an assignment or revisiting a state.
 
@@ -169,33 +169,33 @@ CDE provides a common interface for these mechanisms. A solver may combine them,
 
 A useful separation is:
 
-\[
+$$
  \text{CDE-Core} + \text{Solver Policy} + \text{Validation Contract}.
-\]
+$$
 
 The core defines transitions and constraints; the solver policy determines exploration; validation establishes which claims are justified.
 
 ## 6. Two Evolution Spaces: Solutions and Metrics
 
-In conventional optimization, a metric \(m\) is often fixed while solutions \(x\) vary:
+In conventional optimization, a metric $m$ is often fixed while solutions $x$ vary:
 
-\[
+$$
  x^*=\arg\max_{x\in\mathcal X}m(x).
-\]
+$$
 
 Many practical systems also need to **discover or improve the metric itself**. CDE can represent metric changes as Deltas:
 
-\[
+$$
  m_{t+1}=T_m(m_t,\delta^m_t),
-\]
+$$
 
 including changes to feature sets, weights, aggregation rules, structural scoring trees, or perspective-dependent evaluation.
 
 This introduces a coupled exploration space:
 
-\[
+$$
  (x_{t+1},m_{t+1})=T_{xm}((x_t,m_t),\delta_t).
-\]
+$$
 
 **Critical caveat:** scores produced under different metrics are not automatically comparable. Every result should retain its metric version, constraint version, evaluation context, and evidence. Metric quality must be assessed against an external criterion—such as held-out predictive performance, decision utility, robustness, or independently specified domain requirements—to avoid circular self-validation and reward hacking.
 
@@ -207,11 +207,11 @@ The **CDE-Orchestrator** is a proposed layer above CDE-Core. It can allocate exp
 
 A minimal task contract is:
 
-\[
+$$
  W=(s,\mathcal D_{\mathrm{scope}},C,P,B,V),
-\]
+$$
 
-where \(s\) is a starting state, \(\mathcal D_{\mathrm{scope}}\) the authorized Delta scope, \(C\) the constraint context, \(P\) the exploration policy, \(B\) the budget, and \(V\) the validation protocol.
+where $s$ is a starting state, $\mathcal D_{\mathrm{scope}}$ the authorized Delta scope, $C$ the constraint context, $P$ the exploration policy, $B$ the budget, and $V$ the validation protocol.
 
 Workers may return several different kinds of artifacts:
 
@@ -227,9 +227,9 @@ Independent best-result aggregation may be simple when all results share a compa
 
 A generator or policy may adapt using validated feedback:
 
-\[
+$$
  G_{t+1}=U(G_t,F_t),\qquad P_{t+1}=V_P(P_t,F_t).
-\]
+$$
 
 Parameter adaptation is distinct from **structural recursive self-improvement**, which proposes changes to representations, operators, or evaluation mechanisms. Such changes should be tested independently and remain reversible. The framework does not imply autonomous improvement is guaranteed.
 
@@ -248,12 +248,12 @@ CDE is a candidate mechanism for the second form, and may work alongside existin
 
 A conceptual interface is:
 
-\[
+$$
  \text{SIF Localization Request}
  \rightarrow \text{CDE Exploration Contract}
  \rightarrow \text{Validated Candidate Locations}
  \rightarrow \text{SIF Structural Relay}.
-\]
+$$
 
 This is a **proposed architectural integration**, not a demonstrated replacement for indexing, retrieval, graph search, or other localization methods. Future studies should identify where exploratory Delta localization adds value, when direct lookup is superior, and how the two can cooperate.
 

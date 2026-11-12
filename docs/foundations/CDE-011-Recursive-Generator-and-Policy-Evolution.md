@@ -79,27 +79,27 @@ It is important to avoid collapsing all changes into one category.
 
 **Layer L0 — Task-state evolution.** A solution Delta modifies the state being explored:
 
-\[
+$$
 x_{t+1}=T_x(x_t,\delta_x).
-\]
+$$
 
 **Layer L1 — Generator evolution.** A generator Delta modifies the mechanism producing candidate task Deltas:
 
-\[
+$$
 G_{k+1}=T_G(G_k,\delta_G).
-\]
+$$
 
 **Layer L2 — Policy evolution.** A policy Delta modifies selection, scheduling, solver choice, exploration budgets, or other decision rules:
 
-\[
+$$
 P_{k+1}=T_P(P_k,\delta_P).
-\]
+$$
 
 **Layer L3 — Evaluation and governance evolution.** A separately authorized change may modify metrics, validation protocols, or control-plane rules:
 
-\[
+$$
 (V_{j+1},C_{j+1})=T_{VC}((V_j,C_j),\delta_{VC}).
-\]
+$$
 
 L3 is not an unrestricted privilege granted to the same process being evaluated. Its authority, independence, and approval semantics are external to the candidate generator.
 
@@ -109,30 +109,30 @@ The term *recursive* refers to the fact that the system may use its exploration 
 
 Let the logical meta-state be
 
-\[
+$$
 \mathcal S_k^{\rm meta}
 =(G_k,P_k,\Sigma_k,V_k,C_k,B_k,H_k,\Gamma_k),
-\]
+$$
 
 where:
 
-- \(G_k\): generator registry, including versioned implementations and parameters;
-- \(P_k\): exploration and solver-allocation policy;
-- \(\Sigma_k\): solver portfolio and adapter configuration;
-- \(V_k\): validation contract and benchmark manifest;
-- \(C_k\): hard constraints and governance requirements;
-- \(B_k\): resource budgets and cost accounting;
-- \(H_k\): historical evidence, negative results, and Relay artifacts;
-- \(\Gamma_k\): authorization, provenance, and rollback metadata.
+- $G_k$: generator registry, including versioned implementations and parameters;
+- $P_k$: exploration and solver-allocation policy;
+- $\Sigma_k$: solver portfolio and adapter configuration;
+- $V_k$: validation contract and benchmark manifest;
+- $C_k$: hard constraints and governance requirements;
+- $B_k$: resource budgets and cost accounting;
+- $H_k$: historical evidence, negative results, and Relay artifacts;
+- $\Gamma_k$: authorization, provenance, and rollback metadata.
 
 This tuple is a **logical contract**, not a mandatory centralized data structure. Its fields may be distributed among services, repositories, registries, or workers. A transition must nevertheless resolve the versions relevant to its validity.
 
 A meta-Delta is a typed object
 
-\[
+$$
 \delta^{\rm meta}\in
 \Delta_G\cup\Delta_P\cup\Delta_\Sigma\cup\Delta_V\cup\Delta_C,
-\]
+$$
 
 subject to capability and authorization checks. Not all Delta types are available to all agents.
 
@@ -140,14 +140,14 @@ subject to capability and authorization checks. Not all Delta types are availabl
 
 A candidate's identity should incorporate content and dependencies:
 
-\[
-K_G=\operatorname{Hash}(
+$$
+K_G=\mathrm{Hash}(
 \text{generator definition},
 \text{parameters},
 \text{dependencies},
 \text{runtime contract}
 ).
-\]
+$$
 
 A human-readable version label is useful but insufficient for reproducibility. The same code with different data, solver versions, or sampling distributions may behave differently.
 
@@ -167,12 +167,12 @@ These identities are related but not interchangeable.
 
 A Delta generator is a conditional proposal mechanism:
 
-\[
+$$
 G_\theta(S,z,B)\longrightarrow
 \{\delta_1,\ldots,\delta_M\},
-\]
+$$
 
-where \(S\) is a task state, \(z\) is context, \(B\) is a budget, and \(\theta\) includes its structural and statistical configuration.
+where $S$ is a task state, $z$ is context, $B$ is a budget, and $\theta$ includes its structural and statistical configuration.
 
 Potential generator Deltas include:
 
@@ -224,9 +224,9 @@ A policy governs *which* generated proposals receive effort, *when* they are exp
 
 We can write
 
-\[
+$$
 a_t\sim P_\phi(a\mid S_t,H_t,C_t,B_t),
-\]
+$$
 
 where an action may expand a branch, invoke a solver, dispatch a worker, request evidence, or stop.
 
@@ -249,7 +249,7 @@ A policy that ranks branches is not automatically allowed to prune them. In part
 
 The central loop is:
 
-\[
+$$
 \text{Observe}
 \rightarrow
 \text{Diagnose}
@@ -261,18 +261,18 @@ The central loop is:
 \text{Promote}
 \rightarrow
 \text{Monitor}.
-\]
+$$
 
 A more explicit form is:
 
-\[
+$$
 (G_{k+1},P_{k+1})=
 U(G_k,P_k,F_k\mid C_k,V_k,\Gamma_k),
-\]
+$$
 
-where \(F_k\) is evidence from previous exploration, \(U\) is a controlled update procedure, and \(\Gamma_k\) contains authorization and rollback requirements.
+where $F_k$ is evidence from previous exploration, $U$ is a controlled update procedure, and $\Gamma_k$ contains authorization and rollback requirements.
 
-The equation describes a candidate update process; it does not imply that \(U\) is monotonic or that the new configuration is better.
+The equation describes a candidate update process; it does not imply that $U$ is monotonic or that the new configuration is better.
 
 ### 7.1 Evidence sources
 
@@ -305,25 +305,25 @@ These states must not be conflated. A candidate that passes a syntax check is no
 
 The most important correctness boundary is the distinction between an internal search score and an external assessment of method quality.
 
-Suppose generator \(G\) produces task solutions. Its performance may be assessed by
+Suppose generator $G$ produces task solutions. Its performance may be assessed by
 
-\[
+$$
 J(G;D,V,B)
 =
-\operatorname{Eval}_V(
-\operatorname{Run}(G,D,B)
+\mathrm{Eval}_V(
+\mathrm{Run}(G,D,B)
 ),
-\]
+$$
 
-where \(D\) is a benchmark distribution, \(V\) is an independently specified evaluation protocol, and \(B\) is the total allowed budget.
+where $D$ is a benchmark distribution, $V$ is an independently specified evaluation protocol, and $B$ is the total allowed budget.
 
 A meta-optimizer may seek
 
-\[
+$$
 G^* \in \arg\max_{G\in\mathcal G}J(G;D,V,B).
-\]
+$$
 
-However, if the same system freely modifies \(V\) to reward its own candidates, this objective becomes self-referential. A generator can appear to improve merely because the benchmark or scoring rule has changed.
+However, if the same system freely modifies $V$ to reward its own candidates, this objective becomes self-referential. A generator can appear to improve merely because the benchmark or scoring rule has changed.
 
 Therefore a default CDE recursive-evolution profile should:
 
@@ -334,7 +334,7 @@ Therefore a default CDE recursive-evolution profile should:
 - measure total compute and data access;
 - preserve unsuccessful trials to prevent selective reporting.
 
-A separate metric-evolution process may propose changes to \(V\), as in CDE-007, but those changes require an external validation and governance contract.
+A separate metric-evolution process may propose changes to $V$, as in CDE-007, but those changes require an external validation and governance contract.
 
 ## 9. What Counts as an Improvement?
 
@@ -342,7 +342,7 @@ Improvement is multidimensional. A method may find higher-quality solutions but 
 
 Define an outcome vector
 
-\[
+$$
 \mathbf q(G,P)=
 (q_{\rm quality},
 q_{\rm feasibility},
@@ -351,7 +351,7 @@ q_{\rm latency},
 q_{\rm compute},
 q_{\rm robustness},
 q_{\rm transfer}).
-\]
+$$
 
 The evaluation contract must specify orientation, normalization, constraints, and acceptable tradeoffs. One option is a Pareto archive of candidate configurations. Another is a stakeholder-authorized scalarization or lexicographic rule.
 
@@ -370,13 +370,13 @@ A better generator in isolation can make the whole system worse if it overloads 
 
 ## 10. Adaptive M-to-N Branching at the Meta-Level
 
-At meta-state \(\mathcal S_k^{\rm meta}\), a meta-generator may propose \(M\) candidate modifications:
+At meta-state $\mathcal S_k^{\rm meta}$, a meta-generator may propose $M$ candidate modifications:
 
-\[
+$$
 \{\delta^{\rm meta}_1,\ldots,\delta^{\rm meta}_M\}.
-\]
+$$
 
-After type checks, authorization, feasibility, deduplication, and resource selection, \(N\) exploration edges may be realized. The number of unique successor configurations can differ from both \(M\) and \(N\).
+After type checks, authorization, feasibility, deduplication, and resource selection, $N$ exploration edges may be realized. The number of unique successor configurations can differ from both $M$ and $N$.
 
 This distinction matters because:
 
@@ -392,15 +392,15 @@ A meta-level NoSubtree rule may prevent repeated decisions within a constructive
 
 Recursive evolution creates several opportunities for cycles:
 
-\[
+$$
 G_A \rightarrow G_B \rightarrow G_A
-\]
+$$
 
 or
 
-\[
+$$
 P_1 \rightarrow P_2 \rightarrow P_3 \rightarrow P_1.
-\]
+$$
 
 Returning to a previous configuration is not always erroneous. A rollback may intentionally restore an older version; a distribution shift may make a formerly inferior policy preferable again.
 
@@ -423,13 +423,13 @@ The phrase *recursive self-improvement* (RSI) covers many mechanisms, some much 
 
 A controlled RSI step is:
 
-\[
+$$
 \text{Current method}
 \xrightarrow{\text{meta-Delta}}
 \text{Candidate method}
 \xrightarrow{\text{independent validation}}
 \text{Accepted or rejected method}.
-\]
+$$
 
 The method may subsequently help generate another meta-Delta. That makes the process recursive, but not necessarily self-accelerating.
 
@@ -622,7 +622,7 @@ A method that generates more candidates may find better solutions simply because
 
 A credible experiment should account for:
 
-\[
+$$
 B_{\rm total}
 =
 B_{\rm proposal}
@@ -634,7 +634,7 @@ B_{\rm evaluation}
 B_{\rm validation}
 +
 B_{\rm coordination}.
-\]
+$$
 
 When possible, compare candidates under a **matched total budget** and the same task distribution.
 
@@ -685,16 +685,16 @@ Unknown effects should be treated as unresolved proof obligations.
 
 CDE-007 allows the metric itself to evolve. Recursive generator evolution therefore faces a coupled problem:
 
-\[
+$$
 G_{k+1}=U_G(G_k,F_k,m_j), \qquad
 m_{j+1}=U_m(m_j,E_j).
-\]
+$$
 
 If both are updated using the same performance traces, a generator may learn to exploit weaknesses in the metric while the metric learns to reward the generator's behavior.
 
 A conservative design freezes the evaluation metric during each generator promotion test. Metric revisions occur in a separate governed process, after which historical methods may be re-evaluated under the new metric.
 
-**Cross-version rule:** an incumbent generator under metric \(m_j\) is not automatically the incumbent under \(m_{j+1}\). Raw scores should not be compared across versions without a justified common evaluation.
+**Cross-version rule:** an incumbent generator under metric $m_j$ is not automatically the incumbent under $m_{j+1}$. Raw scores should not be compared across versions without a justified common evaluation.
 
 ### 18.1 Meta-metric regress
 
@@ -873,7 +873,7 @@ Recursive evolution is valuable only if its benefits exceed its costs under the 
 
 Let:
 
-\[
+$$
 C_{\rm meta}
 =
 C_{\rm proposal}
@@ -885,13 +885,13 @@ C_{\rm validation}
 C_{\rm deployment}
 +
 C_{\rm monitoring}.
-\]
+$$
 
-Let \(B_{\rm future}\) denote the independently measured benefit over future task runs. A simplified break-even condition is
+Let $B_{\rm future}$ denote the independently measured benefit over future task runs. A simplified break-even condition is
 
-\[
+$$
 \mathbb E[B_{\rm future}] > C_{\rm meta},
-\]
+$$
 
 after converting outcomes to an authorized common value scale.
 
@@ -950,9 +950,9 @@ If meta-candidate generation is finite, every candidate has a bounded evaluation
 
 Without strong assumptions about task distributions, evaluation accuracy, and candidate generation, there is no guarantee that
 
-\[
+$$
 J(G_{k+1},P_{k+1}) \ge J(G_k,P_k)
-\]
+$$
 
 on unseen tasks. Even when a candidate wins a validation suite, future performance may regress.
 

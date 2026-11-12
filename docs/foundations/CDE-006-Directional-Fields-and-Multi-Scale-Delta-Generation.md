@@ -16,7 +16,7 @@ Constrained Delta Evolution (CDE) treats state transitions as constraint-governe
 
 ---
 
-![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](../../figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
 
 *Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
 
@@ -47,39 +47,39 @@ The answer is not a universal search algorithm. It is a set of separable interfa
 
 Let a CDE problem instance be
 
-\[
+$$
 \mathcal{P}=(\mathcal{S},\mathcal{D},T,C,\mathcal{O},\mathcal{E}),
-\]
+$$
 
-where \(\mathcal{S}\) is a state space; \(\mathcal{D}\) is a space of Delta descriptions; \(T\) is a potentially partial or stochastic transition mechanism; \(C\) is a collection of constraints; \(\mathcal{O}\) describes objectives or evaluation; and \(\mathcal{E}\) describes available evidence and observations. An exploration context may include
+where $\mathcal{S}$ is a state space; $\mathcal{D}$ is a space of Delta descriptions; $T$ is a potentially partial or stochastic transition mechanism; $C$ is a collection of constraints; $\mathcal{O}$ describes objectives or evaluation; and $\mathcal{E}$ describes available evidence and observations. An exploration context may include
 
-\[
+$$
 q_t=(s_t,h_t,e_t,m_t,v_t,b_t),
-\]
+$$
 
-with state \(s_t\), path/decision history \(h_t\), evidence \(e_t\), evaluation specification \(m_t\), version identifiers \(v_t\), and remaining budget \(b_t\).
+with state $s_t$, path/decision history $h_t$, evidence $e_t$, evaluation specification $m_t$, version identifiers $v_t$, and remaining budget $b_t$.
 
-A Delta proposal is not yet a transition. A generator \(G_k\), indexed by family or scale \(k\), produces candidate descriptions:
+A Delta proposal is not yet a transition. A generator $G_k$, indexed by family or scale $k$, produces candidate descriptions:
 
-\[
+$$
 D_{t,k}=G_k(q_t;\theta_{t,k},\xi_{t,k}),
-\]
+$$
 
-where \(\theta_{t,k}\) are generator parameters and \(\xi_{t,k}\) captures randomness or external input. For deterministic generators, \(\xi\) can be omitted.
+where $\theta_{t,k}$ are generator parameters and $\xi_{t,k}$ captures randomness or external input. For deterministic generators, $\xi$ can be omitted.
 
 A validator determines whether a proposal is applicable under the declared context:
 
-\[
-\operatorname{Valid}(q_t,\delta)\in\{\mathrm{true},\mathrm{false},\mathrm{unknown}\}.
-\]
+$$
+\mathrm{Valid}(q_t,\delta)\in\{\mathrm{true},\mathrm{false},\mathrm{unknown}\}.
+$$
 
 An actual transition is recorded as an edge
 
-\[
+$$
 e=(s_t,\delta,a,s_{t+1},\pi_e),
-\]
+$$
 
-where \(a\) is the decision or execution action and \(\pi_e\) is provenance, including relevant constraint and metric versions. If a transition is stochastic, the same Delta can produce several distinct successor edges. Candidate count, realized-edge count, and distinct-successor count are not interchangeable.
+where $a$ is the decision or execution action and $\pi_e$ is provenance, including relevant constraint and metric versions. If a transition is stochastic, the same Delta can produce several distinct successor edges. Candidate count, realized-edge count, and distinct-successor count are not interchangeable.
 
 **Separation principle.** Generation proposes; validation checks; selection prioritizes; transition execution changes state; evidence updates beliefs; the solver decides whether a branch can be soundly pruned.
 
@@ -89,11 +89,11 @@ A **directional field** is context-dependent information that favors some Delta 
 
 A practical directional interface can be represented as
 
-\[
+$$
 \mathfrak{F}_t:(q_t,\delta,k)\mapsto (r_t,u_t,\rho_t),
-\]
+$$
 
-where \(r_t\) is a priority or preference signal, \(u_t\) expresses uncertainty or calibration information, and \(\rho_t\) records the source and validity scope of the signal. Depending on the problem, \(r_t\) may be a scalar, vector, partial order, preference relation, or structured explanation.
+where $r_t$ is a priority or preference signal, $u_t$ expresses uncertainty or calibration information, and $\rho_t$ records the source and validity scope of the signal. Depending on the problem, $r_t$ may be a scalar, vector, partial order, preference relation, or structured explanation.
 
 Examples include:
 
@@ -121,7 +121,7 @@ A directional field is ordinarily a heuristic or a probabilistic estimate. Only 
 
 ### 3.2 Fields may conflict
 
-Suppose \(\mathfrak{F}^{(1)}\) favors lower cost while \(\mathfrak{F}^{(2)}\) favors equitable service. An aggregator may use weights, a Pareto frontier, a lexicographic policy, or a constrained objective. No one aggregator is universally correct; its authority and version must be declared. Conflicting fields are often useful evidence of tradeoffs rather than noise to be hidden.
+Suppose $\mathfrak{F}^{(1)}$ favors lower cost while $\mathfrak{F}^{(2)}$ favors equitable service. An aggregator may use weights, a Pareto frontier, a lexicographic policy, or a constrained objective. No one aggregator is universally correct; its authority and version must be declared. Conflicting fields are often useful evidence of tradeoffs rather than noise to be hidden.
 
 ## 4. The Four Scales of Delta Generation
 
@@ -147,11 +147,11 @@ These are **generator families**, not mutually exclusive categories. One candida
 
 ## 5. Candidate Reachability versus Selection Intelligence
 
-Let \(\mathcal{R}_G(s_0)\) denote the states reachable from \(s_0\) under the support of generator family \(G\), valid transitions, and the permitted horizon. A globally optimal feasible state \(s^*\) cannot be found through those transitions if
+Let $\mathcal{R}_G(s_0)$ denote the states reachable from $s_0$ under the support of generator family $G$, valid transitions, and the permitted horizon. A globally optimal feasible state $s^*$ cannot be found through those transitions if
 
-\[
+$$
 s^*\notin\mathcal{R}_G(s_0).
-\]
+$$
 
 This is a **reachability limitation**, not a ranking failure. Better scoring cannot repair an absent transition path.
 
@@ -165,7 +165,7 @@ Conversely, broad generator support does not guarantee efficient discovery: the 
 
 ### 5.1 A simple counterexample
 
-Consider a one-dimensional state space \(\{0,1,\ldots,100\}\) with a local generator proposing only \(s\mapsto s+1\) or \(s\mapsto s-1\), subject to a rule forbidding traversal of states 40–60. Starting at 0, the local generator cannot reach 100. A long-range Delta \(\delta_{\mathrm{jump}}:0\mapsto 80\), if permitted by the domain's transition contract, changes reachability. If such a jump is *not* a valid domain operation, introducing it would merely falsify the model. Long-range proposals must remain grounded in legal transitions or explicitly represent higher-level plans whose constituent steps are validated.
+Consider a one-dimensional state space $\{0,1,\ldots,100\}$ with a local generator proposing only $s\mapsto s+1$ or $s\mapsto s-1$, subject to a rule forbidding traversal of states 40–60. Starting at 0, the local generator cannot reach 100. A long-range Delta $\delta_{\mathrm{jump}}:0\mapsto 80$, if permitted by the domain's transition contract, changes reachability. If such a jump is *not* a valid domain operation, introducing it would merely falsify the model. Long-range proposals must remain grounded in legal transitions or explicitly represent higher-level plans whose constituent steps are validated.
 
 ### 5.2 Coverage is not completeness
 
@@ -173,13 +173,13 @@ A generator that assigns nonzero probability to every finite candidate may be *p
 
 ## 6. Adaptive M-to-N Branching
 
-At state \(q_t\), a mixture of generators produces \(M_t\) candidate proposals. Validation, deduplication, resource limits, and selection yield \(N_t\) realized exploration edges:
+At state $q_t$, a mixture of generators produces $M_t$ candidate proposals. Validation, deduplication, resource limits, and selection yield $N_t$ realized exploration edges:
 
-\[
+$$
 \bigcup_k G_k(q_t)\xrightarrow{\text{validate, rank, schedule}}\{e_{t,1},\ldots,e_{t,N_t}\}.
-\]
+$$
 
-There is no general requirement that \(N_t=M_t\), that each candidate produce one successor, or that every candidate be executed immediately. The branch ledger should distinguish:
+There is no general requirement that $N_t=M_t$, that each candidate produce one successor, or that every candidate be executed immediately. The branch ledger should distinguish:
 
 - **proposed:** generated but not yet validated;
 - **invalid:** rejected by a sound, scoped constraint check;
@@ -189,18 +189,18 @@ There is no general requirement that \(N_t=M_t\), that each candidate produce on
 - **dominated/pruned:** removed only under an explicitly recorded proof obligation;
 - **abandoned by policy:** not explored, with no completeness claim.
 
-A hard budget may enforce \(N_t\le B_t\). If the system is intended to be complete over a finite search space, deferred candidates must eventually receive fair consideration or be excluded by a sound proof.
+A hard budget may enforce $N_t\le B_t$. If the system is intended to be complete over a finite search space, deferred candidates must eventually receive fair consideration or be excluded by a sound proof.
 
 ### 6.1 Adaptive branch budgets
 
 A policy may choose the per-generator budgets
 
-\[
-(b_{t,1},\ldots,b_{t,K})=\operatorname{Allocate}(q_t,\mathcal{H}_t,B_t),
+$$
+(b_{t,1},\ldots,b_{t,K})=\mathrm{Allocate}(q_t,\mathcal{H}_t,B_t),
 \quad \sum_k b_{t,k}\le B_t,
-\]
+$$
 
-using evidence \(\mathcal{H}_t\) about recent improvements, novelty, uncertainty, and execution cost. Adaptive allocation should be compared with fixed-allocation baselines to determine whether its extra complexity is justified.
+using evidence $\mathcal{H}_t$ about recent improvements, novelty, uncertainty, and execution cost. Adaptive allocation should be compared with fixed-allocation baselines to determine whether its extra complexity is justified.
 
 ## 7. Exploration–Exploitation without a Universal Schedule
 
@@ -218,14 +218,14 @@ Possible policies include:
 
 A simple conceptual priority is
 
-\[
+$$
 P_t(\delta)=\alpha_t\widehat{I}_t(\delta)
 +\beta_t\widehat{N}_t(\delta)
 +\gamma_t\widehat{U}_t(\delta)
 -\lambda_t\widehat{K}_t(\delta),
-\]
+$$
 
-where predicted improvement \(\widehat I\), novelty \(\widehat N\), uncertainty-related exploration value \(\widehat U\), and expected cost \(\widehat K\) are normalized and calibrated for the chosen domain. This expression is **illustrative**, not a universally valid objective. A policy must not silently equate uncertainty with positive value, or mix incomparable scales without calibration.
+where predicted improvement $\widehat I$, novelty $\widehat N$, uncertainty-related exploration value $\widehat U$, and expected cost $\widehat K$ are normalized and calibrated for the chosen domain. This expression is **illustrative**, not a universally valid objective. A policy must not silently equate uncertainty with positive value, or mix incomparable scales without calibration.
 
 ## 8. Directional Weak Evidence and Reliability
 
@@ -233,9 +233,9 @@ Directional hints may be obtained from small samples, partial observations, anal
 
 A CDE evidence record should distinguish:
 
-\[
+$$
 E=(\text{claim},\text{source},\text{context},\text{method},\text{uncertainty},\text{version},\text{tests}).
-\]
+$$
 
 A directional estimate should be updated or downgraded when counterexamples arrive. Evidence from the same underlying source should not be counted as independent corroboration merely because multiple agents relay it. This is especially important in collective learning, where copied errors can acquire artificial credibility.
 
@@ -247,11 +247,11 @@ Failed transitions, infeasible regions, and disproved assumptions can help steer
 
 Directional generation does not override the path and state semantics developed in CDE-003 and CDE-004.
 
-For constructive BTP-like search, accepted and rejected decisions may jointly form a path-local decided set \(U_t\), with a policy that forbids reconsidering the same canonical decision on the same path. In reconfigurable or cyclic-state CDE, a Delta or state may legitimately recur under changed context. Consequently:
+For constructive BTP-like search, accepted and rejected decisions may jointly form a path-local decided set $U_t$, with a policy that forbids reconsidering the same canonical decision on the same path. In reconfigurable or cyclic-state CDE, a Delta or state may legitimately recur under changed context. Consequently:
 
-\[
+$$
 \text{Delta identity}\ne\text{decision identity}\ne\text{state identity}.
-\]
+$$
 
 A generator must consult the applicable decision-memory contract rather than apply a universal no-repeat rule. Canonicalization must include future-relevant context; artificial version changes must not be used to evade deduplication.
 
@@ -273,17 +273,17 @@ The latter two are promising roles for CDE. They do not imply that every localiz
 
 A proposed SIF–CDE localization task can be represented as
 
-\[
+$$
 L=(\text{target predicate},\text{starting context},\text{constraints},
 \text{candidate operators},\text{evidence rule},\text{budget}).
-\]
+$$
 
 The output should be more than a location guess:
 
-\[
+$$
 R_L=(\text{candidate},\text{path},\text{supporting evidence},
 \text{verification status},\text{remaining uncertainty}).
-\]
+$$
 
 This makes a localization result inspectable and relayable. A promising direction can be reported without claiming that the target has been found.
 
@@ -301,10 +301,10 @@ A distributed CDE Orchestrator can dispatch different generator families to hete
 
 A minimal exploration contract is
 
-\[
+$$
 W=(\text{state reference},\text{Delta scope},\text{constraint version},
 \text{metric version},\text{policy},\text{budget},\text{validation rule}).
-\]
+$$
 
 Workers return a result envelope containing generated proposals, realized transitions, evaluation evidence, provenance, and any claimed bound certificates. A control plane can then redistribute effort.
 
@@ -330,11 +330,11 @@ Workers may operate on different state, metric, and constraint versions. Returne
 
 Generator parameters can adapt from observed outcomes:
 
-\[
+$$
 \theta_{t+1}=U(\theta_t,\mathcal{F}_t),
-\]
+$$
 
-where \(\mathcal{F}_t\) contains validated feedback. More ambitious structural adaptation may create new generator families, replace representations, or alter exploration policies.
+where $\mathcal{F}_t$ contains validated feedback. More ambitious structural adaptation may create new generator families, replace representations, or alter exploration policies.
 
 It is important to distinguish:
 
@@ -377,7 +377,7 @@ Distributed workers can explore disjoint route clusters, but their solutions can
 
 ## 15. Worked Example C: Metric Discovery
 
-Let a metric be a structured object \(m\), with Deltas such as weight adjustment, feature addition, feature removal, or scoring-tree restructuring. A metric generator proposes candidates, and an independent validation protocol evaluates their predictive value, robustness, calibration, or decision utility.
+Let a metric be a structured object $m$, with Deltas such as weight adjustment, feature addition, feature removal, or scoring-tree restructuring. A metric generator proposes candidates, and an independent validation protocol evaluates their predictive value, robustness, calibration, or decision utility.
 
 A **metric Delta** is different from a **solution Delta**. The two may be coordinated, but changing the metric changes the basis for ranking candidate solutions. Every evaluation record must preserve the metric version; historical scores should be recomputed or normalized only under an explicit comparability rule.
 
@@ -423,7 +423,7 @@ function CDE_EXPAND(context, generator_portfolio, budget):
     }
 ```
 
-The interface does not imply that selecting \(N\) branches preserves completeness. Completeness-sensitive solvers must add a fairness, exhaustive-enumeration, or sound-pruning obligation. Likewise, stochastic transitions require outcome-specific records rather than treating one proposal as one edge.
+The interface does not imply that selecting $N$ branches preserves completeness. Completeness-sensitive solvers must add a fairness, exhaustive-enumeration, or sound-pruning obligation. Likewise, stochastic transitions require outcome-specific records rather than treating one proposal as one edge.
 
 ## 18. Proposed Conformance Requirements
 

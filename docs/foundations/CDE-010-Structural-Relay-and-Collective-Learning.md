@@ -61,38 +61,38 @@ The proposal does not assert that all knowledge is structurally transferable, th
 
 Let a CDE problem be described by
 
-\[
+$$
 \mathcal P=(\mathcal S,\mathcal D,\mathcal K,G,T,I,\mathcal O),
-\]
+$$
 
-where \(\mathcal S\) is the state universe, \(\mathcal D\) the typed Delta universe, \(\mathcal K\) the scoped constraint family, \(G\) the candidate generator, \(T\) the transition relation, \(I\) the initial states, and \(\mathcal O\) the objective and observation regime.
+where $\mathcal S$ is the state universe, $\mathcal D$ the typed Delta universe, $\mathcal K$ the scoped constraint family, $G$ the candidate generator, $T$ the transition relation, $I$ the initial states, and $\mathcal O$ the objective and observation regime.
 
 An exploration configuration can be represented as
 
-\[
+$$
 q=(s,h,c,v,b),
-\]
+$$
 
-where \(s\) is domain state, \(h\) is future-relevant history, \(c\) is evidence and constraint context, \(v\) is the version vector, and \(b\) is the relevant resource budget. A transition is recorded as
+where $s$ is domain state, $h$ is future-relevant history, $c$ is evidence and constraint context, $v$ is the version vector, and $b$ is the relevant resource budget. A transition is recorded as
 
-\[
+$$
 e=(q_i,\delta,a,q_j,\pi),
-\]
+$$
 
-with Delta \(\delta\), decision semantics \(a\), and provenance \(\pi\).
+with Delta $\delta$, decision semantics $a$, and provenance $\pi$.
 
 A **relay** is not identical to a transition. It is a typed transformation from one or more exploration records into an artifact potentially usable by another context:
 
-\[
-R=\operatorname{Extract}(E_{1:n},\mathcal A,\Pi),
-\]
+$$
+R=\mathrm{Extract}(E_{1:n},\mathcal A,\Pi),
+$$
 
-where \(E_{1:n}\) are evidence-bearing exploration events, \(\mathcal A\) is the artifact schema, and \(\Pi\) is the extraction policy. The receiving side performs
+where $E_{1:n}$ are evidence-bearing exploration events, $\mathcal A$ is the artifact schema, and $\Pi$ is the extraction policy. The receiving side performs
 
-\[
-\operatorname{Assimilate}(R,\mathcal P',V')
+$$
+\mathrm{Assimilate}(R,\mathcal P',V')
 \rightarrow\{\text{accepted},\text{rejected},\text{deferred},\text{quarantined}\}.
-\]
+$$
 
 **Relay publication is not assimilation.** The receiver must decide whether the artifact applies, whether its assumptions hold, and what level of evidence is sufficient for its intended use.
 
@@ -147,11 +147,11 @@ For example, a local-search operator applied one hundred times can yield a distr
 
 A minimal temporal relay chain is:
 
-\[
+$$
 \text{Execution}_t\rightarrow\text{Observation}_t
 \rightarrow\text{Evidence Update}_{t+1}
 \rightarrow\text{Policy Candidate}_{t+1}.
-\]
+$$
 
 No automatic policy promotion follows from evidence accumulation; promotion requires its own validation contract.
 
@@ -159,10 +159,10 @@ No automatic policy promotion follows from evidence accumulation; promotion requ
 
 A canonical relay artifact may be represented as
 
-\[
+$$
 \mathcal R=(id,\tau,payload,scope,pre,claim,evidence,
 versions,prov,rights,life),
-\]
+$$
 
 where:
 
@@ -222,15 +222,15 @@ The receiving-side decision must be recorded separately from the source's confid
 
 ## 9. Applicability and Transfer Contracts
 
-Let \(R\) be a relay artifact from source context \(C_s\), and let \(C_t\) be the receiving context. Applicability is a predicate
+Let $R$ be a relay artifact from source context $C_s$, and let $C_t$ be the receiving context. Applicability is a predicate
 
-\[
+$$
 A(R,C_t)\in\{\text{yes},\text{no},\text{unknown}\}.
-\]
+$$
 
 The three-valued form matters: insufficient evidence is not equivalent to incompatibility.
 
-A transfer mapping \(\phi\) may translate source entities, features, operators, or constraints into target-domain terms. The receiver must check:
+A transfer mapping $\phi$ may translate source entities, features, operators, or constraints into target-domain terms. The receiver must check:
 
 1. **Type compatibility:** can the payload be interpreted?
 2. **Semantic compatibility:** do translated operations mean the same thing?
@@ -247,18 +247,18 @@ CDE-006 proposes directional fields for selecting promising Delta regions. Simil
 
 However:
 
-\[
+$$
 \text{Structural Similarity}\not\Rightarrow\text{Transfer Validity}.
-\]
+$$
 
 A directional score is a **prospecting signal**. It may justify a low-cost test, not automatic deployment. This distinction is especially important when source and target appear superficially similar but have different causal mechanisms, stakeholder priorities, or failure costs.
 
 A relay candidate ranking might use
 
-\[
+$$
 P(R,C_t)=w_1\,S_{struct}+w_2\,E_{source}
 -w_3\,Risk_{transfer}-w_4\,Cost_{validation},
-\]
+$$
 
 with explicit units, normalization, and governance for the weights. This is an illustrative heuristic, not a universal formula. Its quality must be measured by downstream target-domain performance.
 
@@ -384,10 +384,10 @@ A registry that never retires artifacts may become expensive and misleading. Arc
 
 A reusable **Relay Unit** can be modeled as
 
-\[
+$$
 U=(\text{Problem Signature},\text{Method},\text{Preconditions},
 \text{Evidence},\text{Failure Modes},\text{Adaptation Rule}).
-\]
+$$
 
 The unit is more informative than a naked method. It captures where the method works, where it fails, and how to test it elsewhere. This aligns with the broader SI preference for rich per-node intelligence and composable structural units.
 
@@ -399,13 +399,13 @@ SIF Localization can be understood as finding relevant structures, methods, capa
 
 The combined process is:
 
-\[
+$$
 \text{Problem Signature}
 \rightarrow\text{Relay Prospecting}
 \rightarrow\text{Applicability Testing}
 \rightarrow\text{Local Delta Generation}
 \rightarrow\text{Validated Outcome}.
-\]
+$$
 
 CDE-006's multi-scale generators may explore local and distant state regions; relay may introduce **nonlocal structural jumps** by importing a method or decomposition discovered elsewhere. This is a potentially valuable form of exploratory localization, but its benefit depends on the quality of transfer mapping and validation.
 
@@ -425,12 +425,12 @@ When a metric changes, old solution scores, B&B bounds, dominance relations, and
 
 Structural Relay can supply training evidence for improving the generators and policies that produce future Deltas:
 
-\[
+$$
 G_{t+1}=U(G_t,\mathcal E_t),\qquad
 P_{t+1}=V(P_t,\mathcal E_t),
-\]
+$$
 
-where \(\mathcal E_t\) contains validated evidence and negative outcomes. The update operators \(U,V\) may themselves be learned, but recursive improvement must be bounded by explicit evaluation and rollback contracts.
+where $\mathcal E_t$ contains validated evidence and negative outcomes. The update operators $U,V$ may themselves be learned, but recursive improvement must be bounded by explicit evaluation and rollback contracts.
 
 A controlled promotion sequence is:
 
@@ -448,11 +448,11 @@ A policy that raises its own success score is not evidence of improvement if the
 
 A collective system may have far more relay candidates than it can test. Selection can be formulated as a budgeted portfolio problem:
 
-\[
-\max_{A\subseteq\mathcal R}\operatorname{ExpectedUtility}(A)
+$$
+\max_{A\subseteq\mathcal R}\mathrm{ExpectedUtility}(A)
 \quad\text{subject to}\quad
-\sum_{r\in A}\operatorname{ValidationCost}(r)\le B.
-\]
+\sum_{r\in A}\mathrm{ValidationCost}(r)\le B.
+$$
 
 The expected utility may include anticipated improvement, information gain, diversity, transfer risk, and downstream reuse. It is a decision model, not a proof of transfer success. Estimates must be calibrated and periodically checked against realized outcomes.
 
@@ -767,9 +767,9 @@ Distributed exploration creates opportunities for collaboration, but it does not
 
 The most important distinction is:
 
-\[
+$$
 \boxed{\text{Shared Results}\neq\text{Validated Transfer}\neq\text{Collective Learning}}
-\]
+$$
 
 A CDE system becomes collectively learning only when transferred experience changes future exploration or decisions in a way that can be evaluated. Result Relay, Method Relay, Negative Evidence, and Leftover Relay all contribute, but none should be promoted beyond its evidence. This contract-first, low-assumption approach offers a practical research direction for connecting CDE exploration to SIF Localization, heterogeneous solver portfolios, and controlled recursive evolution.
 

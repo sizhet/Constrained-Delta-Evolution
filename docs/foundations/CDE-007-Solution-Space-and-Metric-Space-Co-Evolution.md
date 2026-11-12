@@ -21,11 +21,11 @@ Many optimization systems assume a fixed objective function and seek better solu
 
 The canonical optimization formulation is
 
-\[
+$$
 x^* \in \arg\max_{x\in\mathcal X,\;C(x)} f(x),
-\]
+$$
 
-where the feasible set and objective \(f\) are treated as fixed. This is a useful abstraction for routing, scheduling, matching, planning, and many scientific problems. Yet the abstraction conceals an important engineering activity: deciding *which* objective should be used, *which* measurements are trustworthy, and *which* tradeoffs deserve priority.
+where the feasible set and objective $f$ are treated as fixed. This is a useful abstraction for routing, scheduling, matching, planning, and many scientific problems. Yet the abstraction conceals an important engineering activity: deciding *which* objective should be used, *which* measurements are trustworthy, and *which* tradeoffs deserve priority.
 
 Consider a school-bus scheduling problem. A first metric minimizes vehicle count. A revised metric includes total student travel time. A third penalizes the worst individual ride, and a fourth adds service equity. These are not merely alternative numerical weights: they may encode different values, stakeholders, and admissible compromises. A schedule optimized under one metric can be unacceptable under another.
 
@@ -58,42 +58,42 @@ The research claim is architectural and methodological: CDE may organize these a
 
 Let:
 
-\[
+$$
 \mathcal X=\text{solution-state space}, \qquad
 \mathcal M=\text{metric-candidate space}.
-\]
+$$
 
-Let \(c\in\mathcal C\) denote a versioned constraint specification, \(d\in\mathcal D\) an evidence dataset or observation context, and \(p\in\mathcal P\) an exploration policy.
+Let $c\in\mathcal C$ denote a versioned constraint specification, $d\in\mathcal D$ an evidence dataset or observation context, and $p\in\mathcal P$ an exploration policy.
 
-A metric \(m\in\mathcal M\) is not necessarily a scalar function. It may produce a vector, ordering, probability distribution, calibrated prediction, or partial comparison:
+A metric $m\in\mathcal M$ is not necessarily a scalar function. It may produce a vector, ordering, probability distribution, calibrated prediction, or partial comparison:
 
-\[
+$$
 m:\mathcal X\times\mathcal Z\rightarrow\mathcal Y_m,
-\]
+$$
 
-where \(\mathcal Z\) contains evaluation context and \(\mathcal Y_m\) is the metric-specific output type. When a scalar optimization objective is required, an explicit decision rule \(a_m\) maps the metric output into a preference or utility relation:
+where $\mathcal Z$ contains evaluation context and $\mathcal Y_m$ is the metric-specific output type. When a scalar optimization objective is required, an explicit decision rule $a_m$ maps the metric output into a preference or utility relation:
 
-\[
+$$
 x \succeq_{m,z} y
 \quad\Longleftrightarrow\quad
 a_m(m(x,z),m(y,z),z)\ge 0.
-\]
+$$
 
 This avoids assuming that every metric is a comparable real number.
 
 A **solution improvement** is always relative to an evaluation regime:
 
-\[
+$$
 x_{t+1}\succ_{m_v,c_v,z_v}x_t.
-\]
+$$
 
-A **metric improvement** must instead be defined relative to a separate validation criterion \(V\):
+A **metric improvement** must instead be defined relative to a separate validation criterion $V$:
 
-\[
+$$
 m_{k+1}\succ_{V,\mathcal D_{\rm test}}m_k.
-\]
+$$
 
-The criterion \(V\) may assess predictive validity, decision regret, calibration, stability, fairness, measurement error, or other externally chosen properties. If \(V\) itself changes, its version and authorization must also be tracked.
+The criterion $V$ may assess predictive validity, decision regret, calibration, stability, fairness, measurement error, or other externally chosen properties. If $V$ itself changes, its version and authorization must also be tracked.
 
 ---
 
@@ -107,35 +107,35 @@ The criterion \(V\) may assess predictive validity, decision regret, calibration
 
 One possible logical CDE Container is
 
-\[
+$$
 S_t=(x_t,m_t,c_t,d_t,h_t,g_t,p_t,r_t),
-\]
+$$
 
-where \(h_t\) is decision and evaluation history, \(g_t\) is generator configuration, and \(r_t\) is resource and provenance state.
+where $h_t$ is decision and evaluation history, $g_t$ is generator configuration, and $r_t$ is resource and provenance state.
 
 This is a *logical contract*, not a mandatory in-memory tuple. The solution state may reside in one service, the metric registry in another, and evidence in an external store. A reproducible transition must nevertheless identify the relevant versions and dependencies.
 
 ### 3.2 Distinct transition families
 
-A solution Delta \(\delta_x\) changes a candidate solution:
+A solution Delta $\delta_x$ changes a candidate solution:
 
-\[
+$$
 x' = T_x(x,\delta_x\mid m,c,z).
-\]
+$$
 
-A metric Delta \(\delta_m\) changes a metric candidate:
+A metric Delta $\delta_m$ changes a metric candidate:
 
-\[
+$$
 m' = T_m(m,\delta_m\mid V,d,\gamma).
-\]
+$$
 
-Here \(\gamma\) represents governance requirements, such as permitted features, authorized stakeholders, evaluation protocols, and deployment approval.
+Here $\gamma$ represents governance requirements, such as permitted features, authorized stakeholders, evaluation protocols, and deployment approval.
 
 Some operations modify both spaces:
 
-\[
+$$
 (x',m')=T_{xm}((x,m),\delta_{xm}),
-\]
+$$
 
 but a coupled operation should be decomposable into auditable subevents wherever possible. This permits attribution of improvement or failure.
 
@@ -159,10 +159,10 @@ A metric candidate may combine multiple roles. Nonetheless, **hard constraints a
 
 Two metric implementations may yield identical scores on a sample but differ elsewhere. Therefore metric identity should include at least:
 
-\[
+$$
 K_m=(\text{definition},\text{features},\text{parameters},
 \text{preprocessing},\text{dependencies},\text{version}).
-\]
+$$
 
 Functional equivalence is stronger than sample agreement. Two metrics may be rank-equivalent under a specified domain while numerically different; for example, a strictly increasing transform of a scalar score preserves ordering but changes numerical bounds. Such transformations are not automatically safe for B&B bounds, threshold rules, or calibration.
 
@@ -174,20 +174,20 @@ Metric-space exploration becomes concrete when its transformations are explicit 
 
 Adjust weights, thresholds, or calibration parameters:
 
-\[
+$$
 m_w(x)=\sum_{i=1}^n w_i\phi_i(x),\qquad
-\delta_m=\operatorname{AdjustWeight}(i,\Delta w_i).
-\]
+\delta_m=\mathrm{AdjustWeight}(i,\Delta w_i).
+$$
 
-An update may need to preserve \(w_i\ge0\), \(\sum_i w_i=1\), monotonicity, or stakeholder-approved ranges.
+An update may need to preserve $w_i\ge0$, $\sum_i w_i=1$, monotonicity, or stakeholder-approved ranges.
 
 ### 5.2 Feature Deltas
 
 Add, remove, replace, or transform an input feature:
 
-\[
-\delta_m=\operatorname{AddFeature}(\phi_{\rm equity}).
-\]
+$$
+\delta_m=\mathrm{AddFeature}(\phi_{\rm equity}).
+$$
 
 The feature must have a defined measurement method, missing-data behavior, provenance, and permitted use. A feature that improves training accuracy may be rejected for leakage, instability, or prohibited discrimination.
 
@@ -217,28 +217,28 @@ A useful reference architecture consists of two loops.
 
 **Solution loop:**
 
-\[
+$$
 \delta_x\sim G_x(x_t\mid m_k,c,z),\quad
 x_{t+1}=T_x(x_t,\delta_x),
-\]
+$$
 
-followed by feasibility checks and evaluation under the *current fixed metric version* \(m_k\).
+followed by feasibility checks and evaluation under the *current fixed metric version* $m_k$.
 
 **Metric loop:**
 
-\[
+$$
 \delta_m\sim G_m(m_k\mid E_k,V,\gamma),\quad
 \widetilde m_{k+1}=T_m(m_k,\delta_m),
-\]
+$$
 
-followed by independent validation. Only a candidate that passes the promotion contract becomes \(m_{k+1}\).
+followed by independent validation. Only a candidate that passes the promotion contract becomes $m_{k+1}$.
 
 The loops need not advance at the same speed. A metric can remain frozen across thousands of solution evaluations; a metric-research worker can test many candidates without altering production optimization. This separation helps preserve comparability.
 
 ### 6.1 A versioned iteration
 
-1. Freeze metric \(m_k\), constraints \(c_k\), and evaluation protocol \(V_k\).
-2. Optimize or sample candidate solutions under \(m_k\).
+1. Freeze metric $m_k$, constraints $c_k$, and evaluation protocol $V_k$.
+2. Optimize or sample candidate solutions under $m_k$.
 3. Collect outcomes, counterexamples, uncertainty, and failure evidence.
 4. Propose metric Deltas using a research generator.
 5. Evaluate metric candidates against independent validation criteria.
@@ -252,11 +252,11 @@ This sequence is a safe default, not a universal requirement. Fully asynchronous
 
 Suppose a metric generator seeks
 
-\[
+$$
 m^*=\arg\max_{m\in\mathcal M}Q(m).
-\]
+$$
 
-What is \(Q\)? If \(Q(m)\) is computed by \(m\) itself, the search is circular. A metric can assign itself the highest score by construction. Even a held-out dataset is not independent if it was repeatedly used to choose and tune candidates.
+What is $Q$? If $Q(m)$ is computed by $m$ itself, the search is circular. A metric can assign itself the highest score by construction. Even a held-out dataset is not independent if it was repeatedly used to choose and tune candidates.
 
 A credible metric-validity contract must specify:
 
@@ -279,9 +279,9 @@ When a measure becomes a target, agents may exploit gaps between the measure and
 
 Suppose a school-bus metric is
 
-\[
+$$
 m(x)=-\text{number of buses used}.
-\]
+$$
 
 An optimizer may consolidate routes aggressively, increasing student travel times. The metric improves while service quality deteriorates. This is not a failure of the search algorithm relative to its objective; it is a failure of the objective contract relative to the actual task.
 
@@ -303,12 +303,12 @@ A stable metric can be consistently wrong. A volatile metric can reflect genuine
 
 Every evaluation result should be interpreted as a typed record:
 
-\[
+$$
 R=(\mathrm{id}_x,\mathrm{id}_m,\mathrm{id}_c,\mathrm{id}_d,
 \mathrm{id}_V,y,u,t,\pi),
-\]
+$$
 
-where \(y\) is the metric output, \(u\) is uncertainty or supporting evidence, \(t\) is time, and \(\pi\) is provenance.
+where $y$ is the metric output, $u$ is uncertainty or supporting evidence, $t$ is time, and $\pi$ is provenance.
 
 The version identifiers must be immutable or content-addressed. A score without a metric version is not a reliable comparison artifact.
 
@@ -322,19 +322,19 @@ The version identifiers must be immutable or content-addressed. A score without 
 
 ### 9.2 Re-evaluation and historical preservation
 
-When \(m_k\) becomes \(m_{k+1}\), historical candidate solutions can be re-scored. Their original evaluation records must remain intact. Re-scoring is a new event, not a retroactive overwrite.
+When $m_k$ becomes $m_{k+1}$, historical candidate solutions can be re-scored. Their original evaluation records must remain intact. Re-scoring is a new event, not a retroactive overwrite.
 
-A historical incumbent under \(m_k\) is not automatically the incumbent under \(m_{k+1}\). In B&B, bounds and pruning certificates tied to the old objective may become invalid and must be recomputed or explicitly proven transferable.
+A historical incumbent under $m_k$ is not automatically the incumbent under $m_{k+1}$. In B&B, bounds and pruning certificates tied to the old objective may become invalid and must be recomputed or explicitly proven transferable.
 
 ## 10. Multi-Objective and Perspective-Aware Evaluation
 
 Many real problems have no universally correct scalar metric. Let
 
-\[
+$$
 \mathbf f(x)=(f_1(x),\ldots,f_q(x)).
-\]
+$$
 
-A candidate \(x\) Pareto-dominates \(y\) when it is no worse in every relevant objective and strictly better in at least one, under a declared orientation and feasibility regime.
+A candidate $x$ Pareto-dominates $y$ when it is no worse in every relevant objective and strictly better in at least one, under a declared orientation and feasibility regime.
 
 CDE can maintain a Pareto archive rather than immediately forcing all values into a single score. Metric Deltas may change the objective set, the scalarization rule, the stakeholder perspective, or the admissible tradeoff region.
 
@@ -344,36 +344,36 @@ However, changes to the objective set create a new comparison regime. A Pareto f
 
 A perspective-aware metric should identify:
 
-\[
+$$
 P=(\text{stakeholder},\text{scope},\text{priority rules},
 \text{authorization},\text{version}).
-\]
+$$
 
 This connects to earlier research on perspective-aware scoring and universal control planes, while preserving a crucial distinction: empirical measurement can inform value choices but does not independently authorize them.
 
 ### 10.2 Robust optimization across metrics
 
-When metric uncertainty is substantive, a system may seek solutions that perform acceptably under a set \(\mathcal M_{\rm plausible}\), rather than optimizing one fragile proxy:
+When metric uncertainty is substantive, a system may seek solutions that perform acceptably under a set $\mathcal M_{\rm plausible}$, rather than optimizing one fragile proxy:
 
-\[
+$$
 \max_{x\in\mathcal X_C}\min_{m\in\mathcal M_{\rm plausible}}U_m(x),
-\]
+$$
 
 provided utilities have been placed on a justified common scale. Otherwise use ordinal robustness, regret analysis, or a multi-criteria decision procedure.
 
 ## 11. Metric Deltas, Constraints, and M-to-N Branching
 
-At metric state \(m_k\), a generator proposes \(M\) typed metric Deltas:
+At metric state $m_k$, a generator proposes $M$ typed metric Deltas:
 
-\[
+$$
 G_m(m_k)=\{\delta_m^1,\ldots,\delta_m^M\}.
-\]
+$$
 
-After syntactic validation, hard-constraint checking, resource selection, and duplicate handling, the system may realize \(N\) transition edges. As established in CDE-003:
+After syntactic validation, hard-constraint checking, resource selection, and duplicate handling, the system may realize $N$ transition edges. As established in CDE-003:
 
-\[
+$$
 M\ne N\ne |\text{unique successor metrics}|
-\]
+$$
 
 in general. Multiple Deltas can produce equivalent metric candidates; one stochastic Delta can produce multiple outcomes; some proposals are deferred without creating a state transition.
 
@@ -387,9 +387,9 @@ A constructive metric search may record each proposal as accepted or excluded, e
 
 Therefore:
 
-\[
+$$
 \text{Metric Identity}\neq\text{Decision Identity}\neq\text{Evaluation Context}.
-\]
+$$
 
 Global deduplication by metric hash alone may suppress legitimate re-evaluation under new evidence. Conversely, arbitrarily changing version labels must not defeat meaningful duplicate detection.
 
@@ -413,11 +413,11 @@ The value of CDE is interoperability and auditability, not replacement of these 
 
 Co-evolution is not automatically beneficial. Consider the following loop:
 
-\[
-m_k \rightarrow \operatorname{Optimize}(m_k)
-\rightarrow X_k \rightarrow \operatorname{Evidence}(X_k)
+$$
+m_k \rightarrow \mathrm{Optimize}(m_k)
+\rightarrow X_k \rightarrow \mathrm{Evidence}(X_k)
 \rightarrow m_{k+1}.
-\]
+$$
 
 The evidence generated by the optimizer may be highly selective. A metric trained only on states visited by the current optimizer can fail on unexplored regions. The solution generator may then become increasingly specialized to a narrow, self-confirming metric.
 
@@ -437,11 +437,11 @@ This makes co-evolution a controlled research program rather than a presumption 
 
 A CDE Orchestrator can dispatch different metric-exploration tasks to heterogeneous workers:
 
-\[
+$$
 W_i=(m_k,\Delta_i,C_i,V_i,D_i,B_i,\pi_i),
-\]
+$$
 
-where \(\Delta_i\) is a candidate Delta scope, \(C_i\) is the governing constraint context, \(V_i\) is the validation protocol, \(D_i\) is the evidence snapshot, \(B_i\) is a resource budget, and \(\pi_i\) is provenance and execution policy.
+where $\Delta_i$ is a candidate Delta scope, $C_i$ is the governing constraint context, $V_i$ is the validation protocol, $D_i$ is the evidence snapshot, $B_i$ is a resource budget, and $\pi_i$ is provenance and execution policy.
 
 For example:
 
@@ -520,11 +520,11 @@ This is a plausible research hypothesis, not an established performance guarante
 
 ## 17. Worked Example A: School-Bus Scheduling
 
-Let \(x\) encode route assignments, bus usage, and pickup sequences. Hard constraints include vehicle capacity, legal safety limits, service coverage, and schedule feasibility.
+Let $x$ encode route assignments, bus usage, and pickup sequences. Hard constraints include vehicle capacity, legal safety limits, service coverage, and schedule feasibility.
 
 A metric portfolio may contain:
 
-\[
+$$
 \mathbf f(x)=
 \bigl(
 B(x),\;
@@ -532,9 +532,9 @@ T_{\rm total}(x),\;
 T_{\max}(x),\;
 E_{\rm inequity}(x)
 \bigr),
-\]
+$$
 
-where \(B\) counts vehicles, \(T_{\rm total}\) is total travel time, \(T_{\max}\) is maximum individual ride time, and \(E_{\rm inequity}\) is a defined equity indicator.
+where $B$ counts vehicles, $T_{\rm total}$ is total travel time, $T_{\max}$ is maximum individual ride time, and $E_{\rm inequity}$ is a defined equity indicator.
 
 **Solution Deltas:** move a student between routes, swap stops, reassign a vehicle, or restructure a route.
 
@@ -583,9 +583,9 @@ This case naturally connects to autonomous questioning and evidence-driven Struc
 
 ## 20. Worked Example D: A Minimal Numerical Counterexample
 
-Consider three feasible solutions with two measured attributes, benefit \(b\) and cost \(c\):
+Consider three feasible solutions with two measured attributes, benefit $b$ and cost $c$:
 
-| Solution | Benefit \(b\) | Cost \(c\) |
+| Solution | Benefit $b$ | Cost $c$ |
 |---|---:|---:|
 | A | 10 | 8 |
 | B | 8 | 3 |
@@ -593,35 +593,35 @@ Consider three feasible solutions with two measured attributes, benefit \(b\) an
 
 Define a metric family
 
-\[
+$$
 m_\lambda(x)=b(x)-\lambda c(x), \qquad \lambda\ge0.
-\]
+$$
 
-At \(\lambda=0.2\):
+At $\lambda=0.2$:
 
-\[
+$$
 m_{0.2}(A)=8.4,\quad m_{0.2}(B)=7.4,\quad m_{0.2}(C)=5.8,
-\]
+$$
 
 so A ranks first.
 
-At \(\lambda=1\):
+At $\lambda=1$:
 
-\[
+$$
 m_1(A)=2,\quad m_1(B)=5,\quad m_1(C)=5,
-\]
+$$
 
 so B and C tie for first.
 
-At \(\lambda=2\):
+At $\lambda=2$:
 
-\[
+$$
 m_2(A)=-6,\quad m_2(B)=2,\quad m_2(C)=4,
-\]
+$$
 
 so C ranks first.
 
-Nothing about the physical solutions changed. The metric changed, and therefore the ranking changed. The scores across different \(\lambda\) values should not be treated as a single consistent leaderboard.
+Nothing about the physical solutions changed. The metric changed, and therefore the ranking changed. The scores across different $\lambda$ values should not be treated as a single consistent leaderboard.
 
 The example illustrates why a CDE evaluation record must carry the metric version and why a metric Delta is not equivalent to a solution Delta.
 
@@ -789,7 +789,7 @@ Test whether a metric-search operator learned in one domain transfers to another
 
 ### 25.1 Feasibility preservation
 
-If the initial state satisfies \(C\), every applied solution Delta is checked against \(C\), and the transition implementation is sound, then all committed solution states remain feasible under the same constraint version. This property does not imply that the solution is optimal.
+If the initial state satisfies $C$, every applied solution Delta is checked against $C$, and the transition implementation is sound, then all committed solution states remain feasible under the same constraint version. This property does not imply that the solution is optimal.
 
 ### 25.2 Version-safe comparisons
 
@@ -805,7 +805,7 @@ A new metric may reverse rankings; a better-validated metric may reduce the incu
 
 ### 25.5 Optimality under a changing metric
 
-An optimality certificate for \(m_k\) is not automatically valid for \(m_{k+1}\). Reuse requires proof that the relevant objective ordering and bounds are preserved, or a fresh optimization certificate.
+An optimality certificate for $m_k$ is not automatically valid for $m_{k+1}$. Reuse requires proof that the relevant objective ordering and bounds are preserved, or a fresh optimization certificate.
 
 ### 25.6 Independent validation cannot be inferred
 
@@ -894,19 +894,19 @@ With versioned evaluation, typed contracts, negative evidence, distributed Relay
 
 | Symbol | Meaning |
 |---|---|
-| \(\mathcal X\) | Solution-state space |
-| \(\mathcal M\) | Metric-candidate space |
-| \(x\) | Candidate solution |
-| \(m\) | Metric candidate |
-| \(C\) | Hard-constraint specification |
-| \(V\) | Independent validation contract |
-| \(G_x,G_m\) | Solution and metric Delta generators |
-| \(\delta_x,\delta_m\) | Solution and metric Deltas |
-| \(T_x,T_m\) | Typed transition functions |
-| \(R\) | Versioned evaluation record |
-| \(\gamma\) | Governance and authorization context |
-| \(\succeq_m\) | Preference relation under metric \(m\) |
-| \(W_i\) | Distributed exploration task |
+| $\mathcal X$ | Solution-state space |
+| $\mathcal M$ | Metric-candidate space |
+| $x$ | Candidate solution |
+| $m$ | Metric candidate |
+| $C$ | Hard-constraint specification |
+| $V$ | Independent validation contract |
+| $G_x,G_m$ | Solution and metric Delta generators |
+| $\delta_x,\delta_m$ | Solution and metric Deltas |
+| $T_x,T_m$ | Typed transition functions |
+| $R$ | Versioned evaluation record |
+| $\gamma$ | Governance and authorization context |
+| $\succeq_m$ | Preference relation under metric $m$ |
+| $W_i$ | Distributed exploration task |
 
 ## Appendix B. Recommended Cross-References
 
