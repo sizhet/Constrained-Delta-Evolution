@@ -308,8 +308,7 @@ The most important correctness boundary is the distinction between an internal s
 Suppose generator $G$ produces task solutions. Its performance may be assessed by
 
 $$
-J(G;D,V,B)
-=
+J(G;D,V,B) =
 \mathrm{Eval}_V(
 \mathrm{Run}(G,D,B)
 ),
