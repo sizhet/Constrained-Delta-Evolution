@@ -546,12 +546,9 @@ Each counterexample suggests a corresponding conformance or benchmark test.
 CDE is not a single optimizer. A useful decomposition is:
 
 $$
-\text{CDE deployment}
-=
-\text{Core contracts}
-+
-\text{chosen solver(s)}
-+
+\text{CDE deployment} =
+\text{Core contracts} +
+\text{chosen solver(s)} +
 \text{optional orchestration}.
 $$
 
