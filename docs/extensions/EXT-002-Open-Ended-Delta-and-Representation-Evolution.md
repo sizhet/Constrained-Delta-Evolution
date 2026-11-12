@@ -144,8 +144,7 @@ $$
 Open-ended evolution introduces a slower meta-transition:
 
 $$
-(\mathcal R_{v+1},\mathcal O_{v+1},T_{v+1})
-=
+(\mathcal R_{v+1},\mathcal O_{v+1},T_{v+1}) =
 \mathcal E(
 \mathcal R_v,\mathcal O_v,T_v,\mu_v
 ),
@@ -320,8 +319,7 @@ Let $\llbracket s\rrbracket_{\mathcal R}$ denote the domain meaning of a represe
 
 $$
 \forall s\in D_F,\quad
-\mathrm{obs}_{\mathcal O}(\llbracket s\rrbracket_{\mathcal R_a})
-=
+\mathrm{obs}_{\mathcal O}(\llbracket s\rrbracket_{\mathcal R_a}) =
 \mathrm{obs}_{\mathcal O}(\llbracket F(s)\rrbracket_{\mathcal R_b}).
 $$
 
