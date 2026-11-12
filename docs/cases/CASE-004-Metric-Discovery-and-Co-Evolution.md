@@ -538,16 +538,14 @@ The evaluator must use criteria that are not trivially identical to the candidat
 For each candidate $m'$, compare:
 
 $$
-\Delta_{\mathrm{self}}
-=
+\Delta_{\mathrm{self}} =
 m'(x_{m'})-m'(x_{\mathrm{baseline}})
 $$
 
 with:
 
 $$
-\Delta_{\mathrm{ind}}
-=
+\Delta_{\mathrm{ind}} =
 U_{\mathrm{ind}}(x_{m'})-U_{\mathrm{ind}}(x_{\mathrm{baseline}}).
 $$
 
@@ -902,8 +900,7 @@ Comparisons must account for differences in information access, tuning budget, n
 ### 32.1 Held-out decision utility
 
 $$
-U_{\mathrm{test}}(m)
-=
+U_{\mathrm{test}}(m) =
 \frac{1}{n}\sum_{i=1}^{n}
 u_i^\star(x_i(m)),
 $$
