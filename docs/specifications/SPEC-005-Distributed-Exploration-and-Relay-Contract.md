@@ -40,9 +40,9 @@ The architecture has: (a) a **Task Registry** holding task identities and immuta
 
 A DEU is the immutable logical work specification
 
-\[
+$$
 W=(id,S_0,\Delta_{scope},C_v,M_v,P_v,B,V,\Gamma,\pi),
-\]
+$$
 
 where `id` is a unique task identity; `S0` an immutable source state/snapshot; `Delta_scope` the permitted exploration scope; `Cv` hard-constraint bundle/version; `Mv` objective/metric version; `Pv` generator/solver/control policy versions; `B` resource budget; `V` verification requirements; `Γ` governance/authorization context; and `π` provenance/lineage. Implementations MUST additionally bind relevant schema, external context, path-memory, and equivalence versions when they affect validity. An unversioned pointer to mutable data is insufficient for a reproducible task. A task MAY reference immutable artifacts instead of copying large payloads.
 
@@ -121,13 +121,13 @@ Messages may be lost, duplicated, delayed, or reordered. A baseline implementati
 
 ## 10. Partitioning and coverage contract
 
-A parent exploration scope \(\Omega\) may be divided into child scopes \(\Omega_1,\dots,\Omega_k\). The partition report MUST state whether it claims: (a) complete coverage, (b) partial coverage, or (c) heuristic sampling. Complete coverage requires a justified condition such as
+A parent exploration scope $\Omega$ may be divided into child scopes $\Omega_1,\dots,\Omega_k$. The partition report MUST state whether it claims: (a) complete coverage, (b) partial coverage, or (c) heuristic sampling. Complete coverage requires a justified condition such as
 
-\[
+$$
 \Omega\subseteq\bigcup_{i=1}^{k}\Omega_i.
-\]
+$$
 
-Disjointness is a separate property: \(\Omega_i\cap\Omega_j=\varnothing\) for \(i\ne j\). Overlap MAY be intentional for verification or robustness. The scheduler MUST NOT infer coverage from task count. A child task MUST inherit the relevant parent constraints and path context, or declare a sound transformation. Every unresolved region MUST remain in a typed **Leftover** record.
+Disjointness is a separate property: $\Omega_i\cap\Omega_j=\varnothing$ for $i\ne j$. Overlap MAY be intentional for verification or robustness. The scheduler MUST NOT infer coverage from task count. A child task MUST inherit the relevant parent constraints and path context, or declare a sound transformation. Every unresolved region MUST remain in a typed **Leftover** record.
 
 ## 11. Split and merge records
 

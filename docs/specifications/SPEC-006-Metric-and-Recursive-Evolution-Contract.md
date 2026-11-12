@@ -76,11 +76,11 @@ L0, L1, and L2 MAY be candidates for change. L3 MAY also evolve, but changes to 
 
 A conceptual transition is
 
-\[
+$$
 X_{k+1}=T_X(X_k,\delta_X),\quad X\in\{m,G,P\},
-\]
+$$
 
-where \(m\) is a metric, \(G\) a generator, and \(P\) a policy. This equation denotes candidate construction, not automatic promotion.
+where $m$ is a metric, $G$ a generator, and $P$ a policy. This equation denotes candidate construction, not automatic promotion.
 
 ## 5. Identity, Versioning, and Artifact Classes
 
@@ -168,7 +168,7 @@ Each type MUST specify preconditions, affected dependencies, comparability impac
 
 Raw scores under distinct metrics MUST NOT be assumed comparable.
 
-If \(m_1(x)=f(x)\) and \(m_2(x)=100f(x)\), a score increase is not evidence of improved solution quality. If weights change, rankings may reverse.
+If $m_1(x)=f(x)$ and $m_2(x)=100f(x)$, a score increase is not evidence of improved solution quality. If weights change, rankings may reverse.
 
 A comparison across versions MUST use at least one declared method:
 
@@ -466,7 +466,7 @@ A metric, constraint, generator, representation, or policy change may invalidate
 - state equivalence relations;
 - cached scores and rankings.
 
-Each candidate MUST declare affected dependencies. An implementation MUST invalidate or reverify any certificate whose assumptions are no longer satisfied. An exact-optimal result under metric \(m_1\) MUST NOT be relabeled optimal under \(m_2\) without a valid proof.
+Each candidate MUST declare affected dependencies. An implementation MUST invalidate or reverify any certificate whose assumptions are no longer satisfied. An exact-optimal result under metric $m_1$ MUST NOT be relabeled optimal under $m_2$ without a valid proof.
 
 ## 27. Recursive Evolution Control
 
@@ -849,7 +849,7 @@ Worker B must independently test applicability. If the method performs worse, th
 
 ## 46. Worked Example F — Controlled Recursive Generator Evolution
 
-A meta-generator proposes successive versions \(G_0,G_1,G_2\). Each version is evaluated under a frozen protocol and approved only within a declared scope. \(G_1\) improves held-out performance; \(G_2\) overfits development cases and is rejected.
+A meta-generator proposes successive versions $G_0,G_1,G_2$. Each version is evaluated under a frozen protocol and approved only within a declared scope. $G_1$ improves held-out performance; $G_2$ overfits development cases and is rejected.
 
 This is a successful *governed research process*, even though the second recursive update fails. The evidence does not support monotonic RSI. The rejected candidate and its counterexamples remain available for future Method and Leftover Relay.
 
@@ -914,7 +914,7 @@ This is a successful *governed research process*, even though the second recursi
 
 SPEC-006 completes the initial CDE specification series by defining how the **methods of exploration** may themselves become subjects of constrained Delta exploration. The central distinction is:
 
-\[
+$$
 \boxed{
 \text{Candidate Change}
 \neq
@@ -924,7 +924,7 @@ SPEC-006 completes the initial CDE specification series by defining how the **me
 \neq
 \text{Authorized Promotion}
 }
-\]
+$$
 
 Metric evolution can change what a system values or measures. Generator evolution can change what it is capable of proposing. Policy evolution can change where it spends effort. Recursive combinations may create useful new exploration methods—but none of these changes is automatically beneficial or safe.
 

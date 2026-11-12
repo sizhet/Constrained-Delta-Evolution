@@ -71,26 +71,26 @@ Two states or contexts are future-equivalent only if their feasible continuation
 
 Let a search path be a finite sequence
 
-\[
+$$
 \pi_t=(S_0,e_1,S_1,e_2,\ldots,e_t,S_t),
-\]
+$$
 
-where each edge \(e_i\) identifies its source, Delta, decision, disposition, outcome, and successor. A path context is
+where each edge $e_i$ identifies its source, Delta, decision, disposition, outcome, and successor. A path context is
 
-\[
+$$
 P_t=(\pi_t,A_t,R_t,D_t,I_t,V_t,\kappa_t),
-\]
+$$
 
 where:
 
-- \(A_t\): accepted decision keys;
-- \(R_t\): explicitly excluded decision keys;
-- \(D_t\): deferred decision keys, with status and expiry/revisit conditions;
-- \(I_t\): infeasibility evidence scoped to the context in which it was checked;
-- \(V_t\): visited-state observations;
-- \(\kappa_t\): schema, constraint, generator, metric, policy, and other future-relevant versions.
+- $A_t$: accepted decision keys;
+- $R_t$: explicitly excluded decision keys;
+- $D_t$: deferred decision keys, with status and expiry/revisit conditions;
+- $I_t$: infeasibility evidence scoped to the context in which it was checked;
+- $V_t$: visited-state observations;
+- $\kappa_t$: schema, constraint, generator, metric, policy, and other future-relevant versions.
 
-For the fixed constructive NoSubtree profile, define \(U_t=A_t\cup R_t\). A new constructive decision \(d\) is eligible only if \(d\notin U_t\), subject to all applicable preconditions and hard constraints.
+For the fixed constructive NoSubtree profile, define $U_t=A_t\cup R_t$. A new constructive decision $d$ is eligible only if $d\notin U_t$, subject to all applicable preconditions and hard constraints.
 
 This rule is **path-local** by default. An exclusion on one path does not automatically exclude the same decision on every other path.
 
@@ -213,7 +213,7 @@ The contract distinguishes:
 
 The optional profile **CDE-NoSubtree-Constructive-v1** applies when:
 
-1. The decision universe \(\mathcal D\) is finite and fixed for the episode.
+1. The decision universe $\mathcal D$ is finite and fixed for the episode.
 2. Each nonterminal constructive expansion resolves one previously unresolved decision key.
 3. Decisions are monotonic along a path: once accepted or excluded, they remain resolved.
 4. No generator introduces new decision keys during the episode.
@@ -221,37 +221,37 @@ The optional profile **CDE-NoSubtree-Constructive-v1** applies when:
 
 For each path, require
 
-\[
+$$
 A_t\cap R_t=\varnothing,\qquad U_t=A_t\cup R_t,
-\]
+$$
 
-and for any next decision \(d\),
+and for any next decision $d$,
 
-\[
+$$
 d\notin U_t.
-\]
+$$
 
 After an accepted or excluded decision,
 
-\[
+$$
 U_{t+1}=U_t\cup\{d\}.
-\]
+$$
 
-**NS-01:** The runtime MUST reject a constructive expansion that resolves a decision already in \(U_t\).
+**NS-01:** The runtime MUST reject a constructive expansion that resolves a decision already in $U_t$.
 
 **NS-02:** A branch that resolves `ACCEPT(d)` MUST prevent a later `EXCLUDE(d)` on the same path, and vice versa.
 
 **NS-03:** Sibling paths MAY make different choices for the same decision.
 
-**NS-04:** A deferred proposal MUST NOT enter \(U_t\) solely because it was deferred.
+**NS-04:** A deferred proposal MUST NOT enter $U_t$ solely because it was deferred.
 
 **NS-05:** If an implementation resolves more than one decision per expansion, it MUST declare and validate the full set of newly resolved keys.
 
 ## 11. Conditional Finite-Depth Theorem
 
-**Proposition NS-T1.** Under the five fixed constructive assumptions in Section 10, a path has at most \(m=|\mathcal D|\) decision-resolving expansions.
+**Proposition NS-T1.** Under the five fixed constructive assumptions in Section 10, a path has at most $m=|\mathcal D|$ decision-resolving expansions.
 
-**Proof sketch.** Let \(\rho_t=m-|U_t|\). Initially \(0\le\rho_0\le m\). Every nonterminal expansion adds at least one fresh decision to \(U_t\), so \(\rho_{t+1}<\rho_t\). The rank cannot decrease indefinitely.
+**Proof sketch.** Let $\rho_t=m-|U_t|$. Initially $0\le\rho_0\le m$. Every nonterminal expansion adds at least one fresh decision to $U_t$, so $\rho_{t+1}<\rho_t$. The rank cannot decrease indefinitely.
 
 The proposition does **not** imply:
 
@@ -268,11 +268,11 @@ A runtime MUST NOT advertise this theorem outside its assumptions.
 
 Consider three states and distinct operations:
 
-\[
+$$
 S_0\xrightarrow{\delta_a}S_1\xrightarrow{\delta_b}S_0.
-\]
+$$
 
-The two Deltas are different, yet the path returns to \(S_0\). A system that only remembers Delta IDs will not detect this cycle.
+The two Deltas are different, yet the path returns to $S_0$. A system that only remembers Delta IDs will not detect this cycle.
 
 Conversely, a Delta definition may be valid at different states and need not be globally forbidden after its first use. Therefore Delta reuse, decision reuse, and state revisitation require separate policies.
 
@@ -634,7 +634,7 @@ For a strict constructive profile, a decision-resolution event MUST use a fresh 
 
 **INV-PM-01 — Identity separation.** Delta, decision, state, and future-equivalence identities are not implicitly interchangeable.
 
-**INV-PM-02 — Constructive disjointness.** In strict NoSubtree paths, \(A_t\cap R_t=\varnothing\).
+**INV-PM-02 — Constructive disjointness.** In strict NoSubtree paths, $A_t\cap R_t=\varnothing$.
 
 **INV-PM-03 — Constructive monotonicity.** Strict constructive resolved sets only grow along a path.
 
@@ -747,21 +747,21 @@ A conformance suite MUST exercise conflicting decisions, stale context, invalid 
 
 ## 33. Worked Example A — BTP Yes/No Decisions
 
-Suppose a constructive assignment problem has decision universe \(\mathcal D=\{a,b,c\}\). From the root, the search resolves `a=YES` on one path and `a=NO` on its sibling. Both are legal, but neither child may resolve `a` again in the strict profile.
+Suppose a constructive assignment problem has decision universe $\mathcal D=\{a,b,c\}$. From the root, the search resolves `a=YES` on one path and `a=NO` on its sibling. Both are legal, but neither child may resolve `a` again in the strict profile.
 
 For the YES child:
 
-\[
+$$
 A_1=\{a\},\quad R_1=\varnothing,\quad U_1=\{a\}.
-\]
+$$
 
 For the NO child:
 
-\[
+$$
 A_1=\varnothing,\quad R_1=\{a\},\quad U_1=\{a\}.
-\]
+$$
 
-A later `DEFER(b)` does not add `b` to \(U\). A later `ACCEPT(b)` does. Each path has at most three decision-resolving expansions, assuming the fixed-universe profile remains in force. This says nothing about whether all feasible assignments are generated or whether the best assignment is selected.
+A later `DEFER(b)` does not add `b` to $U$. A later `ACCEPT(b)` does. Each path has at most three decision-resolving expansions, assuming the fixed-universe profile remains in force. This says nothing about whether all feasible assignments are generated or whether the best assignment is selected.
 
 ## 34. Worked Example B — Loop Back in Route Reconfiguration
 
@@ -785,7 +785,7 @@ Worker B may resume that work only after resolving the inherited path context an
 
 ## 37. Worked Example E — Stochastic Search
 
-A stochastic operator proposes a transition from belief state \(B_0\). Two sampled executions produce the same visible observation, but different hidden states may remain possible. A loop detector based only on observation equality may report `POSSIBLE_LOOP`; it must not assert exact hidden-state identity without a valid observation/belief equivalence contract.
+A stochastic operator proposes a transition from belief state $B_0$. Two sampled executions produce the same visible observation, but different hidden states may remain possible. A loop detector based only on observation equality may report `POSSIBLE_LOOP`; it must not assert exact hidden-state identity without a valid observation/belief equivalence contract.
 
 The system can still use revisit budgets or time limits to control cost. Such limits bound the episode, not the underlying stochastic process's convergence.
 
@@ -857,7 +857,7 @@ SPEC-003 defines the distinction between **remembering decisions** and **recogni
 
 The central contract is:
 
-\[
+$$
 \boxed{
 \text{Decision Memory}
 \neq
@@ -865,7 +865,7 @@ The central contract is:
 \neq
 \text{Future Equivalence}
 }
-\]
+$$
 
 CDE can support constructive no-repeat exploration and cyclic reconfiguration within a shared architecture, provided their different assumptions remain visible and testable. **Conformance before runtime** means documenting what a memory record proves, where it applies, and when it must be reconsidered.
 

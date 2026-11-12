@@ -24,7 +24,7 @@ This specification defines the proposed interoperable contract for **Delta gener
 
 ---
 
-![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](../../figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
 
 *Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
 
@@ -86,37 +86,37 @@ A Delta may be proposed more than once, and distinct proposals may refer to the 
 
 ## 4. Formal Model
 
-Let \(S\) be a logical State Container and \(\kappa\) a versioned context. A generator invocation produces a finite sequence or bounded stream of proposals:
+Let $S$ be a logical State Container and $\kappa$ a versioned context. A generator invocation produces a finite sequence or bounded stream of proposals:
 
-\[
+$$
 G_{\gamma}(S,\kappa,B)\longrightarrow
 P=\langle p_1,\ldots,p_M\rangle,
-\]
+$$
 
-where \(\gamma\) identifies the generator version and \(B\) is a resource budget.
+where $\gamma$ identifies the generator version and $B$ is a resource budget.
 
 A selection policy chooses a subset or multiset of proposals for attempts:
 
-\[
-A=\operatorname{Select}_{\pi}(P,S,\kappa,B),\qquad |A|=Q.
-\]
+$$
+A=\mathrm{Select}_{\pi}(P,S,\kappa,B),\qquad |A|=Q.
+$$
 
-Validation and realization yield an edge multiset \(E\) with \(|E|=N\). Let \(\equiv_\kappa\) be a declared state equivalence relation for successor accounting. Then:
+Validation and realization yield an edge multiset $E$ with $|E|=N$. Let $\equiv_\kappa$ be a declared state equivalence relation for successor accounting. Then:
 
-\[
+$$
 K=\left|\{[S']_{\equiv_\kappa}: S'\text{ is a successor in }E\}\right|.
-\]
+$$
 
-In the default **single-outcome committed-edge profile**, one attempt creates at most one committed edge, so \(N\le Q\le M\) when each proposal is attempted at most once. **These inequalities do not hold universally**: a retry may create multiple attempts, a generator may yield duplicate proposals, and a nondeterministic relation may explicitly enumerate several possible edges per attempt. The implementation MUST declare its accounting mode.
+In the default **single-outcome committed-edge profile**, one attempt creates at most one committed edge, so $N\le Q\le M$ when each proposal is attempted at most once. **These inequalities do not hold universally**: a retry may create multiple attempts, a generator may yield duplicate proposals, and a nondeterministic relation may explicitly enumerate several possible edges per attempt. The implementation MUST declare its accounting mode.
 
 The general rule is:
 
-\[
+$$
 \boxed{M\ \text{(proposals)},\quad
 Q\ \text{(attempts)},\quad
 N\ \text{(realized edges)},\quad
 K\ \text{(unique successors)}}
-\]
+$$
 
 with each cardinality measured under documented semantics.
 
@@ -465,15 +465,15 @@ For a complete invocation, every proposal MUST have a traceable lifecycle. The r
 
 ### 14.2 Distinct Delta count
 
-\(D\le M\) for a finite proposal sequence when Delta identity is defined within the invocation. This does not imply \(D\le Q\) if retries or repeated attempts are allowed.
+$D\le M$ for a finite proposal sequence when Delta identity is defined within the invocation. This does not imply $D\le Q$ if retries or repeated attempts are allowed.
 
 ### 14.3 Unique successor count
 
-\(K\le N\) when computed over the same edge set and equivalence contract. If `unique_successor_count_K` is computed over committed edges, the report MUST identify that subset.
+$K\le N$ when computed over the same edge set and equivalence contract. If `unique_successor_count_K` is computed over committed edges, the report MUST identify that subset.
 
 ### 14.4 Zero and partial cases
 
-An invocation with \(M=0\) MAY be valid. A partial stream MUST report that its counts are partial; it MUST NOT imply exhaustive coverage.
+An invocation with $M=0$ MAY be valid. A partial stream MUST report that its counts are partial; it MUST NOT imply exhaustive coverage.
 
 ## 15. Deduplication and Coalescence
 
@@ -661,9 +661,9 @@ Results evaluated against obsolete source, constraint, or metric versions MUST b
 
 A generator may itself be updated by a meta-Delta as proposed in CDE-011:
 
-\[
+$$
 G_{k+1}=T_G(G_k,\delta_G).
-\]
+$$
 
 SPEC-002 requires that each generator version have a distinct manifest and immutable dependency identity. A candidate generator MUST NOT replace an active version merely because it produces higher internal scores.
 
@@ -671,7 +671,7 @@ Promotion, independent validation, and rollback belong to SPEC-006.
 
 ### 22.1 Changed coverage
 
-Adding or removing operators can change reachability. A coverage certificate for \(G_k\) MUST NOT automatically be reused for \(G_{k+1}\).
+Adding or removing operators can change reachability. A coverage certificate for $G_k$ MUST NOT automatically be reused for $G_{k+1}$.
 
 ### 22.2 Changed equivalence
 
@@ -837,13 +837,13 @@ Generator or branch contract conformance does not assert completeness, optimalit
 
 ## 26. Conditional Properties
 
-**Proposition A — Count bound in a restricted profile.** If an invocation emits \(M\) proposals, each proposal is attempted at most once, and each attempt produces at most one committed edge, then \(N_c\le Q\le M\).
+**Proposition A — Count bound in a restricted profile.** If an invocation emits $M$ proposals, each proposal is attempted at most once, and each attempt produces at most one committed edge, then $N_c\le Q\le M$.
 
 *Reason:* attempts are selected from proposals, and committed edges are a subset of single-outcome attempts.
 
 This bound does not apply to unrestricted retries or multi-outcome edge enumeration.
 
-**Proposition B — Unique-successor bound.** If \(K\) counts equivalence classes of successors of a fixed set of \(N\) edges, then \(K\le N\).
+**Proposition B — Unique-successor bound.** If $K$ counts equivalence classes of successors of a fixed set of $N$ edges, then $K\le N$.
 
 *Reason:* a partition cannot contain more nonempty classes than elements.
 
@@ -945,18 +945,18 @@ The harness SHOULD inject generator crashes, partial streams, invalid schemas, m
 
 ## 29. Worked Example A — BTP-Style Constructive Branching
 
-Consider a finite set of assignment decisions \(d_1,d_2,d_3\). A generator proposes `ACCEPT(d_i)` and `EXCLUDE(d_i)` for unresolved decisions.
+Consider a finite set of assignment decisions $d_1,d_2,d_3$. A generator proposes `ACCEPT(d_i)` and `EXCLUDE(d_i)` for unresolved decisions.
 
 A path-local decision registry records which decisions have been resolved. At each step, the generator SHOULD avoid proposing already resolved decisions under the fixed constructive profile. The exact NoSubtree rule belongs to SPEC-003.
 
-Suppose \(M=4\) proposals are emitted; one duplicates a Delta definition, one is infeasible, and two are selected for attempts. If one attempt commits a successor and the other fails validation, then:
+Suppose $M=4$ proposals are emitted; one duplicates a Delta definition, one is infeasible, and two are selected for attempts. If one attempt commits a successor and the other fails validation, then:
 
-- \(M=4\);
-- \(D=3\) distinct Delta definitions;
-- \(Q=2\) selected attempts;
-- \(N_c=1\) committed edge.
+- $M=4$;
+- $D=3$ distinct Delta definitions;
+- $Q=2$ selected attempts;
+- $N_c=1$ committed edge.
 
-The count of all realized edges \(N\) depends on whether the implementation also records modeled or observed noncommitted outcomes; the accounting mode must say so.
+The count of all realized edges $N$ depends on whether the implementation also records modeled or observed noncommitted outcomes; the accounting mode must say so.
 
 ## 30. Worked Example B — Multi-Scale Peak Search
 
@@ -966,7 +966,7 @@ A generator portfolio emits:
 - three regional jumps;
 - two long-range probes.
 
-Thus \(M=10\) proposals. A selector chooses six attempts under a fixed evaluation budget. Two attempts yield infeasible states, one is cancelled, and three produce committed successors. If two committed successors are equivalent under a declared state equivalence, then \(N_c=3\) and \(K_c=2\) unique committed successors.
+Thus $M=10$ proposals. A selector chooses six attempts under a fixed evaluation budget. Two attempts yield infeasible states, one is cancelled, and three produce committed successors. If two committed successors are equivalent under a declared state equivalence, then $N_c=3$ and $K_c=2$ unique committed successors.
 
 The selector may use directional scores to prioritize probes, but a low-scoring candidate is not safely prunable unless an appropriate certificate exists.
 
@@ -1105,7 +1105,7 @@ These are descriptive metrics, not universal quality measures.
 
 SPEC-002 establishes a precise contract for the step between **having a state** and **deciding which constrained transitions to explore**. Its central requirement is to keep the full lifecycle visible:
 
-\[
+$$
 \boxed{
 \text{Generate}
 \rightarrow
@@ -1119,9 +1119,9 @@ SPEC-002 establishes a precise contract for the step between **having a state** 
 \rightarrow
 \text{Commit / Record}
 }
-\]
+$$
 
-The cardinalities \(M\), \(Q\), \(N\), and \(K\) describe different stages and must not be treated as interchangeable. Delta identity is not proposal identity; proposal identity is not branch identity; and successor equality is not necessarily future equivalence.
+The cardinalities $M$, $Q$, $N$, and $K$ describe different stages and must not be treated as interchangeable. Delta identity is not proposal identity; proposal identity is not branch identity; and successor equality is not necessarily future equivalence.
 
 The specification permits adaptive M-to-N branching, multi-scale directional generation, stochastic outcomes, solver-neutral orchestration, and distributed exploration while preserving a conservative boundary: **a candidate is not a valid committed transition until the governing State Container and Constraint Contract permits it**.
 

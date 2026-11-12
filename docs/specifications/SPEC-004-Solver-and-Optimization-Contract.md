@@ -75,11 +75,11 @@ The orchestrator MAY choose and coordinate solvers. The **verifier**, not the so
 
 A solver request MUST identify a versioned problem instance:
 
-\[
+$$
 \mathcal P_v=(\mathcal S,\Delta,T,C_v,F_v,\mathcal G,\kappa,B),
-\]
+$$
 
-where \(\mathcal S\) is the state domain; \(\Delta\) the Delta/operator domain; \(T\) the transition relation; \(C_v\) the applicable hard constraints; \(F_v\) the objective or multi-objective evaluation; \(\mathcal G\) the goal or acceptable terminal-state predicate; \(\kappa\) the complete relevant context; and \(B\) the resource budget.
+where $\mathcal S$ is the state domain; $\Delta$ the Delta/operator domain; $T$ the transition relation; $C_v$ the applicable hard constraints; $F_v$ the objective or multi-objective evaluation; $\mathcal G$ the goal or acceptable terminal-state predicate; $\kappa$ the complete relevant context; and $B$ the resource budget.
 
 A request MUST declare whether the task is **feasibility**, **satisfaction**, **optimization**, **enumeration**, **exploration**, or **metric discovery**. These task types have different result semantics.
 
@@ -317,7 +317,7 @@ An A* adapter MAY claim optimality only under appropriate assumptions, including
 
 A DP adapter MUST declare its subproblem identity and recurrence. A cache key MUST capture all information relevant to future feasible continuations and objective values.
 
-Let \(s_1\sim s_2\) denote claimed future equivalence. For safe memoization, the implementation must establish, under the relevant context, that the two states have equivalent continuation opportunities and objective semantics for the recurrence being cached.
+Let $s_1\sim s_2$ denote claimed future equivalence. For safe memoization, the implementation must establish, under the relevant context, that the two states have equivalent continuation opportunities and objective semantics for the recurrence being cached.
 
 ### 13.1 Future-equivalence certificate
 
@@ -352,21 +352,21 @@ A computed recurrence value is not an optimality proof unless the recurrence cor
 
 A B&B adapter MUST define the objective orientation, incumbent semantics, node relaxation, bound computation, and pruning rule.
 
-For **minimization**, a valid node lower bound \(L(n)\) satisfies:
+For **minimization**, a valid node lower bound $L(n)$ satisfies:
 
-\[
+$$
 L(n)\le \min_{x\in F(n)} f(x),
-\]
+$$
 
-where \(F(n)\) is the node's feasible completion set. If a verified feasible incumbent has objective \(U\), the node MAY be pruned when \(L(n)\ge U\), subject to the declared tie policy and numerical semantics.
+where $F(n)$ is the node's feasible completion set. If a verified feasible incumbent has objective $U$, the node MAY be pruned when $L(n)\ge U$, subject to the declared tie policy and numerical semantics.
 
-For **maximization**, a valid node upper bound \(U(n)\) satisfies:
+For **maximization**, a valid node upper bound $U(n)$ satisfies:
 
-\[
+$$
 U(n)\ge \max_{x\in F(n)} f(x).
-\]
+$$
 
-With a verified feasible incumbent \(L\), the node MAY be pruned when \(U(n)\le L\), subject to tie policy.
+With a verified feasible incumbent $L$, the node MAY be pruned when $U(n)\le L$, subject to tie policy.
 
 These inequalities assume nonempty completion sets; an empty node requires an independently justified infeasibility determination. Infinite or undefined bounds require explicit handling.
 
@@ -432,7 +432,7 @@ Within a fixed minimization problem, the accepted incumbent objective SHOULD be 
 
 An `OPTIMAL` claim MUST be supported by a sound certificate or an auditable exact-completion argument under declared assumptions.
 
-For minimization with feasible incumbent \(U\) and valid global lower bound \(L\), an absolute gap is \(U-L\ge0\). For maximization with feasible incumbent \(L\) and valid global upper bound \(U\), the absolute gap is again \(U-L\ge0\). A relative gap MUST declare its denominator, treatment of zero, and numerical tolerances.
+For minimization with feasible incumbent $U$ and valid global lower bound $L$, an absolute gap is $U-L\ge0$. For maximization with feasible incumbent $L$ and valid global upper bound $U$, the absolute gap is again $U-L\ge0$. A relative gap MUST declare its denominator, treatment of zero, and numerical tolerances.
 
 ### 16.1 Proof artifacts
 
@@ -698,7 +698,7 @@ Assume that SPEC-001 validation is sound, all accepted candidates pass it, and c
 
 ### Proposition B — Sound B&B pruning
 
-For minimization, if \(L(n)\) is a sound lower bound for every feasible completion of node \(n\) and \(U\) is the objective of a verified feasible incumbent, then pruning node \(n\) when \(L(n)\ge U\) cannot remove a strictly better feasible solution. For maximization the dual statement holds with a sound upper bound and feasible lower incumbent. Tie handling may matter when enumerating all optima.
+For minimization, if $L(n)$ is a sound lower bound for every feasible completion of node $n$ and $U$ is the objective of a verified feasible incumbent, then pruning node $n$ when $L(n)\ge U$ cannot remove a strictly better feasible solution. For maximization the dual statement holds with a sound upper bound and feasible lower incumbent. Tie handling may matter when enumerating all optima.
 
 ### Proposition C — DP memoization
 
@@ -829,9 +829,9 @@ The learned directional score is useful for search ordering but is not a proof t
 
 ## 37. Worked case E — Metric co-evolution
 
-A CDE run proposes both candidate solutions and revised evaluation metrics. The solution optimizer uses metric version \(m_1\), while a separate validation process evaluates a proposed \(m_2\).
+A CDE run proposes both candidate solutions and revised evaluation metrics. The solution optimizer uses metric version $m_1$, while a separate validation process evaluates a proposed $m_2$.
 
-An optimum under \(m_1\) is not automatically optimal under \(m_2\). The orchestrator creates distinct problem lineages or re-evaluates candidates under a common metric. The proposed metric itself requires independent validation before promotion under SPEC-006.
+An optimum under $m_1$ is not automatically optimal under $m_2$. The orchestrator creates distinct problem lineages or re-evaluates candidates under a common metric. The proposed metric itself requires independent validation before promotion under SPEC-006.
 
 ## 38. Worked case F — Distributed solver portfolio
 
@@ -938,9 +938,9 @@ The contract builds on established ideas in search theory, dynamic programming, 
 
 SPEC-004 defines a conservative, extensible boundary between **CDE exploration** and **solver-specific mathematical guarantees**. The essential distinction is:
 
-\[
+$$
 \boxed{\text{Feasible}\neq\text{Best Known}\neq\text{Bounded Gap}\neq\text{Proven Optimal}.}
-\]
+$$
 
 A solver may discover candidates; an orchestrator may coordinate methods; a verifier must establish which claims the evidence supports. DP requires future-equivalent subproblems. B&B requires sound bounds and complete frontier accounting. Heuristic filtering is not certified pruning. Distributed local feasibility is not global feasibility. Metric evolution changes the meaning of optimization claims unless context is pinned.
 

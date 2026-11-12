@@ -93,15 +93,15 @@ It does **not** fully specify Delta generation or M-to-N selection (SPEC-002), p
 
 A conforming implementation MUST be able to resolve a State Container into the following logical fields, even if they are stored separately:
 
-\[
+$$
 S=(id,\sigma,v,payload,ctx,provenance).
-\]
+$$
 
 Where:
 
 - `id` identifies a state snapshot or content-equivalent state under declared rules;
-- `schema_id` \(\sigma\) identifies the state schema;
-- `revision` \(v\) identifies the relevant committed version;
+- `schema_id` $\sigma$ identifies the state schema;
+- `revision` $v$ identifies the relevant committed version;
 - `payload` is the typed task-state content or an immutable reference to it;
 - `context_refs` identify dependencies needed for interpretation;
 - `provenance` links the state to its origin and creation event.
@@ -174,9 +174,9 @@ Canonicalization MAY normalize ordering or encoding. It MUST preserve the semant
 
 A hard-constraint bundle is an immutable, versioned collection of checks:
 
-\[
+$$
 C_v=\{c_1,\ldots,c_n\}.
-\]
+$$
 
 A constraint may be a state predicate, transition predicate, relational predicate, or externally evaluated policy.
 
@@ -216,7 +216,7 @@ An application that uses probabilistic or risk-bounded constraints MUST explicit
 
 Hard constraints have priority over soft preferences, heuristic scores, directional fields, and solver predictions.
 
-For a candidate \(S'\), a high utility \(L(S')\) cannot compensate for a hard failure \(c_i(S')=\texttt{FAIL}\).
+For a candidate $S'$, a high utility $L(S')$ cannot compensate for a hard failure $c_i(S')=\texttt{FAIL}$.
 
 ### 6.4 External constraints
 
@@ -360,19 +360,19 @@ A conforming implementation SHOULD be able to state and test the following invar
 
 Every committed State Container conforms to its declared schema.
 
-\[
+$$
 \forall S\in\mathcal S_{\rm committed},\quad
-\operatorname{SchemaValid}(S)=\texttt{true}.
-\]
+\mathrm{SchemaValid}(S)=\texttt{true}.
+$$
 
 ### INV-02 — Constraint satisfaction
 
 Every committed state satisfies the hard constraints applicable to that state and commit context.
 
-\[
+$$
 \forall S\in\mathcal S_{\rm committed},\quad
-C_{\operatorname{version}(S)}(S)=\texttt{true}.
-\]
+C_{\mathrm{version}(S)}(S)=\texttt{true}.
+$$
 
 ### INV-03 — Transition admissibility
 
@@ -851,38 +851,38 @@ This specification is the first step toward a modular, interoperable CDE researc
 
 ## Appendix A — Compact Formal Contract
 
-Let \(\mathcal S_v\) be states under schema version \(v\), \(\Delta_\tau\) a Delta type, and \(C_c\) a constraint bundle.
+Let $\mathcal S_v$ be states under schema version $v$, $\Delta_\tau$ a Delta type, and $C_c$ a constraint bundle.
 
 A transition request is
 
-\[
+$$
 q=(S,\delta,\tau,c,\kappa,a),
-\]
+$$
 
-where \(\kappa\) is the versioned context and \(a\) the authorization reference.
+where $\kappa$ is the versioned context and $a$ the authorization reference.
 
 Define
 
-\[
-\operatorname{Admissible}(q,S')
+$$
+\mathrm{Admissible}(q,S')
 =
-\operatorname{Typed}(S,\delta,S')
+\mathrm{Typed}(S,\delta,S')
 \land
-\operatorname{Preconditions}(S,\delta)
+\mathrm{Preconditions}(S,\delta)
 \land
-\operatorname{Authorized}(a)
+\mathrm{Authorized}(a)
 \land
-\operatorname{ContextCurrent}(\kappa)
+\mathrm{ContextCurrent}(\kappa)
 \land
 C_c(S,\delta,S').
-\]
+$$
 
 The commit rule is:
 
-\[
-\frac{\operatorname{Admissible}(q,S')=\texttt{true}}
-     {\operatorname{Commit}(q,S')}.
-\]
+$$
+\frac{\mathrm{Admissible}(q,S')=\texttt{true}}
+     {\mathrm{Commit}(q,S')}.
+$$
 
 The rule is operationally sound only when each premise is checked correctly and atomically with respect to the declared consistency boundary.
 
