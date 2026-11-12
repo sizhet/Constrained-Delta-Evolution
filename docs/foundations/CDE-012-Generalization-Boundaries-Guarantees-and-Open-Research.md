@@ -255,7 +255,7 @@ The statement is standard search theory. CDE can host such a search but does not
 
 ### 8.1 Counterexample: missing Delta
 
-Suppose the only path to a goal requires Delta ${\delta^*}$, but $G(S)$ never proposes ${\delta^*}$. No scoring function or solver scheduling policy can discover that goal through the restricted transition system.
+Suppose the only path to a goal requires Delta $\delta^*$, but $G(S)$ never proposes $\delta^*$. No scoring function or solver scheduling policy can discover that goal through the restricted transition system.
 
 ### 8.2 Counterexample: unsafe heuristic pruning
 
