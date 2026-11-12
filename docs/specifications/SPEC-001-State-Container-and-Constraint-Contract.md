@@ -864,8 +864,7 @@ where $\kappa$ is the versioned context and $a$ the authorization reference.
 Define
 
 $$
-\mathrm{Admissible}(q,S')
-=
+\mathrm{Admissible}(q,S') =
 \mathrm{Typed}(S,\delta,S')
 \land
 \mathrm{Preconditions}(S,\delta)
