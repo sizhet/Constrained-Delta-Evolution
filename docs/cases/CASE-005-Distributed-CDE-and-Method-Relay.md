@@ -68,17 +68,17 @@ The central question is whether a distributed CDE orchestrator can improve valid
 
 A CDE task is a versioned optimization or exploration problem:
 
-\[
+$$
 \mathcal P=(S,\Delta,T,C,G,L,M,P,B,\Gamma),
-\]
+$$
 
-where \(S\) is the state space, \(\Delta\) typed candidate transitions, \(T\) transition semantics, \(C\) hard constraints, \(G\) Delta generator, \(L\) path-memory policy, \(M\) evaluation metric, \(P\) control policy, \(B\) resource budget, and \(\Gamma\) provenance/governance context.
+where $S$ is the state space, $\Delta$ typed candidate transitions, $T$ transition semantics, $C$ hard constraints, $G$ Delta generator, $L$ path-memory policy, $M$ evaluation metric, $P$ control policy, $B$ resource budget, and $\Gamma$ provenance/governance context.
 
-A distributed task unit \(W_i\) binds a **snapshot** of relevant versions and an exploration scope:
+A distributed task unit $W_i$ binds a **snapshot** of relevant versions and an exploration scope:
 
-\[
+$$
 W_i=(id_i,S_i^0,\Delta_i^{scope},C_v,M_v,P_v,B_i,V_i,\Gamma_i,\pi_i).
-\]
+$$
 
 The orchestrator dispatches units to workers, receives typed results, validates applicability and global compatibility, and records uncompleted regions as Leftovers. The orchestrator may be centralized, hierarchical, or federated; a logical control plane need not be one physical process.
 
@@ -168,7 +168,7 @@ Checkpoints include the frontier, evaluated candidates, local incumbent, constra
 
 ## 8. Partitioning, Coverage, and Overlap
 
-A parent exploration scope \(\Omega\) may be partitioned into child scopes \(\Omega_i\). Three distinct claims are possible:
+A parent exploration scope $\Omega$ may be partitioned into child scopes $\Omega_i$. Three distinct claims are possible:
 
 - **Partition:** child scopes are pairwise disjoint and cover the parent scope under a declared equivalence.
 - **Cover:** their union covers the parent scope, but overlap is allowed.
@@ -176,11 +176,11 @@ A parent exploration scope \(\Omega\) may be partitioned into child scopes \(\Om
 
 A complete partition requires a checkable relationship:
 
-\[
+$$
 \bigcup_i\Omega_i=\Omega,
-\]
+$$
 
-and, for a disjoint partition, \(\Omega_i\cap\Omega_j=\varnothing\) for \(i\ne j\). These are mathematical obligations, not assumptions inferred from task counts.
+and, for a disjoint partition, $\Omega_i\cap\Omega_j=\varnothing$ for $i\ne j$. These are mathematical obligations, not assumptions inferred from task counts.
 
 ### 8.1 Coverage certificates
 
@@ -367,11 +367,11 @@ For this case, *collective learning* means that reusable knowledge from one or m
 
 Possible benefits include improved feasible best-so-far objective, lower evaluation cost, faster target discovery, higher calibrated matching accuracy, or fewer invalid metric promotions. The selected measure must be preregistered.
 
-\[
+$$
 \Delta_{\mathrm{relay}}=
 U_{\mathrm{target}}(\text{validated relay})-
 U_{\mathrm{target}}(\text{no relay}).
-\]
+$$
 
 A positive estimate with uncertainty and scope restrictions supports a conditional benefit. Shared files, agent agreement, and a higher internal score alone do not establish collective learning.
 
@@ -503,19 +503,19 @@ Measure tail latency and worker imbalance, not only mean task duration. Work ste
 
 **Parallel speedup:**
 
-\[
+$$
 S_p=T_1/T_p,
-\]
+$$
 
 where hardware, workload, and measurement scope must be declared. Speedup is not automatically work efficiency.
 
 **Work efficiency:**
 
-\[
+$$
 E_p=T_1/(pT_p),
-\]
+$$
 
-under a comparable \(p\)-worker resource model.
+under a comparable $p$-worker resource model.
 
 **Redundancy rate:** fraction of evaluations duplicated under the declared equivalence/context key; purposeful replication is reported separately.
 
@@ -681,7 +681,7 @@ The appropriate output is a **negative-transfer evidence artifact** and a refine
 
 ## 36. Worked Example F — Temporal Relay
 
-A noisy evaluator returns measurements \(y_i=f(x)+\epsilon_i\). Multiple independently seeded observations at the same point can reduce uncertainty about \(f(x)\) under suitable noise assumptions. A repeated evaluation record must preserve the seed, evaluator version, dependence assumptions, cost, and incremental uncertainty reduction.
+A noisy evaluator returns measurements $y_i=f(x)+\epsilon_i$. Multiple independently seeded observations at the same point can reduce uncertainty about $f(x)$ under suitable noise assumptions. A repeated evaluation record must preserve the seed, evaluator version, dependence assumptions, cost, and incremental uncertainty reduction.
 
 If the noise is strongly correlated, repeated samples may add much less information than assumed. For a deterministic cached evaluation, identical repetition may be unnecessary except to test reproducibility or worker integrity.
 
@@ -1015,7 +1015,7 @@ D-CDE can represent many distributed search workflows, but representability does
 
 The appropriate hierarchy is:
 
-\[
+$$
 \boxed{
 \text{Distributed Execution}
 \neq\text{Coherent Coordination}
@@ -1023,7 +1023,7 @@ The appropriate hierarchy is:
 \neq\text{Validated Transfer}
 \neq\text{Collective Learning}
 }
-\]
+$$
 
 No general convergence, universal speedup, global optimality, or open-ended RSI guarantee follows from the framework alone.
 
@@ -1060,7 +1060,7 @@ CASE-005 closes the initial CDE case series by integrating **distributed explora
 
 The principal research cycle is:
 
-\[
+$$
 \boxed{
 \begin{gathered}
 \text{Partition and Dispatch Versioned Delta Tasks}\\
@@ -1075,7 +1075,7 @@ The principal research cycle is:
 \downarrow\\
 \text{Authorize, Monitor, or Reject Learning Updates}
 \end{gathered}}
-\]
+$$
 
 The scientific test is whether these contracts produce **reproducible improvements in validated target outcomes and total cost**, relative to strong distributed baselines. A successful prototype would demonstrate an operational research direction, not a universal algorithmic superiority theorem.
 

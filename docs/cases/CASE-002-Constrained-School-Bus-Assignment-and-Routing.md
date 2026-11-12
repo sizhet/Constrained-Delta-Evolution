@@ -83,30 +83,30 @@ All five are proposed hypotheses, not reported results.
 
 Let:
 
-- \(I\): students or indivisible transportation-demand units;
-- \(P\): eligible pickup/drop-off stops;
-- \(K\): schools;
-- \(V\): candidate physical vehicles;
-- \(R\): candidate trips/routes;
-- \(D\): depots;
-- \(T\): relevant time horizon;
-- \(E\): permitted road-network connections.
+- $I$: students or indivisible transportation-demand units;
+- $P$: eligible pickup/drop-off stops;
+- $K$: schools;
+- $V$: candidate physical vehicles;
+- $R$: candidate trips/routes;
+- $D$: depots;
+- $T$: relevant time horizon;
+- $E$: permitted road-network connections.
 
-Each student \(i\in I\) has an assigned school \(k(i)\), eligible stops \(P_i\), demand units \(q_i\), service requirements \(a_i\), and possibly a maximum allowed in-vehicle ride time \(L_i\). Students who must travel together may be modeled as a group, subject to capacity and accessibility constraints.
+Each student $i\in I$ has an assigned school $k(i)$, eligible stops $P_i$, demand units $q_i$, service requirements $a_i$, and possibly a maximum allowed in-vehicle ride time $L_i$. Students who must travel together may be modeled as a group, subject to capacity and accessibility constraints.
 
-Each vehicle \(v\in V\) has capacity \(Q_v\), compatibility attributes \(A_v\), depot eligibility, and availability windows. Each school \(k\) has an arrival window \([\underline t_k,\overline t_k]\), interpreted under the district's operating rules.
+Each vehicle $v\in V$ has capacity $Q_v$, compatibility attributes $A_v$, depot eligibility, and availability windows. Each school $k$ has an arrival window $[\underline t_k,\overline t_k]$, interpreted under the district's operating rules.
 
-Travel-time estimates \(\tau_{ab}(t,\omega)\) may depend on departure time \(t\) and scenario \(\omega\). A deterministic reference profile uses frozen travel-time estimates; a robust profile evaluates multiple scenarios.
+Travel-time estimates $\tau_{ab}(t,\omega)$ may depend on departure time $t$ and scenario $\omega$. A deterministic reference profile uses frozen travel-time estimates; a robust profile evaluates multiple scenarios.
 
 All input sets and policy values MUST be versioned. Student identifiers SHOULD be pseudonymized in research artifacts.
 
 ## 5. Primary Objective: Minimum Feasible Fleet Size
 
-Let \(z_v\in\{0,1\}\) indicate whether physical vehicle \(v\) is used in the schedule. The primary objective is
+Let $z_v\in\{0,1\}$ indicate whether physical vehicle $v$ is used in the schedule. The primary objective is
 
-\[
+$$
 \min F=\sum_{v\in V} z_v.
-\]
+$$
 
 This definition requires a valid mapping from trips to vehicles. Counting trips alone can overstate fleet needs when a vehicle serves multiple trips; counting unique vehicle labels without schedule compatibility can understate them.
 
@@ -114,31 +114,31 @@ This definition requires a valid mapping from trips to vehicles. Counting trips 
 
 A secondary ride-time measure is
 
-\[
+$$
 R_{\mathrm{total}}=\sum_{i\in I} w_i\,r_i,
-\]
+$$
 
-where \(r_i\) is the student's planned in-vehicle ride time and \(w_i\) is an explicitly defined weight. An unweighted mean is obtained with equal weights and suitable normalization.
+where $r_i$ is the student's planned in-vehicle ride time and $w_i$ is an explicitly defined weight. An unweighted mean is obtained with equal weights and suitable normalization.
 
-Other measures may include maximum ride time \(R_{\max}=\max_i r_i\), excess ride time relative to a reference, operating miles, driver-hours, schedule slack, and inequity across schools or student groups.
+Other measures may include maximum ride time $R_{\max}=\max_i r_i$, excess ride time relative to a reference, operating miles, driver-hours, schedule slack, and inequity across schools or student groups.
 
 ### 5.2 Recommended objective hierarchy
 
 A default research profile uses a **lexicographic objective**:
 
 1. Satisfy all hard constraints.
-2. Minimize feasible fleet size \(F\).
-3. Among equal-\(F\) solutions, minimize a declared ride-time objective.
+2. Minimize feasible fleet size $F$.
+3. Among equal-$F$ solutions, minimize a declared ride-time objective.
 4. Among remaining ties, minimize operating cost and improve robustness.
 
 This avoids trading a whole additional bus against an arbitrarily chosen small ride-time score difference. However, districts may legitimately choose an epsilon-constraint formulation with a hard ride-time cap and a fleet-cost budget. The objective hierarchy is a policy decision, not a universal mandate.
 
 ### 5.3 Alternative epsilon-constraint formulation
 
-\[
+$$
 \min F\quad\text{subject to}\quad R_{\max}\le L_{\max},\quad
 R_{\mathrm{total}}\le \bar R,
-\]
+$$
 
 alongside all safety and service constraints. The thresholds must come from an authorized policy context, not be invented by the optimizer.
 
@@ -152,9 +152,9 @@ Every eligible demand unit MUST be served exactly as required by the service con
 
 At every segment of a trip, onboard demand must not exceed the assigned vehicle's capacity:
 
-\[
-\operatorname{load}_{rv}(e)\le Q_v.
-\]
+$$
+\mathrm{load}_{rv}(e)\le Q_v.
+$$
 
 Capacity is segment-dependent; checking only the total number of assigned students can be incorrect for pickup-and-drop-off patterns.
 
@@ -170,9 +170,9 @@ Each trip must arrive within the applicable school window. Pickup time windows, 
 
 Where a maximum ride-time rule applies:
 
-\[
+$$
 r_i\le L_i.
-\]
+$$
 
 The reference case treats the threshold as supplied policy data. It does not assert a universal maximum.
 
@@ -196,11 +196,11 @@ Unknown or unreliable hard-constraint evidence must not silently be treated as p
 
 A logical CDE State Container for this case can be expressed as
 
-\[
+$$
 S=(A,\mathcal R,\mathcal V,\mathcal T,\mathcal E,\kappa,\beta,\rho),
-\]
+$$
 
-where \(A\) is student-to-stop/trip assignment, \(\mathcal R\) trip routes, \(\mathcal V\) trip-to-vehicle allocation, \(\mathcal T\) schedules, \(\mathcal E\) evaluation and validation evidence, \(\kappa\) versioned context, \(\beta\) remaining budget, and \(\rho\) path/provenance references.
+where $A$ is student-to-stop/trip assignment, $\mathcal R$ trip routes, $\mathcal V$ trip-to-vehicle allocation, $\mathcal T$ schedules, $\mathcal E$ evaluation and validation evidence, $\kappa$ versioned context, $\beta$ remaining budget, and $\rho$ path/provenance references.
 
 ```yaml
 state_id: "schoolbus-state-0042"
@@ -272,11 +272,11 @@ A Delta definition is distinct from a proposal instance and from a committed tra
 
 ## 9. Adaptive M-to-N Branching
 
-At a state \(S_t\), multiple generators produce \(M\) proposals. A branch selector chooses \(Q\) attempts. Validation and realization produce \(N\) recorded edges, including \(N_c\) committed edges, and \(K\) distinct successors under declared equivalence.
+At a state $S_t$, multiple generators produce $M$ proposals. A branch selector chooses $Q$ attempts. Validation and realization produce $N$ recorded edges, including $N_c$ committed edges, and $K$ distinct successors under declared equivalence.
 
-\[
+$$
 M\longrightarrow Q\longrightarrow N\longrightarrow K.
-\]
+$$
 
 Example: 20 proposals may include 8 local, 6 regional, 4 long-range, and 2 Relay-guided candidates. The selector attempts 10. Four fail hard constraints, two are redundant under a validated equivalence rule, and four lead to distinct committed schedules. These numbers illustrate accounting only; they are not experimental findings.
 
@@ -329,9 +329,9 @@ An exact solver may optimize a selected cluster of routes while other assignment
 
 Define the objective vector
 
-\[
+$$
 \Phi(S)=\big(F(S),R_{\mathrm{total}}(S),R_{\max}(S),C_{\mathrm{op}}(S)\big)
-\]
+$$
 
 for feasible states, with lexicographic comparison under a declared policy. Alternative policies must be versioned.
 
@@ -345,11 +345,11 @@ A worker may report `PREDICTED_FLEET_SIZE=7`, but the coordinator must not promo
 
 ### 11.2 Bounds and optimality
 
-If a solver supplies a valid lower bound \(L\) on fleet size and the incumbent uses \(U\) buses, then \(L\le F^*\le U\) under the same model assumptions. If \(L=U\), optimal fleet size is established for that model. Without a valid lower bound or exhaustive proof, the schedule is only the best known feasible result.
+If a solver supplies a valid lower bound $L$ on fleet size and the incumbent uses $U$ buses, then $L\le F^*\le U$ under the same model assumptions. If $L=U$, optimal fleet size is established for that model. Without a valid lower bound or exhaustive proof, the schedule is only the best known feasible result.
 
 ## 12. Trip Scheduling and Physical Vehicle Reuse
 
-A route is a trip with start and end locations and times. Define a compatibility arc \(r\to s\) when a vehicle can complete trip \(r\), reposition as needed, and start trip \(s\) on time, with compatible equipment and operating restrictions.
+A route is a trip with start and end locations and times. Define a compatibility arc $r\to s$ when a vehicle can complete trip $r$, reposition as needed, and start trip $s$ on time, with compatible equipment and operating restrictions.
 
 A vehicle schedule is a path through compatible trips. The fleet minimization subproblem can sometimes be represented as a path-cover or vehicle-scheduling problem on a directed acyclic compatibility graph, depending on modeling assumptions.
 
@@ -367,9 +367,9 @@ Optimizing trips first and vehicles second may miss better joint solutions. A CD
 
 For a morning inbound trip, a student's ride time is the difference between actual scheduled arrival at the school and the student's boarding time, adjusted for any transfer or intermediate service as specified.
 
-\[
+$$
 r_i=t_{\mathrm{school},i}-t_{\mathrm{board},i}
-\]
+$$
 
 for a direct inbound trip without transfer. Other service profiles require more general formulas.
 
@@ -728,7 +728,7 @@ On small instances, an exact model may establish optimal fleet size or a valid l
 
 ## 25. Evaluation Metrics
 
-**Primary metric:** feasible fleet size \(F\).
+**Primary metric:** feasible fleet size $F$.
 
 **Secondary metrics:** total student ride time, average ride time, maximum ride time, 90th/95th percentiles, route operating time, deadhead distance, driver-hours, schedule slack, and feasibility rate.
 
@@ -738,11 +738,11 @@ On small instances, an exact model may establish optimal fleet size or a valid l
 
 ### 25.1 Fleet reduction
 
-For a valid baseline fleet \(F_0\) and candidate fleet \(F_1\), report absolute savings \(F_0-F_1\) and relative savings \((F_0-F_1)/F_0\) when \(F_0>0\). A claimed saving must be based on physically realizable vehicle schedules.
+For a valid baseline fleet $F_0$ and candidate fleet $F_1$, report absolute savings $F_0-F_1$ and relative savings $(F_0-F_1)/F_0$ when $F_0>0$. A claimed saving must be based on physically realizable vehicle schedules.
 
 ### 25.2 Ride-time cost of savings
 
-Report the ride-time change for each reduction in fleet count. A Pareto frontier across \((F,R_{\mathrm{total}},R_{\max})\) can be informative even when the deployment policy is lexicographic.
+Report the ride-time change for each reduction in fleet count. A Pareto frontier across $(F,R_{\mathrm{total}},R_{\max})$ can be informative even when the deployment policy is lexicographic.
 
 ### 25.3 Robustness
 
@@ -1005,7 +1005,7 @@ Constrained School-Bus Assignment and Routing is a demanding but concrete CDE ca
 
 The reference research design combines:
 
-\[
+$$
 \boxed{
 \text{State Containers}
 +\text{Typed Deltas}
@@ -1013,7 +1013,7 @@ The reference research design combines:
 +\text{Solver Portfolio}
 +\text{Distributed Relay}
 }
-\]
+$$
 
 under independent validation, versioned provenance, and controlled policy evolution.
 

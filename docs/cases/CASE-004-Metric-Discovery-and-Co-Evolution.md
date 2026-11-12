@@ -32,11 +32,11 @@ The proposed framework combines classical multiobjective optimization, surrogate
 
 Optimization is typically described as finding:
 
-\[
+$$
 x^\star\in\arg\max_{x\in\mathcal F}m(x),
-\]
+$$
 
-where \(\mathcal F\) is the feasible solution space and \(m\) is an evaluation metric. But the formula assumes that \(m\) is sufficiently appropriate for the actual objective. In practice, this assumption may fail.
+where $\mathcal F$ is the feasible solution space and $m$ is an evaluation metric. But the formula assumes that $m$ is sufficiently appropriate for the actual objective. In practice, this assumption may fail.
 
 Examples include:
 
@@ -48,8 +48,8 @@ Examples include:
 
 These failures motivate two separate questions:
 
-1. **Solution search:** Given metric \(m\), which feasible solution \(x\) should be selected?
-2. **Metric search:** Given independent evidence and governance, which metric \(m\) is useful, valid, and safe to employ?
+1. **Solution search:** Given metric $m$, which feasible solution $x$ should be selected?
+2. **Metric search:** Given independent evidence and governance, which metric $m$ is useful, valid, and safe to employ?
 
 CDE proposes that both questions can be represented with typed Deltas, but they require **different authority and validation contracts**.
 
@@ -91,25 +91,25 @@ These are experimental hypotheses, not conclusions.
 
 Define three logically distinct spaces:
 
-\[
+$$
 \mathcal X = \text{candidate solutions},\quad
 \mathcal M = \text{candidate metrics},\quad
 \mathcal V = \text{independent validation evidence}.
-\]
+$$
 
-A solution score is \(m(x)\), while the quality of a metric is evaluated through a separate validation function:
+A solution score is $m(x)$, while the quality of a metric is evaluated through a separate validation function:
 
-\[
+$$
 J(m;\mathcal D_{\mathrm{val}},\mathcal P,\mathcal G),
-\]
+$$
 
-where \(\mathcal D_{\mathrm{val}}\) is validation evidence, \(\mathcal P\) is a declared decision protocol, and \(\mathcal G\) is governance context.
+where $\mathcal D_{\mathrm{val}}$ is validation evidence, $\mathcal P$ is a declared decision protocol, and $\mathcal G$ is governance context.
 
 The key separation is:
 
-\[
+$$
 \boxed{\text{High }m(x)\ \not\Rightarrow\ \text{High }J(m)}
-\]
+$$
 
 A candidate metric MUST NOT be promoted merely because solutions selected by that metric receive high values *under the same metric*.
 
@@ -130,21 +130,21 @@ Passing E0–E2 does not automatically establish E3–E5.
 
 The minimal co-evolution model contains two nested search loops.
 
-**Inner loop — Solution evolution:** Under a pinned metric version \(m_v\), explore feasible \(x\) using solution Deltas.
+**Inner loop — Solution evolution:** Under a pinned metric version $m_v$, explore feasible $x$ using solution Deltas.
 
-**Outer loop — Metric evolution:** Propose candidate metrics \(m_{v'}\), evaluate their effect on independently validated decisions, and accept or reject promotion.
+**Outer loop — Metric evolution:** Propose candidate metrics $m_{v'}$, evaluate their effect on independently validated decisions, and accept or reject promotion.
 
 A third, slower loop may revise the generator and policy used in either loop, subject to SPEC-006:
 
-\[
+$$
 \begin{aligned}
 x_{t+1}&=T_X(x_t,\delta^X_t; m_v,C_v),\\
 m_{k+1}&=T_M(m_k,\delta^M_k; G_M),\\
 (G,P)_{r+1}&=T_{\mathrm{meta}}((G,P)_r,\delta^{\mathrm{meta}}_r).
 \end{aligned}
-\]
+$$
 
-Here \(t,k,r\) denote different logical timescales; no fixed ratio is assumed. Metric candidates may be evaluated in isolated sandboxes without replacing the production metric.
+Here $t,k,r$ denote different logical timescales; no fixed ratio is assumed. Metric candidates may be evaluated in isolated sandboxes without replacing the production metric.
 
 ### 5.1 Version isolation
 
@@ -160,17 +160,17 @@ Two State Container profiles are needed.
 
 ### 6.1 Solution State
 
-\[
+$$
 S^X=(x,\mathcal H_X,C_v,M_v,P_v,B_X,\Gamma_X).
-\]
+$$
 
 It includes the current solution, relevant search history, constraint and metric versions, policy, budget, and provenance.
 
 ### 6.2 Metric State
 
-\[
+$$
 S^M=(m,\mathcal H_M,D_{\mathrm{train}},D_{\mathrm{val}}^{\mathrm{ref}},G_v,B_M,\Gamma_M).
-\]
+$$
 
 It includes a candidate metric, its change history, references to training and validation partitions, governance version, budget, and provenance. The validation partition SHOULD be access-controlled; the generator must not be able to inspect hidden validation labels.
 
@@ -275,19 +275,19 @@ These are separate predicates. A solution promotion policy may require all four,
 
 ## 9. Benchmark Family A — Synthetic Proxy Misalignment
 
-Construct candidates \(x\) with observable features \(z(x)\), a proxy metric \(m_0(x)\), and a hidden reference utility \(u^\star(x)\).
+Construct candidates $x$ with observable features $z(x)$, a proxy metric $m_0(x)$, and a hidden reference utility $u^\star(x)$.
 
 For example:
 
-\[
+$$
 u^\star(x)=2z_1(x)+z_2(x)-3\max(0,z_3(x)-\tau)^2,
-\]
+$$
 
-\[
+$$
 m_0(x)=2z_1(x)+z_2(x).
-\]
+$$
 
-The proxy omits a nonlinear penalty. A solution generator that maximizes \(m_0\) may exploit high \(z_3\) values if correlated with \(z_1\). A Metric Delta adding the omitted penalty may improve decisions.
+The proxy omits a nonlinear penalty. A solution generator that maximizes $m_0$ may exploit high $z_3$ values if correlated with $z_1$. A Metric Delta adding the omitted penalty may improve decisions.
 
 **Caution:** In a real discovery experiment, the candidate metric generator must not receive the hidden formula. The benchmark oracle retains it solely for independent evaluation.
 
@@ -320,14 +320,14 @@ A plausible *declared* operational hierarchy is:
 
 A weighted sum that trades one additional vehicle against a small ride-time reduction may violate the intended fleet-first priority. A lexicographic metric can represent the policy more faithfully:
 
-\[
+$$
 \min_{\mathrm{lex}}\left(
 N_{\mathrm{vehicles}},
 T_{\mathrm{ride},95},
 T_{\mathrm{ride,total}},
 C_{\mathrm{operations}}
 \right).
-\]
+$$
 
 The ordering is a **case assumption** and must be authorized by the relevant stakeholder; it is not universally correct.
 
@@ -353,13 +353,13 @@ Use synthetic graph matching from CASE-003.
 
 Candidate metrics include:
 
-\[
+$$
 m_{\mathrm{attr}},\quad
 m_{\mathrm{rel}},\quad
 m_{\mathrm{topo}},\quad
 m_{\mathrm{context}},\quad
 m_{\mathrm{combined}}.
-\]
+$$
 
 An attribute-heavy metric may perform well on clean labels and fail on corrupted labels. A relation-heavy metric may fail on symmetric or noisy graphs. Co-evolution may adapt feature weights or metric structure, but must be tested on held-out graphs with different corruption patterns.
 
@@ -389,9 +389,9 @@ Where stakeholders genuinely disagree, there may be no single universally correc
 
 Model a deployment environment in which the data distribution changes as the policy optimized by the metric changes.
 
-\[
+$$
 D_{t+1}=\Phi(D_t,\pi_{m_t},\xi_t).
-\]
+$$
 
 The metric affects the policy, which affects future observations. This creates feedback loops and possible distribution shift.
 
@@ -422,12 +422,12 @@ The laboratory MUST NOT claim a discovered metric is objectively true merely bec
 
 At each outer-loop invocation:
 
-\[
+$$
 M=\#\text{Metric Delta proposals},
 \quad Q=\#\text{validation attempts},
 \quad N=\#\text{realized candidate evaluations},
 \quad K=\#\text{distinct metric successors}.
-\]
+$$
 
 Some candidates may be invalid, redundant, deferred, or rejected. The system MUST record the full accounting, including unsuccessful proposals and validation costs.
 
@@ -535,23 +535,23 @@ The evaluator must use criteria that are not trivially identical to the candidat
 
 ### 18.2 Metric self-confirmation test
 
-For each candidate \(m'\), compare:
+For each candidate $m'$, compare:
 
-\[
+$$
 \Delta_{\mathrm{self}}
 =
 m'(x_{m'})-m'(x_{\mathrm{baseline}})
-\]
+$$
 
 with:
 
-\[
+$$
 \Delta_{\mathrm{ind}}
 =
 U_{\mathrm{ind}}(x_{m'})-U_{\mathrm{ind}}(x_{\mathrm{baseline}}).
-\]
+$$
 
-A positive \(\Delta_{\mathrm{self}}\) with nonpositive \(\Delta_{\mathrm{ind}}\) is a warning sign. The independent utility estimator may itself be uncertain and must report that uncertainty.
+A positive $\Delta_{\mathrm{self}}$ with nonpositive $\Delta_{\mathrm{ind}}$ is a warning sign. The independent utility estimator may itself be uncertain and must report that uncertainty.
 
 ## 19. Goodhart and Reward-Hacking Stress Tests
 
@@ -767,29 +767,29 @@ Matching seeds and budgets does not eliminate all variance. Randomization, solve
 
 ## 24. Worked Example A — Proxy Improvement Versus True Utility
 
-Suppose a candidate \(x\) has features:
+Suppose a candidate $x$ has features:
 
-\[
+$$
 z_1=4,\quad z_2=2,\quad z_3=5,\quad \tau=2.
-\]
+$$
 
 Under the synthetic formulas in Section 9:
 
-\[
+$$
 m_0(x)=2(4)+2=10,
-\]
+$$
 
-\[
+$$
 u^\star(x)=10-3(5-2)^2=-17.
-\]
+$$
 
-A different candidate \(y\) with \(z_1=3,z_2=2,z_3=2\) has:
+A different candidate $y$ with $z_1=3,z_2=2,z_3=2$ has:
 
-\[
+$$
 m_0(y)=8,\qquad u^\star(y)=8.
-\]
+$$
 
-Thus the proxy ranks \(x\) above \(y\), while the reference utility ranks \(y\) above \(x\). This is a **constructed arithmetic counterexample**, not an experimental observation.
+Thus the proxy ranks $x$ above $y$, while the reference utility ranks $y$ above $x$. This is a **constructed arithmetic counterexample**, not an experimental observation.
 
 A Metric Delta introducing the missing penalty may repair this instance, but independent tests are needed to establish generalization.
 
@@ -901,23 +901,23 @@ Comparisons must account for differences in information access, tuning budget, n
 
 ### 32.1 Held-out decision utility
 
-\[
+$$
 U_{\mathrm{test}}(m)
 =
 \frac{1}{n}\sum_{i=1}^{n}
 u_i^\star(x_i(m)),
-\]
+$$
 
-where \(x_i(m)\) is the solution chosen using \(m\) on task \(i\), and \(u_i^\star\) is an independent reference outcome available to the benchmark evaluator.
+where $x_i(m)$ is the solution chosen using $m$ on task $i$, and $u_i^\star$ is an independent reference outcome available to the benchmark evaluator.
 
 ### 32.2 Decision regret
 
-\[
+$$
 R(m)=\frac{1}{n}\sum_i
 \left[u_i^\star(x_i^\star)-u_i^\star(x_i(m))\right].
-\]
+$$
 
-If \(x_i^\star\) is only numerically approximated, label the result approximate regret, not certified optimality gap.
+If $x_i^\star$ is only numerically approximated, label the result approximate regret, not certified optimality gap.
 
 ### 32.3 False promotion rate
 
@@ -1379,7 +1379,7 @@ Evidence for one level does not automatically establish the next. A learned scor
 
 The relevant hierarchy is:
 
-\[
+$$
 \boxed{
 \text{Metric Representability}
 \neq
@@ -1391,7 +1391,7 @@ The relevant hierarchy is:
 \neq
 \text{Generalization}
 }
-\]
+$$
 
 CDE supplies contracts for exploration and validation. It does not eliminate the epistemic difficulty of choosing what should be measured.
 
@@ -1424,7 +1424,7 @@ Metric Discovery and Co-Evolution addresses a central weakness of optimization s
 
 The essential research loop is:
 
-\[
+$$
 \boxed{
 \begin{gathered}
 \text{Generate Solution Deltas under }m_v\\
@@ -1440,7 +1440,7 @@ The essential research loop is:
 \text{Relay Evidence, Methods, and Leftovers}
 \end{gathered}
 }
-\]
+$$
 
 A higher internal score is not sufficient evidence of a better metric. A better metric on one benchmark is not proof of cross-domain generalization. A successful recursive update is not a guarantee of sustained self-improvement.
 

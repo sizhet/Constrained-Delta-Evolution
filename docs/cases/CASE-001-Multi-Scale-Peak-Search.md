@@ -20,7 +20,7 @@ The case formalizes a two-dimensional benchmark family with multiple peaks, infe
 
 ---
 
-![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](../../figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
 
 *Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
 
@@ -94,34 +94,34 @@ These are **testable hypotheses**, not established findings.
 
 Let the search domain be:
 
-\[
+$$
 \Omega=[-6,6]\times[-6,6]\subset\mathbb R^2.
-\]
+$$
 
 We seek:
 
-\[
+$$
 \max_{x\in\Omega} f(x)
 \quad\text{subject to}\quad
 c_j(x)\le 0,\;j=1,\ldots,J.
-\]
+$$
 
-Here \(f\) is an objective, \(c_j\) are hard constraints, and each evaluation may consume a finite budget.
+Here $f$ is an objective, $c_j$ are hard constraints, and each evaluation may consume a finite budget.
 
-For a known deterministic test function, an independent evaluator can compute the exact objective at proposed points. For noisy experiments, the evaluator returns an observation \(y=f(x)+\epsilon\), while the benchmark oracle retains the latent \(f(x)\) for post-run scoring. The optimizer MUST NOT have access to hidden oracle information during search.
+For a known deterministic test function, an independent evaluator can compute the exact objective at proposed points. For noisy experiments, the evaluator returns an observation $y=f(x)+\epsilon$, while the benchmark oracle retains the latent $f(x)$ for post-run scoring. The optimizer MUST NOT have access to hidden oracle information during search.
 
 ### 3.1 Multi-peak benchmark family
 
 Define a mixture of Gaussian-shaped peaks:
 
-\[
+$$
 f(x)=b(x)+\sum_{i=1}^{P} a_i
 \exp\left(
 -\frac{\|x-\mu_i\|_2^2}{2\sigma_i^2}
 \right),
-\]
+$$
 
-where \(b(x)\) is an optional low-amplitude background term, \(a_i>0\) is peak amplitude, \(\mu_i\in\Omega\) its center, and \(\sigma_i>0\) its width.
+where $b(x)$ is an optional low-amplitude background term, $a_i>0$ is peak amplitude, $\mu_i\in\Omega$ its center, and $\sigma_i>0$ its width.
 
 **Important:** In a sum of overlapping peaks, the actual maximizer need not be exactly at a component center. The benchmark MUST evaluate the full function, not equate the largest amplitude with a proven global optimum.
 
@@ -129,33 +129,33 @@ where \(b(x)\) is an optional low-amplitude background term, \(a_i>0\) is peak a
 
 A deliberately separated example is:
 
-| Component | Center \(\mu_i\) | Amplitude \(a_i\) | Width \(\sigma_i\) |
+| Component | Center $\mu_i$ | Amplitude $a_i$ | Width $\sigma_i$ |
 |---|---|---:|---:|
-| A | \((-3,-2)\) | 5.0 | 0.85 |
-| B | \((2.5,2.2)\) | 8.0 | 0.65 |
-| C | \((0,-3.5)\) | 4.0 | 1.10 |
+| A | $(-3,-2)$ | 5.0 | 0.85 |
+| B | $(2.5,2.2)$ | 8.0 | 0.65 |
+| C | $(0,-3.5)$ | 4.0 | 1.10 |
 
-Let \(b(x)=0\). A search initialized near A may exploit A successfully yet fail to visit B if it uses only short local steps. This is an intended qualitative stress test; **it does not establish the exact optimizer location or a measured performance gap**.
+Let $b(x)=0$. A search initialized near A may exploit A successfully yet fail to visit B if it uses only short local steps. This is an intended qualitative stress test; **it does not establish the exact optimizer location or a measured performance gap**.
 
 ### 3.3 Constraint variants
 
 Four variants separate search difficulty from constraint difficulty.
 
-**C0 — Box only:** \(x\in\Omega\).
+**C0 — Box only:** $x\in\Omega$.
 
-**C1 — Forbidden disk:** exclude a disk centered at \(z\) with radius \(r\):
+**C1 — Forbidden disk:** exclude a disk centered at $z$ with radius $r$:
 
-\[
+$$
 c_{\rm disk}(x)=r^2-\|x-z\|_2^2\le 0.
-\]
+$$
 
 **C2 — Capacity-like linear constraint:**
 
-\[
+$$
 c_{\rm lin}(x)=x_1+0.7x_2-\tau\le 0.
-\]
+$$
 
-**C3 — Disconnected feasible islands:** the feasible region is a union of explicitly defined regions \(F_1\cup F_2\). The validator checks membership in at least one region. This variant probes whether long-range transitions can bridge disconnected feasible components without requiring an infeasible intermediate path.
+**C3 — Disconnected feasible islands:** the feasible region is a union of explicitly defined regions $F_1\cup F_2$. The validator checks membership in at least one region. This variant probes whether long-range transitions can bridge disconnected feasible components without requiring an infeasible intermediate path.
 
 Constraint definitions and their versions MUST be frozen before each benchmark run. A benchmark SHOULD include a variant where the highest unconstrained peak is infeasible, so algorithms are evaluated on *feasible* rather than raw objective value.
 
@@ -180,17 +180,17 @@ The CDE State Container is not merely a coordinate pair. It includes the version
 
 A minimal logical state is:
 
-\[
+$$
 S_t=(x_t,\mathcal I_t,\kappa_t,\beta_t,\rho_t),
-\]
+$$
 
 where:
 
-- \(x_t\): current candidate point or active search location;
-- \(\mathcal I_t\): information state, including evaluated points and evidence references;
-- \(\kappa_t\): schema, constraint, metric, and policy versions;
-- \(\beta_t\): remaining budget;
-- \(\rho_t\): provenance and path-context reference.
+- $x_t$: current candidate point or active search location;
+- $\mathcal I_t$: information state, including evaluated points and evidence references;
+- $\kappa_t$: schema, constraint, metric, and policy versions;
+- $\beta_t$: remaining budget;
+- $\rho_t$: provenance and path-context reference.
 
 The information state may be stored separately and referenced immutably; this prevents unnecessary duplication of an expanding evaluation history.
 
@@ -250,10 +250,10 @@ The benchmark uses four proposal scales.
 
 ### 6.1 Local Delta
 
-\[
+$$
 \delta_L:\quad x'=x+\eta,\qquad
 \eta\sim \mathcal N(0,\sigma_L^2 I).
-\]
+$$
 
 The proposal is clipped or rejected according to a declared boundary policy. Clipping can distort the proposal distribution and MUST be documented.
 
@@ -261,31 +261,31 @@ Local Deltas exploit an attraction basin but may have low probability of crossin
 
 ### 6.2 Regional Delta
 
-\[
+$$
 \delta_R:\quad x'=x+\eta,\qquad
 \eta\sim\mathcal N(0,\sigma_R^2 I),
 \quad\sigma_R>\sigma_L.
-\]
+$$
 
 Regional Deltas broaden exploration without abandoning the current region entirely.
 
 ### 6.3 Long-Range Delta
 
-\[
+$$
 \delta_G:\quad x'\sim q_G(\cdot\mid\Omega),
-\]
+$$
 
-where \(q_G\) may be uniform over the domain, stratified, low-discrepancy, or otherwise explicitly specified.
+where $q_G$ may be uniform over the domain, stratified, low-discrepancy, or otherwise explicitly specified.
 
 Long-range proposals are allowed to jump across disconnected feasible regions. Whether an application permits such jumps is domain-dependent; for this numerical optimization case, a proposed evaluation point need not be reachable through a physical continuous path.
 
 ### 6.4 Directional Delta
 
-\[
+$$
 \delta_D:\quad x'=x+\alpha d+\eta,
-\]
+$$
 
-where \(d\) is a normalized direction derived from a declared evidence model, \(\alpha\) a step scale, and \(\eta\) exploration noise.
+where $d$ is a normalized direction derived from a declared evidence model, $\alpha$ a step scale, and $\eta$ exploration noise.
 
 Directional evidence may be a local gradient estimate, surrogate-model suggestion, historical improvement vector, or Relay-provided hypothesis. It is **not** a hard-constraint certificate.
 
@@ -308,11 +308,11 @@ The proposal can be stochastic while the realized state transition is determinis
 
 ## 7. Adaptive M-to-N Branching
 
-At a given invocation, the generator portfolio emits \(M\) Delta proposals. A selector chooses \(Q\) attempts. After validation and realization, \(N\) edges are recorded and \(K\) distinct successor states remain under the declared equivalence relation.
+At a given invocation, the generator portfolio emits $M$ Delta proposals. A selector chooses $Q$ attempts. After validation and realization, $N$ edges are recorded and $K$ distinct successor states remain under the declared equivalence relation.
 
-\[
+$$
 M \longrightarrow Q \longrightarrow N \longrightarrow K.
-\]
+$$
 
 The four quantities are not interchangeable.
 
@@ -327,9 +327,9 @@ Suppose an invocation emits 12 proposals:
 
 The selector attempts 7. Of these, 2 fail hard constraints, 1 duplicates an already evaluated candidate, and 4 produce new committed evaluations. If two committed evaluations lead to the same logical successor under a declared equivalence, the report may show:
 
-\[
+$$
 M=12,\quad Q=7,\quad N_c=4,\quad K_c=3.
-\]
+$$
 
 These are **illustrative bookkeeping numbers**, not benchmark results. Whether duplicate evaluations are represented as realized edges depends on the declared edge-kind and accounting policy.
 
@@ -460,25 +460,25 @@ For selected deterministic low-dimensional landscapes, a dense grid plus indepen
 
 For maximization:
 
-\[
+$$
 F_t^{\star}=\max\{f(x_i): i\le t,\ x_i\text{ feasible}\}.
-\]
+$$
 
 If no feasible point has been evaluated, the result is `NO_FEASIBLE_INCUMBENT`, not zero.
 
 ### 11.2 Simple regret
 
-Given a trusted reference \(f_{\rm ref}^{\star}\):
+Given a trusted reference $f_{\rm ref}^{\star}$:
 
-\[
+$$
 R_t=f_{\rm ref}^{\star}-F_t^{\star}.
-\]
+$$
 
 If the reference is approximate, report it as approximate regret. Do not call it a certified optimality gap.
 
 ### 11.3 Discovery success
 
-Define a target threshold \(\theta\) before the run. Success occurs when the algorithm evaluates a feasible point with \(f(x)\ge\theta\). In noisy experiments, distinguish **observed threshold crossing** from **validated latent-objective crossing**.
+Define a target threshold $\theta$ before the run. Success occurs when the algorithm evaluates a feasible point with $f(x)\ge\theta$. In noisy experiments, distinguish **observed threshold crossing** from **validated latent-objective crossing**.
 
 ### 11.4 Time to discovery
 
@@ -490,11 +490,11 @@ Measure the number of occupied spatial bins or separated basins visited. Report 
 
 ### 11.6 Feasibility yield
 
-\[
+$$
 Y_{\rm feas}=
 \frac{\text{feasible attempted candidates}}
 {\text{all attempted candidates}},
-\]
+$$
 
 with the zero-denominator case reported as undefined.
 
@@ -512,7 +512,7 @@ Report total time, generator time, validation time, solver time, and orchestrati
 
 Create a preregistered benchmark suite with varying:
 
-- number of peaks \(P\);
+- number of peaks $P$;
 - separation between centers;
 - width distribution;
 - amplitude contrast;
@@ -528,9 +528,9 @@ Use training, validation, and held-out test landscape families with disjoint ran
 
 Suggested objective-evaluation budgets:
 
-\[
+$$
 B\in\{25,50,100,250,500\}.
-\]
+$$
 
 These are proposed design points, not measured thresholds. Larger budgets MAY be necessary for higher dimensions.
 
@@ -678,23 +678,23 @@ The benchmark harness MUST distinguish initialization evaluations from search ev
 
 ## 16. Worked Walkthrough — A Local Basin and a Distant Basin
 
-Consider the L1 landscape with starting point \(x_0=(-3.2,-2.2)\), near peak A. A local step of standard deviation \(0.15\) tends to propose points near the current basin. A long-range proposal sampled uniformly over \([-6,6]^2\) has a nonzero probability of landing near peak B.
+Consider the L1 landscape with starting point $x_0=(-3.2,-2.2)$, near peak A. A local step of standard deviation $0.15$ tends to propose points near the current basin. A long-range proposal sampled uniformly over $[-6,6]^2$ has a nonzero probability of landing near peak B.
 
-For a disk of radius \(r=0.5\) fully inside the square, the probability of a uniform sample falling inside the disk is:
+For a disk of radius $r=0.5$ fully inside the square, the probability of a uniform sample falling inside the disk is:
 
-\[
+$$
 p=\frac{\pi r^2}{12^2}
 =\frac{\pi(0.5)^2}{144}
 \approx 0.00545.
-\]
+$$
 
-With \(n\) independent uniform proposals, the probability of at least one point falling in that disk is:
+With $n$ independent uniform proposals, the probability of at least one point falling in that disk is:
 
-\[
+$$
 1-(1-p)^n.
-\]
+$$
 
-For \(n=100\), this is approximately \(0.421\). This calculation concerns **geometric sampling of a disk**, not probability of finding the true global optimum, satisfying all constraints, or achieving a target score. It illustrates why a uniform global proposal can be expensive even in 2D.
+For $n=100$, this is approximately $0.421$. This calculation concerns **geometric sampling of a disk**, not probability of finding the true global optimum, satisfying all constraints, or achieving a target score. It illustrates why a uniform global proposal can be expensive even in 2D.
 
 An adaptive portfolio may use local exploitation after discovering a promising region, but it may also prematurely focus on the wrong basin. Both possibilities must be measured.
 
@@ -702,9 +702,9 @@ An adaptive portfolio may use local exploitation after discovering a promising r
 
 Set:
 
-\[
+$$
 f_U(x)=-\|x-\mu\|_2^2.
-\]
+$$
 
 This smooth unimodal function is a negative control for the proposition that multi-scale search is universally better. A gradient-based or well-tuned local optimizer may approach the optimum with fewer evaluations than a method spending budget on long-range proposals.
 
@@ -779,14 +779,14 @@ Test a source landscape whose strongest basin is deliberately shifted away from 
 
 The primary metric is best feasible objective value. A secondary research extension permits changes in the scoring policy, such as a tradeoff between objective improvement, exploration diversity, and evaluation cost:
 
-\[
+$$
 U_\omega =
 \omega_1 \,\widehat{\Delta f}
 +\omega_2\,\text{novelty}
 -\omega_3\,\text{cost}.
-\]
+$$
 
-The weights \(\omega\) are *policy evaluation parameters*, not replacements for hard constraints. Each change requires a versioned metric record.
+The weights $\omega$ are *policy evaluation parameters*, not replacements for hard constraints. Each change requires a versioned metric record.
 
 A new metric that improves its own internal score is not necessarily a better metric. Independent validation must compare held-out outcomes against predeclared objectives and guard against Goodhart effects.
 
@@ -1109,7 +1109,7 @@ Multi-Scale Peak Search is a useful first CDE case because its search geometry i
 
 The case's central design is:
 
-\[
+$$
 \boxed{
 \text{Local Exploitation}
 +
@@ -1119,7 +1119,7 @@ The case's central design is:
 +
 \text{Validated Directional Evidence}
 }
-\]
+$$
 
 subject to hard constraints, budget accounting, versioned state transitions, and independently evaluated outcomes.
 

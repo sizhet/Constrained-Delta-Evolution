@@ -31,7 +31,7 @@ The proposed laboratory combines typed matching hypotheses, directional weak evi
 
 Conventional matching often computes a similarity score between two objects and chooses the highest-scoring correspondence. This works well in many applications, but can be inadequate when the correct interpretation depends on relationships, context, missing observations, competing explanations, or constraints across several matches.
 
-Consider two knowledge graphs with partially overlapping concepts. An attribute-level comparison may suggest that nodes \(a\) and \(b\) match, yet their neighboring relations contradict the hypothesis. Conversely, two nodes may have different labels but highly compatible roles in corresponding subgraphs.
+Consider two knowledge graphs with partially overlapping concepts. An attribute-level comparison may suggest that nodes $a$ and $b$ match, yet their neighboring relations contradict the hypothesis. Conversely, two nodes may have different labels but highly compatible roles in corresponding subgraphs.
 
 A dynamic matching system should therefore be able to:
 
@@ -80,33 +80,33 @@ All hypotheses require experimental testing. They are not findings.
 
 Let the source and target structures be attributed graphs:
 
-\[
+$$
 G_A=(V_A,E_A,\mathcal A_A),\qquad
 G_B=(V_B,E_B,\mathcal A_B),
-\]
+$$
 
-where \(V\) are nodes, \(E\) typed relations, and \(\mathcal A\) node/edge attributes.
+where $V$ are nodes, $E$ typed relations, and $\mathcal A$ node/edge attributes.
 
 A candidate correspondence is:
 
-\[
+$$
 h=(u,v,\tau,\kappa),\quad u\in V_A,\;v\in V_B,
-\]
+$$
 
-where \(\tau\) is a hypothesis type (e.g. `same_concept`, `functional_analogue`, `possible_record_link`, `related_but_distinct`) and \(\kappa\) is a versioned interpretation context.
+where $\tau$ is a hypothesis type (e.g. `same_concept`, `functional_analogue`, `possible_record_link`, `related_but_distinct`) and $\kappa$ is a versioned interpretation context.
 
 The goal is not always to find a bijection. Depending on the task, a valid matching can be one-to-one, one-to-many, many-to-many, partial, or explicitly unresolved.
 
-Define a hypothesis set \(H\) and its evidence \(E_H\). A constrained optimization profile may seek:
+Define a hypothesis set $H$ and its evidence $E_H$. A constrained optimization profile may seek:
 
-\[
+$$
 \max_H U(H;M_v,E_H)
 \quad\text{subject to}\quad C_v(H)=\mathrm{PASS},
-\]
+$$
 
-where \(M_v\) is a versioned scoring model and \(C_v\) is the applicable hard-constraint bundle.
+where $M_v$ is a versioned scoring model and $C_v$ is the applicable hard-constraint bundle.
 
-A high value of \(U\) does not prove identity, correctness, or causality. The decision policy must declare what a selected correspondence actually means.
+A high value of $U$ does not prove identity, correctness, or causality. The decision policy must declare what a selected correspondence actually means.
 
 ### 3.1 Three distinct outputs
 
@@ -150,12 +150,12 @@ The primary scientific conclusions SHOULD be based on P1–P3. P4 is an addition
 
 ## 6. Synthetic Benchmark Generation
 
-A reproducible benchmark starts with a latent graph \(G^\star\) and creates two observed views.
+A reproducible benchmark starts with a latent graph $G^\star$ and creates two observed views.
 
-\[
+$$
 G_A=T_A(G^\star,\epsilon_A),\qquad
 G_B=T_B(G^\star,\epsilon_B).
-\]
+$$
 
 Transformations may include:
 
@@ -191,13 +191,13 @@ The benchmark generator retains ground-truth mappings for evaluation. The matchi
 
 Suggested benchmark dimensions:
 
-\[
+$$
 p_{\mathrm{attr\_missing}}\in\{0,0.2,0.5,0.8\},
-\]
+$$
 
-\[
+$$
 p_{\mathrm{edge\_noise}}\in\{0,0.1,0.3\},
-\]
+$$
 
 with varying overlap ratios, node counts, relation types, and distractor prevalence.
 
@@ -207,20 +207,20 @@ These are proposed experiment settings, not measured results. A practical study 
 
 The logical DSM State Container includes:
 
-\[
+$$
 S_t=(G_A^v,G_B^v,H_t,E_t,C_v,M_v,P_v,B_t,\Gamma_t).
-\]
+$$
 
 Here:
 
-- \(G_A^v,G_B^v\): versioned graph snapshots;
-- \(H_t\): current hypothesis portfolio;
-- \(E_t\): evidence ledger and uncertainty;
-- \(C_v\): hard-constraint bundle;
-- \(M_v\): metric/scoring version;
-- \(P_v\): branch and validation policy version;
-- \(B_t\): remaining budget;
-- \(\Gamma_t\): path, provenance, and governance context.
+- $G_A^v,G_B^v$: versioned graph snapshots;
+- $H_t$: current hypothesis portfolio;
+- $E_t$: evidence ledger and uncertainty;
+- $C_v$: hard-constraint bundle;
+- $M_v$: metric/scoring version;
+- $P_v$: branch and validation policy version;
+- $B_t$: remaining budget;
+- $\Gamma_t$: path, provenance, and governance context.
 
 The actual storage MAY use immutable references to large graph and evidence objects.
 
@@ -391,18 +391,18 @@ Scale is structural, not necessarily Euclidean. A cross-cluster probe can be lon
 
 ### 11.3 Candidate generation limits
 
-A generator MUST declare whether it enumerates all admissible correspondences or samples a subset. A heuristic top-\(k\) generator cannot claim exhaustive coverage without a valid proof.
+A generator MUST declare whether it enumerates all admissible correspondences or samples a subset. A heuristic top-$k$ generator cannot claim exhaustive coverage without a valid proof.
 
 ## 12. Adaptive M-to-N Branching
 
 For each generation invocation, distinguish:
 
-\[
+$$
 M=\#\text{proposals},\quad
 Q=\#\text{attempts},\quad
 N=\#\text{realized edges},\quad
 K=\#\text{unique successors}.
-\]
+$$
 
 An invocation might generate 20 hypotheses, select 8 for evidence checking, commit 3 valid changes, defer 3, and reject 2. These are illustrative counts only.
 
@@ -459,13 +459,13 @@ No-repeat Delta decisions do not guarantee the absence of state cycles. Converse
 
 A candidate score may combine several factors:
 
-\[
+$$
 s(h)=w_a s_{\rm attr}(h)
 +w_r s_{\rm relation}(h)
 +w_t s_{\rm topology}(h)
 +w_c s_{\rm context}(h)
 -w_x p_{\rm conflict}(h).
-\]
+$$
 
 This is an illustrative scalarization. It is not necessarily a calibrated probability.
 
@@ -605,10 +605,10 @@ Baselines must receive comparable information, training data, query budgets, and
 
 For a declared matching relation:
 
-\[
+$$
 \mathrm{Precision}=\frac{TP}{TP+FP},\qquad
 \mathrm{Recall}=\frac{TP}{TP+FN}.
-\]
+$$
 
 Define the zero-denominator policy before evaluation. Report micro and macro metrics where appropriate.
 
@@ -811,7 +811,7 @@ The appropriate claim type matters. A system that forces every pair into `same_c
 
 ## 24. Worked Example B — Dynamic Graph Revision
 
-At time \(t_0\), node \(a\) appears to correspond to node \(b_1\) based on labels. At \(t_1\), a new relation reveals that \(b_1\) has an incompatible role, while \(b_2\) has the expected neighborhood.
+At time $t_0$, node $a$ appears to correspond to node $b_1$ based on labels. At $t_1$, a new relation reveals that $b_1$ has an incompatible role, while $b_2$ has the expected neighborhood.
 
 The system proposes:
 
@@ -1020,9 +1020,9 @@ A complete enumeration of candidate pairs does not guarantee correct decisions w
 
 ## 34. Performance and Complexity Considerations
 
-For two graphs with \(|V_A|=n\) and \(|V_B|=m\), the naive pair universe contains \(nm\) candidate correspondences before structural combinations are considered.
+For two graphs with $|V_A|=n$ and $|V_B|=m$, the naive pair universe contains $nm$ candidate correspondences before structural combinations are considered.
 
-A top-\(k\) generator can reduce the number evaluated, but may omit true matches. Relational consistency may require global optimization with substantially higher cost. A multi-agent approach can add independent evidence but also introduce coordination overhead.
+A top-$k$ generator can reduce the number evaluated, but may omit true matches. Relational consistency may require global optimization with substantially higher cost. A multi-agent approach can add independent evidence but also introduce coordination overhead.
 
 The benchmark SHOULD measure:
 
@@ -1148,7 +1148,7 @@ Success on synthetic graph alignment does not establish reliable real-world iden
 
 Likewise, the ability to represent a matching hypothesis does not imply that the generator will discover it, that the evidence will distinguish it, that the solver will select it, or that the result will be efficient.
 
-\[
+$$
 \boxed{
 \text{Representability}
 \neq
@@ -1158,7 +1158,7 @@ Likewise, the ability to represent a matching hypothesis does not imply that the
 \neq
 \text{Reliable Attribution}
 }
-\]
+$$
 
 The case's strongest contribution may be a disciplined representation of uncertainty and revision, not necessarily a higher headline F1 score.
 
@@ -1189,7 +1189,7 @@ Dynamic Structural Matching provides a useful third CDE case because it introduc
 
 The proposed cycle is:
 
-\[
+$$
 \boxed{
 \text{Propose Correspondence}
 \rightarrow
@@ -1203,7 +1203,7 @@ The proposed cycle is:
 \rightarrow
 \text{Relay Evidence and Leftovers}
 }
-\]
+$$
 
 Its value lies in making uncertainty, decision scope, revision history, and validation explicit. Strong evidence can justify a task-specific correspondence; weak evidence can justify further investigation; missing evidence should remain missing; and an unsupported identity claim should not be manufactured from a similarity score.
 
