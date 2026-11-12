@@ -1022,7 +1022,7 @@ A complete enumeration of candidate pairs does not guarantee correct decisions w
 
 For two graphs with $|V_A|=n$ and $|V_B|=m$, the naive pair universe contains $nm$ candidate correspondences before structural combinations are considered.
 
-A top-$k$ generator can reduce the number evaluated, but may omit true matches. Relational consistency may require global optimization with substantially higher cost. A multi-agent approach can add independent evidence but also introduce coordination overhead.
+A top-k generator can reduce the number evaluated, but may omit true matches. Relational consistency may require global optimization with substantially higher cost. A multi-agent approach can add independent evidence but also introduce coordination overhead.
 
 The benchmark SHOULD measure:
 
