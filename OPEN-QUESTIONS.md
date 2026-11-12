@@ -14,12 +14,12 @@ This register turns the 27 CDE research papers—12 foundations, six specificati
 
 The central model is a versioned exploration problem
 
-\[
+$$
 \mathcal P_v=(S_v,\Delta_v,T_v,C_v,G_v,L_v),\qquad
 s_{t+1}=T_v(s_t,\delta_t),\quad \delta_t\in G_v(s_t),
-\]
+$$
 
-with hard constraints \(C_v\), explicit path/evidence context \(L_v\), and optional versioned metric, solver, and governance contracts. A candidate Delta is not a valid transition until its applicable constraints and commit rules have been checked.
+with hard constraints $C_v$, explicit path/evidence context $L_v$, and optional versioned metric, solver, and governance contracts. A candidate Delta is not a valid transition until its applicable constraints and commit rules have been checked.
 
 **Important distinctions:** representability is not generability; generability is not budgeted reachability; reachability is not completeness; completeness is not optimality; optimization under a metric is not proof of metric quality; information sharing is not validated collective learning.
 
@@ -82,13 +82,13 @@ Question states should be tracked as `OPEN`, `IN_PROGRESS`, `PARTIALLY_ANSWERED`
 ### OQ-007 — When does adaptive branching beat fixed branching? [P0]
 
 **Challenge.** Distinguish genuine efficiency gains from differences in evaluation budget, operator diversity, or stopping policy.  
-**Test.** Compare fixed \(Q\), adaptive \(Q\), and equal-cost random selection across multiple landscapes and seeds.  
+**Test.** Compare fixed $Q$, adaptive $Q$, and equal-cost random selection across multiple landscapes and seeds.  
 **Failure signal.** The adaptive method wins only when allocated more objective evaluations.  
 **References.** CDE-003; SPEC-002; CASE-001.
 
 ### OQ-008 — Which branching counts are necessary for honest reporting? [P0]
 
-**Challenge.** Distinguish \(M\) proposals, \(Q\) attempts, \(N\) realized edges, \(N_c\) committed edges, and \(K\) unique successors.  
+**Challenge.** Distinguish $M$ proposals, $Q$ attempts, $N$ realized edges, $N_c$ committed edges, and $K$ unique successors.  
 **Test.** Use duplicates, invalid transitions, retries, and convergent paths; reconcile each ledger.  
 **Failure signal.** Duplicate successors or failed attempts are counted as new explored states.  
 **References.** CDE-003; SPEC-002; CASE-005.

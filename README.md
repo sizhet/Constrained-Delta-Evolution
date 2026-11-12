@@ -36,21 +36,21 @@ This is a **research architecture and integration proposal**, not a claim that s
 
 A simplified CDE problem can be written as:
 
-\[
+$$
 \mathcal P=(S,\Delta,T,C,G,L),
 \qquad s_{t+1}=T(s_t,\delta_t),\quad \delta_t\in G(s_t).
-\]
+$$
 
 Here:
 
 | Symbol | Role |
 |---|---|
-| \(S\) | Typed, versioned State Container and state space |
-| \(\Delta\) | Delta definitions and instantiated proposed changes |
-| \(T\) | Transition interpretation and commit semantics |
-| \(C\) | Hard constraints and separately identified soft preferences |
-| \(G\) | Delta generator and candidate selection mechanisms |
-| \(L\) | Path memory, evidence, provenance, and lineage |
+| $S$ | Typed, versioned State Container and state space |
+| $\Delta$ | Delta definitions and instantiated proposed changes |
+| $T$ | Transition interpretation and commit semantics |
+| $C$ | Hard constraints and separately identified soft preferences |
+| $G$ | Delta generator and candidate selection mechanisms |
+| $L$ | Path memory, evidence, provenance, and lineage |
 
 A transition is **committed** only after the applicable hard-constraint contract is satisfied. `UNKNOWN` or `ERROR` is not equivalent to `PASS`. A high heuristic score is not a feasibility proof.
 

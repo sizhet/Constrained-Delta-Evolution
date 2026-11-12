@@ -27,19 +27,19 @@ The suggested order is not mandatory. Independent researchers may pursue specifi
 
 For a fixed versioned task context, write
 
-\[
+$$
 \mathcal{P}_v=(S_v,\Delta_v,T_v,C_v,G_v,L_v,M_v),
 \qquad s_{t+1}=T_v(s_t,\delta_t),\quad \delta_t\in G_v(s_t).
-\]
+$$
 
-Here, \(S_v\) is the state space, \(\Delta_v\) the typed Delta universe, \(T_v\) the transition semantics, \(C_v\) the hard-constraint bundle, \(G_v\) the proposal mechanism, \(L_v\) the path and evidence context, and \(M_v\) the metric or preference model. The subscript \(v\) matters: representations, operators, constraints, and metrics may evolve, but old results cannot silently be interpreted under new semantics.
+Here, $S_v$ is the state space, $\Delta_v$ the typed Delta universe, $T_v$ the transition semantics, $C_v$ the hard-constraint bundle, $G_v$ the proposal mechanism, $L_v$ the path and evidence context, and $M_v$ the metric or preference model. The subscript $v$ matters: representations, operators, constraints, and metrics may evolve, but old results cannot silently be interpreted under new semantics.
 
 A useful implementation must distinguish **proposed** from **attempted**, **realized** from **committed**, and **unique** from **duplicate** successors. At minimum, maintain the ledger:
 
-\[
+$$
 M=\text{proposals},\quad Q=\text{attempts},\quad N=\text{realized edges},
 \quad N_c=\text{committed edges},\quad K=\text{unique successors}.
-\]
+$$
 
 The counts refer to one declared scope and version. Do not silently equate them or use a global count to describe a local search branch.
 
@@ -87,7 +87,7 @@ Compare fixed branching, uncertainty-aware branching, diversity-aware branching,
 
 A critical negative control is a task where simple fixed branching already covers the relevant neighborhood. In that setting, adaptive policies may add complexity without benefit.
 
-**Research questions:** Can branching allocation be learned without leaking held-out task information? Does increasing proposal diversity improve exploration after deduplication? When does larger \(M\) merely inflate duplicate candidates? Which adaptive policies remain robust when directional evidence is misleading?
+**Research questions:** Can branching allocation be learned without leaking held-out task information? Does increasing proposal diversity improve exploration after deduplication? When does larger $M$ merely inflate duplicate candidates? Which adaptive policies remain robust when directional evidence is misleading?
 
 ## 5. Research Track C — Path Memory, NoSubtree, and Loop Back
 
@@ -283,7 +283,7 @@ Benchmarks should be published with seeds, task generation code, split definitio
 The following controls are especially important because CDE spans multiple optimization and intelligence claims:
 
 - **NC-01:** A simple baseline already solves the task optimally.
-- **NC-02:** Extra proposals increase \(M\) but not distinct successors \(K\).
+- **NC-02:** Extra proposals increase $M$ but not distinct successors $K$.
 - **NC-03:** Directional evidence points away from the best region.
 - **NC-04:** Heuristic rejection is mislabeled as infeasibility proof.
 - **NC-05:** A coarse state equivalence merges states with different futures.
@@ -333,7 +333,7 @@ Every empirical study should declare its primary endpoint before inspecting fina
 1. task instances, generation method, and train/development/test separation;
 2. hardware, software, solver versions, random seeds, and runtime limits;
 3. state, operator, constraint, metric, generator, and policy versions;
-4. \(M,Q,N,N_c,K\) and duplicate rates under a declared scope;
+4. $M,Q,N,N_c,K$ and duplicate rates under a declared scope;
 5. total compute, wall time, memory, and coordination/validation overhead;
 6. feasibility, best-known objective, bounds, and certificate status;
 7. uncertainty estimates across independent instances and seeds;

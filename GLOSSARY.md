@@ -540,40 +540,40 @@ For the formal specification series, see [SPEC-001](docs/specifications/SPEC-001
 
 | Symbol | Meaning | Important qualification |
 |---|---|---|
-| \(\mathcal P\) | Declared problem | Includes scope, versions, and assumptions |
-| \(S\), \(s\) | State space; state instance | Representation-dependent |
-| \(\Delta\), \(\delta\) | Delta family; Delta instance | Not necessarily a committed edge |
-| \(T(s,\delta)\) | Proposed transition | Must be constraint-checked |
-| \(C(s)\) | Constraint evaluation | `UNKNOWN` is not `PASS` |
-| \(G(s)\) | Delta generator | Proposal does not imply reachability |
-| \(L\) | Path/lineage context | Version and scope dependent |
-| \(M\) | Proposed Delta instances | Counts proposals |
-| \(Q\) | Selected attempts | Counts attempted evaluations |
-| \(N\) | Realized transition edges | May include convergent successors |
-| \(N_c\) | Committed transition edges | Must pass applicable validation |
-| \(K\) | Unique successor states | Requires stated equivalence policy |
-| \(D\) | Distinct Delta definitions | Different from Delta instances |
-| \(A\) | Accepted constructive decisions | Path-local |
-| \(R\) | Excluded constructive decisions | Path-local; not a global proof |
-| \(U=A\cup R\) | Resolved constructive decisions | Assumes fixed decision universe |
-| \(\mathcal R_v\) | Representation version | Migration may invalidate caches |
-| \(\mathcal O_v\) | Operator vocabulary version | Operator changes require revalidation |
-| \(m_v\) | Metric version | Cross-version scores may not compare |
-| \(x\) | Candidate solution | Distinct from a metric or policy |
+| $\mathcal P$ | Declared problem | Includes scope, versions, and assumptions |
+| $S$, $s$ | State space; state instance | Representation-dependent |
+| $\Delta$, $\delta$ | Delta family; Delta instance | Not necessarily a committed edge |
+| $T(s,\delta)$ | Proposed transition | Must be constraint-checked |
+| $C(s)$ | Constraint evaluation | `UNKNOWN` is not `PASS` |
+| $G(s)$ | Delta generator | Proposal does not imply reachability |
+| $L$ | Path/lineage context | Version and scope dependent |
+| $M$ | Proposed Delta instances | Counts proposals |
+| $Q$ | Selected attempts | Counts attempted evaluations |
+| $N$ | Realized transition edges | May include convergent successors |
+| $N_c$ | Committed transition edges | Must pass applicable validation |
+| $K$ | Unique successor states | Requires stated equivalence policy |
+| $D$ | Distinct Delta definitions | Different from Delta instances |
+| $A$ | Accepted constructive decisions | Path-local |
+| $R$ | Excluded constructive decisions | Path-local; not a global proof |
+| $U=A\cup R$ | Resolved constructive decisions | Assumes fixed decision universe |
+| $\mathcal R_v$ | Representation version | Migration may invalidate caches |
+| $\mathcal O_v$ | Operator vocabulary version | Operator changes require revalidation |
+| $m_v$ | Metric version | Cross-version scores may not compare |
+| $x$ | Candidate solution | Distinct from a metric or policy |
 
 A basic task-state transition is:
 
-\[
+$$
 \mathcal P=(S,\Delta,T,C,G,L),\qquad
 s_{t+1}=T(s_t,\delta_t),\quad \delta_t\in G(s_t).
-\]
+$$
 
 A generated successor becomes committed only if all required checks pass under coherent versions. A representation/operator meta-transition is a separate, governed candidate:
 
-\[
+$$
 (\mathcal R_{v+1},\mathcal O_{v+1})
 =\mathcal E(\mathcal R_v,\mathcal O_v,\mu_v).
-\]
+$$
 
 The expression describes a proposed change; it does not authorize deployment.
 

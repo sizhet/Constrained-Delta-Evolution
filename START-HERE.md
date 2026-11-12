@@ -38,10 +38,10 @@ If you are interested in **AI, multi-agent learning, and RSI**, read [`CDE-009`]
 
 A CDE task can be described by:
 
-\[
+$$
 \mathcal P=(S,\Delta,T,C,G,L),
 \qquad s_{t+1}=T(s_t,\delta_t),\quad\delta_t\in G(s_t).
-\]
+$$
 
 | Element | Meaning | Questions to ask |
 |---|---|---|
@@ -122,9 +122,9 @@ Changing a generator, policy, metric, or representation is a candidate intervent
 
 A useful summary is:
 
-\[
+$$
 \boxed{\text{Representability}\ne\text{Reachability}\ne\text{Completeness}\ne\text{Optimality}\ne\text{Validated Generalization}}
-\]
+$$
 
 For explicit guarantee boundaries, read [`CDE-012`](docs/foundations/CDE-012-Generalization-Boundaries-Guarantees-and-Open-Research.md).
 

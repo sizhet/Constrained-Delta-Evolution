@@ -17,7 +17,7 @@ This document turns the 54 questions in `OPEN-QUESTIONS.md` into an indexed, fal
 
 For a pinned version of a task, CDE describes a state and transition system:
 
-\[\mathcal P_v=(S_v,\Delta_v,T_v,C_v,G_v,L_v),\qquad s_{t+1}=T_v(s_t,\delta_t),\quad\delta_t\in G_v(s_t).\]
+$$\mathcal P_v=(S_v,\Delta_v,T_v,C_v,G_v,L_v),\qquad s_{t+1}=T_v(s_t,\delta_t),\quad\delta_t\in G_v(s_t).$$
 
 Hard constraints are validated independently of directional/soft scores. Adaptive branching must distinguish **M** proposals, **Q** attempted candidates, **N** realized edges, **N_c** committed edges, and **K** distinct successor states. Every claim is relative to pinned state, operator, constraint, metric, solver, and validation versions. A locally successful candidate is not necessarily globally feasible; a higher internal score is not proof of a better metric; sharing an artifact is not proof of collective learning.
 

@@ -37,7 +37,7 @@ A statement such as “CDE can express a branch-and-bound solver” is architect
 
 For a pinned task version, define
 
-\[\mathcal P_v=(S_v,\Delta_v,T_v,C_v,G_v,L_v),\qquad s_{t+1}=T_v(s_t,\delta_t),\quad \delta_t\in G_v(s_t).\]
+$$\mathcal P_v=(S_v,\Delta_v,T_v,C_v,G_v,L_v),\qquad s_{t+1}=T_v(s_t,\delta_t),\quad \delta_t\in G_v(s_t).$$
 
 Hard constraints govern state commits; soft scores and directional fields prioritize proposals but cannot certify feasibility. In any exploration scope distinguish **M** proposed Delta instances, **Q** attempted candidates, **N** realized edges, **N_c** committed edges, and **K** distinct successor states. Track Delta definitions **D** separately from Delta instances, and distinguish search depth from count of distinct decisions. All reported rates must declare numerator, denominator, deduplication scope, and whether aborted/retried attempts are included.
 
