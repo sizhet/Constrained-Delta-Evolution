@@ -622,16 +622,11 @@ A method that generates more candidates may find better solutions simply because
 A credible experiment should account for:
 
 $$
-B_{\rm total}
-=
-B_{\rm proposal}
-+
-B_{\rm task\ search}
-+
-B_{\rm evaluation}
-+
-B_{\rm validation}
-+
+B_{\rm total} =
+B_{\rm proposal} +
+B_{\rm task\ search} +
+B_{\rm evaluation} +
+B_{\rm validation} +
 B_{\rm coordination}.
 $$
 
@@ -873,16 +868,11 @@ Recursive evolution is valuable only if its benefits exceed its costs under the 
 Let:
 
 $$
-C_{\rm meta}
-=
-C_{\rm proposal}
-+
-C_{\rm sandbox}
-+
-C_{\rm validation}
-+
-C_{\rm deployment}
-+
+C_{\rm meta} =
+C_{\rm proposal} +
+C_{\rm sandbox} +
+C_{\rm validation} +
+C_{\rm deployment} +
 C_{\rm monitoring}.
 $$
 
