@@ -21,7 +21,7 @@ The paper formalizes individual and population State Containers, typed mutation/
 
 ---
 
-![Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
+![Fig-004-Adaptive-M-to-N-Delta-Branching.png](../../figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png)
 
 *Figure 4. Adaptive Delta branching distinguishes M proposals, Q selected attempts, N realized transition edges, N_c committed edges, and K distinct successor states. Deduplication, invalid attempts, and uncommitted edges prevent these counts from being treated as interchangeable.*
 
@@ -85,15 +85,15 @@ These are **design metaphors**, not claims that the biological process has been 
 
 ## 5. Formal Population Model
 
-Let the population at logical epoch \(t\) be
+Let the population at logical epoch $t$ be
 
-\[
+$$
 \mathcal P_t=\{(S_i,\theta_i,\pi_i,\gamma_i)\}_{i=1}^{n_t},
-\]
+$$
 
-where \(S_i\) is a versioned State Container, \(\theta_i\) a generator configuration, \(\pi_i\) a selection policy, and \(\gamma_i\) provenance/path context. Population size \(n_t\) may change if the profile permits births, retirement, or migration.
+where $S_i$ is a versioned State Container, $\theta_i$ a generator configuration, $\pi_i$ a selection policy, and $\gamma_i$ provenance/path context. Population size $n_t$ may change if the profile permits births, retirement, or migration.
 
-A typed Delta \(\delta\in G_{\theta_i}(S_i)\) proposes a successor under a hard constraint bundle \(C_v\). A coordinator may select \(Q\) attempts from \(M\) proposals, yielding \(N\) realized edges and \(K\) distinct successors under a declared equivalence contract.
+A typed Delta $\delta\in G_{\theta_i}(S_i)$ proposes a successor under a hard constraint bundle $C_v$. A coordinator may select $Q$ attempts from $M$ proposals, yielding $N$ realized edges and $K$ distinct successors under a declared equivalence contract.
 
 Population fitness is **not automatically** the task's independent utility. Population selection may use heuristic scores; promotion and scientific evaluation must use independently defined criteria.
 
@@ -156,9 +156,9 @@ A mutation that generates an infeasible candidate is a recorded failed proposal,
 
 ## 9. Adaptive M-to-N Population Branching
 
-An epoch may produce many proposals per member, select a subset for expensive validation, and retain only a fraction. Distinguish \(M\) generated proposals, \(D\) distinct Delta definitions, \(Q\) selected attempts, \(N\) realized edges, \(N_c\) committed edges, and \(K\) distinct successor states.
+An epoch may produce many proposals per member, select a subset for expensive validation, and retain only a fraction. Distinguish $M$ generated proposals, $D$ distinct Delta definitions, $Q$ selected attempts, $N$ realized edges, $N_c$ committed edges, and $K$ distinct successor states.
 
-Retries, stochastic environmental outcomes, and multi-parent operations change cardinality relations. No unconditional \(N\le Q\le M\) claim is valid across all profiles. Each generation invocation MUST declare its accounting mode and deduplication semantics.
+Retries, stochastic environmental outcomes, and multi-parent operations change cardinality relations. No unconditional $N\le Q\le M$ claim is valid across all profiles. Each generation invocation MUST declare its accounting mode and deduplication semantics.
 
 An adaptive selector can use improvement, novelty, uncertainty, constraint feasibility estimates, and expected cost. **Heuristic selection is not certified pruning.** Unselected proposals should be recorded as deferred, policy-excluded, or Leftover, not misrepresented as impossible.
 
@@ -170,7 +170,7 @@ The allocation policy may be fixed, bandit-inspired, uncertainty-aware, or budge
 
 ## 11. Directional Fields and Weak Evidence
 
-A directional field \(d(S,E_v)\) maps a state and evidence snapshot to a proposed search direction, neighborhood, or operator preference. It can be learned from recent improvements, surrogate gradients, graph relationships, or validated Relay artifacts.
+A directional field $d(S,E_v)$ maps a state and evidence snapshot to a proposed search direction, neighborhood, or operator preference. It can be learned from recent improvements, surrogate gradients, graph relationships, or validated Relay artifacts.
 
 The field is a **proposal guide**, not an oracle. Its evidence may be weak, correlated, stale, or systematically misleading. The benchmark should compare calibrated, noisy, and adversarial fields, and measure whether the portfolio preserves alternatives despite a strong directional recommendation.
 
@@ -180,7 +180,7 @@ For discrete states, direction may be a ranking over Delta classes or structural
 
 Diversity is useful only relative to a declared descriptor space. A quality-diversity archive might index solutions by cost, structural footprint, novelty, or region. Archive entries should retain feasibility, metric version, descriptor version, provenance, and uncertainty.
 
-An archive cell winner under metric \(m_v\) may not remain a winner under \(m_{v+1}\). A metric change requires re-evaluation or a validated mapping before cross-version replacement. Descriptor drift can invalidate niche assignments.
+An archive cell winner under metric $m_v$ may not remain a winner under $m_{v+1}$. A metric change requires re-evaluation or a validated mapping before cross-version replacement. Descriptor drift can invalidate niche assignments.
 
 Diversity maintenance may be treated as a soft objective or exploration policy; it MUST NOT override hard feasibility. High novelty is not proof of high task utility.
 
@@ -467,7 +467,7 @@ coverage_claim: "partial"
 provenance_ref: "epoch-ledger-014"
 ```
 
-All values are illustrative. Selected, deferred, and excluded proposals partition \(M=160\). Attempt outcomes partition \(Q=64\). `realized_edges_N` depends on the declared event ontology; in this illustrative profile 48 realized edges include 45 committed and 3 realized-but-uncommitted outcomes. This distinction must be encoded in the ledger, not inferred from labels alone.
+All values are illustrative. Selected, deferred, and excluded proposals partition $M=160$. Attempt outcomes partition $Q=64$. `realized_edges_N` depends on the declared event ontology; in this illustrative profile 48 realized edges include 45 committed and 3 realized-but-uncommitted outcomes. This distinction must be encoded in the ledger, not inferred from labels alone.
 
 ## 39. Negative Controls and Failure Injection
 
@@ -663,9 +663,9 @@ Biomimetic and Population-Based CDE offers a way to represent **many competing e
 
 The central proposal is:
 
-\[
+$$
 \boxed{\text{Population Diversity}+\text{Multi-Scale Deltas}+\text{Hard Constraints}+\text{Validated Relay}+\text{Governed Evolution}}
-\]
+$$
 
 This combination is a research architecture, not a universal optimizer. Its merit must be established through budget-matched comparisons, counterexamples, independent validation, and negative-transfer studies. The intended contribution is to make heterogeneous population exploration **auditable, composable, and experimentally falsifiable**.
 

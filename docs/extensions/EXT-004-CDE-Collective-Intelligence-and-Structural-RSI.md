@@ -89,9 +89,9 @@ These are testable hypotheses, not reported results.
 
 The following chain is deliberately non-equivalent:
 
-\[
+$$
 \boxed{\text{Parallel Execution}\ne\text{Coordination}\ne\text{Validated Transfer}\ne\text{Collective Learning}\ne\text{Structural RSI}}.
-\]
+$$
 
 - **Parallel execution** means concurrent work occurs.
 - **Coordination** means work is allocated and reconciled coherently.
@@ -103,25 +103,25 @@ A single project can exhibit some properties without the others.
 
 ## 5. Formal Model
 
-Let the collective system at logical epoch \(t\) be:
+Let the collective system at logical epoch $t$ be:
 
-\[
+$$
 \mathcal C_t=(\mathcal A_t,\mathcal T_t,\mathcal R_t,\mathcal K_t,\mathcal P_t,\mathcal V_t,\mathcal G_t),
-\]
+$$
 
-where \(\mathcal A\) is the set of agents/solvers, \(\mathcal T\) task portfolio, \(\mathcal R\) versioned Relay registry, \(\mathcal K\) validated capability registry, \(\mathcal P\) coordination and exploration policies, \(\mathcal V\) independent validation apparatus, and \(\mathcal G\) governance constraints.
+where $\mathcal A$ is the set of agents/solvers, $\mathcal T$ task portfolio, $\mathcal R$ versioned Relay registry, $\mathcal K$ validated capability registry, $\mathcal P$ coordination and exploration policies, $\mathcal V$ independent validation apparatus, and $\mathcal G$ governance constraints.
 
-For task \(i\), an agent explores a state under pinned task versions:
+For task $i$, an agent explores a state under pinned task versions:
 
-\[
+$$
 s_{i,k+1}=T_{i,v}(s_{i,k},\delta_{i,k}),\quad \delta_{i,k}\in G_{i,v}(s_{i,k}),
-\]
+$$
 
-subject to \(C_{i,v}(s_{i,k+1})=\mathrm{PASS}\) before commitment. A candidate collective update \(\mu_t\) proposes:
+subject to $C_{i,v}(s_{i,k+1})=\mathrm{PASS}$ before commitment. A candidate collective update $\mu_t$ proposes:
 
-\[
+$$
 \widetilde{\mathcal C}_{t+1}=E(\mathcal C_t,\mu_t).
-\]
+$$
 
 The tilde denotes a **sandbox candidate**. It becomes an authorized successor only after the independent promotion contract succeeds. No general monotonicity follows from these equations.
 
@@ -256,7 +256,7 @@ A method's portability depends on matching these conditions. Reusing a function 
 
 Evidence from different agents may be highly correlated because they share data, initial states, models, random seeds, or upstream assumptions. A relay system SHOULD record dependency provenance and avoid treating repeated dependent claims as independent confirmations.
 
-For a set of evidence events \(e_1,\ldots,e_n\), the system may estimate uncertainty with an appropriate dependence model; it MUST NOT assume \(n\) independent trials solely because there are \(n\) agents. When independence cannot be established, the report should preserve that uncertainty.
+For a set of evidence events $e_1,\ldots,e_n$, the system may estimate uncertainty with an appropriate dependence model; it MUST NOT assume $n$ independent trials solely because there are $n$ agents. When independence cannot be established, the report should preserve that uncertainty.
 
 **Negative evidence** is particularly valuable: failed transfer, contradictory outcomes, and rejected methods can constrain future exploration. Negative evidence must also be scoped; one failed context does not establish global impossibility.
 
@@ -284,15 +284,15 @@ Repetition is not automatically informative. Exact duplicate work with no new in
 
 ## 15. Collective Learning Criterion
 
-Define a task distribution \(D\), a baseline system \(\mathcal C_0\), and a candidate collective system \(\mathcal C_1\). Let \(U\) denote an independently specified task outcome and \(K\) total cost. A possible comparison is:
+Define a task distribution $D$, a baseline system $\mathcal C_0$, and a candidate collective system $\mathcal C_1$. Let $U$ denote an independently specified task outcome and $K$ total cost. A possible comparison is:
 
-\[
+$$
 \Delta U_D = \mathbb E_{\tau\sim D}[U(\mathcal C_1,\tau)-U(\mathcal C_0,\tau)],
-\]
+$$
 
-with corresponding \(\Delta K_D\) and uncertainty intervals. A collective learning claim requires evidence that previously acquired shared artifacts improve **future, held-out tasks**, not just the tasks that produced those artifacts.
+with corresponding $\Delta K_D$ and uncertainty intervals. A collective learning claim requires evidence that previously acquired shared artifacts improve **future, held-out tasks**, not just the tasks that produced those artifacts.
 
-A cost-adjusted evaluation may use a preregistered utility function \(J(U,K)\), but the choice of weights or constraints must be authorized and versioned. A positive \(\Delta U_D\) does not automatically justify unlimited coordination cost.
+A cost-adjusted evaluation may use a preregistered utility function $J(U,K)$, but the choice of weights or constraints must be authorized and versioned. A positive $\Delta U_D$ does not automatically justify unlimited coordination cost.
 
 ## 16. The Collective Intelligence Frontier
 
@@ -300,11 +300,11 @@ The system may occupy different points on a frontier of solution quality, covera
 
 A multiobjective evaluation can report:
 
-\[
+$$
 \mathbf J(\mathcal C)=
 (Q_{\mathrm{heldout}},R_{\mathrm{transfer}},C_{\mathrm{coverage}},
 -L_{\mathrm{latency}},-K_{\mathrm{cost}},-F_{\mathrm{failure}}).
-\]
+$$
 
 The interpretation of each component and the selection rule must be explicit. Pareto superiority on a declared benchmark is not universal superiority.
 
@@ -312,10 +312,10 @@ The interpretation of each component and the selection rule must be explicit. Pa
 
 CDE retains the distinction among:
 
-- \(M\): generated Delta proposals;
-- \(Q\): selected attempts;
-- \(N\): realized transition/evaluation outcomes;
-- \(K\): distinct successors.
+- $M$: generated Delta proposals;
+- $Q$: selected attempts;
+- $N$: realized transition/evaluation outcomes;
+- $K$: distinct successors.
 
 For collective systems, these counts exist at separate scopes:
 
@@ -1136,7 +1136,7 @@ These interfaces are proposed architectural correspondences, not proven interope
 
 The following implications are invalid without additional evidence:
 
-\[
+$$
 \begin{aligned}
 \text{More Agents} &\not\Rightarrow \text{More Intelligence},\\
 \text{More Relay} &\not\Rightarrow \text{Better Transfer},\\
@@ -1145,7 +1145,7 @@ The following implications are invalid without additional evidence:
 \text{Local Gain} &\not\Rightarrow \text{Global Gain},\\
 \text{Finite RSI Success} &\not\Rightarrow \text{Open-Ended RSI or AGI}.
 \end{aligned}
-\]
+$$
 
 The architecture may help organize and test hypotheses about collective intelligence. It does not establish a universal law of intelligence growth, guarantee safe autonomous self-modification, or demonstrate AGI.
 
@@ -1178,7 +1178,7 @@ The proposed Collective CDE–Structural RSI architecture treats intelligence gr
 
 The essential cycle is:
 
-\[
+$$
 \boxed{
 \begin{gathered}
 \text{Explore Tasks and Preserve Leftovers}\\
@@ -1195,7 +1195,7 @@ The essential cycle is:
 \downarrow\\
 \text{Independently Evaluate, Authorize, Monitor, or Roll Back}
 \end{gathered}}
-\]
+$$
 
 The decisive distinction is not whether a system changes itself, but whether the change produces **independently validated, appropriately scoped improvements**. In that sense, Structural Relay provides a possible mechanism for collective accumulation, while CDE provides a disciplined exploration and control framework. Their integration is a substantial research hypothesis, not an already established outcome.
 

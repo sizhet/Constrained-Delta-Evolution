@@ -119,61 +119,61 @@ All hypotheses are proposed for testing; none is an observed result.
 
 Let a task be represented by:
 
-\[
+$$
 \mathcal P_v=(S_{\mathcal R_v},\Delta_{\mathcal O_v},T_v,C_v,M_v,G_v,L_v),
-\]
+$$
 
 where:
 
-- \(\mathcal R_v\) is the versioned State Representation;
-- \(S_{\mathcal R_v}\) is the state space expressible under that representation;
-- \(\mathcal O_v\) is the versioned Delta operator vocabulary;
-- \(\Delta_{\mathcal O_v}\) is the set of typed Delta instances;
-- \(T_v\) is the transition interpretation;
-- \(C_v\) is the hard-constraint bundle;
-- \(M_v\) is the scoring/metric contract;
-- \(G_v\) is the proposal generator;
-- \(L_v\) is the path, evidence, and lineage context.
+- $\mathcal R_v$ is the versioned State Representation;
+- $S_{\mathcal R_v}$ is the state space expressible under that representation;
+- $\mathcal O_v$ is the versioned Delta operator vocabulary;
+- $\Delta_{\mathcal O_v}$ is the set of typed Delta instances;
+- $T_v$ is the transition interpretation;
+- $C_v$ is the hard-constraint bundle;
+- $M_v$ is the scoring/metric contract;
+- $G_v$ is the proposal generator;
+- $L_v$ is the path, evidence, and lineage context.
 
 Ordinary CDE exploration uses:
 
-\[
+$$
 s_{t+1}=T_v(s_t,\delta_t),\quad \delta_t\in G_v(s_t).
-\]
+$$
 
 Open-ended evolution introduces a slower meta-transition:
 
-\[
+$$
 (\mathcal R_{v+1},\mathcal O_{v+1},T_{v+1})
 =
 \mathcal E(
 \mathcal R_v,\mathcal O_v,T_v,\mu_v
 ),
-\]
+$$
 
-where \(\mu_v\) is a typed, governed meta-Delta. This equation describes a candidate transformation, **not automatic activation**.
+where $\mu_v$ is a typed, governed meta-Delta. This equation describes a candidate transformation, **not automatic activation**.
 
 ### 5.1 Three forms of reachability
 
 Define:
 
-- **Representable:** a target solution can be encoded in \(S_{\mathcal R}\).
+- **Representable:** a target solution can be encoded in $S_{\mathcal R}$.
 - **Generable:** a valid sequence of available Delta operators can propose it.
 - **Discoverable under budget:** the search policy can find and validate it within a specified resource limit.
 
 These are different predicates:
 
-\[
+$$
 \text{Representable}\not\Rightarrow
 \text{Generable}\not\Rightarrow
 \text{Discoverable within budget}.
-\]
+$$
 
 Even if a solution is generable, the system may never select the necessary sequence.
 
 ### 5.2 Representation-relative completeness
 
-A search can be exhaustive only relative to a declared finite or otherwise well-defined candidate universe and a sound traversal policy. When \(\mathcal R\) or \(\mathcal O\) changes, previous coverage claims MUST be reconsidered.
+A search can be exhaustive only relative to a declared finite or otherwise well-defined candidate universe and a sound traversal policy. When $\mathcal R$ or $\mathcal O$ changes, previous coverage claims MUST be reconsidered.
 
 ## 6. Four-Layer Evolution Architecture
 
@@ -316,14 +316,14 @@ Representation changes fall into two broad categories.
 
 ### 11.1 Semantic interpretation maps
 
-Let \(\llbracket s\rrbracket_{\mathcal R}\) denote the domain meaning of a represented state. A migration map \(F:\mathcal R_a\to\mathcal R_b\) is semantics-preserving for a declared observable set \(\mathcal O\) if:
+Let $\llbracket s\rrbracket_{\mathcal R}$ denote the domain meaning of a represented state. A migration map $F:\mathcal R_a\to\mathcal R_b$ is semantics-preserving for a declared observable set $\mathcal O$ if:
 
-\[
+$$
 \forall s\in D_F,\quad
 \mathrm{obs}_{\mathcal O}(\llbracket s\rrbracket_{\mathcal R_a})
 =
 \mathrm{obs}_{\mathcal O}(\llbracket F(s)\rrbracket_{\mathcal R_b}).
-\]
+$$
 
 The equality is relative to specified observables and assumptions, not a universal assertion of semantic equivalence.
 
@@ -450,9 +450,9 @@ A syntactically novel operator may be semantically redundant. A meaningful innov
 
 ## 15. Novelty, Utility, and Risk Metrics
 
-A candidate representation or operator \(z\) may be evaluated through a vector:
+A candidate representation or operator $z$ may be evaluated through a vector:
 
-\[
+$$
 \mathbf J(z)=
 \left(
 N_{\mathrm{semantic}},
@@ -461,7 +461,7 @@ C_{\mathrm{compute}},
 R_{\mathrm{risk}},
 G_{\mathrm{transfer}}
 \right).
-\]
+$$
 
 Here novelty, held-out utility, compute cost, risk, and transferability are distinct dimensions. A single scalar score may be convenient but requires an explicit perspective and weighting policy.
 
@@ -487,11 +487,11 @@ Preserve a portfolio of distinct candidate representations rather than premature
 
 ## 16. Adaptive M-to-N Meta-Branching
 
-At the meta-level, \(M\) candidate operator/representation Deltas are proposed, \(Q\) validation attempts are selected, \(N\) candidate artifacts are realized, and \(K\) distinct successor configurations are obtained.
+At the meta-level, $M$ candidate operator/representation Deltas are proposed, $Q$ validation attempts are selected, $N$ candidate artifacts are realized, and $K$ distinct successor configurations are obtained.
 
-\[
+$$
 M \to Q \to N \to K.
-\]
+$$
 
 These counts MUST remain separate from inner-loop task-state branching. A system should maintain two ledgers:
 
@@ -1463,7 +1463,7 @@ A persistent unsolved problem may motivate a new capability; a newly available c
 
 The following distinctions are essential:
 
-\[
+$$
 \boxed{
 \begin{aligned}
 \text{New Syntax}
@@ -1473,7 +1473,7 @@ The following distinctions are essential:
 &\neq \text{Generalized Capability}
 \end{aligned}
 }
-\]
+$$
 
 A new operator may be syntactically different but semantically redundant. A representation may add expressive power but increase search cost. A successful benchmark result may not transfer. A validated local improvement does not imply open-ended recursive growth.
 
@@ -1508,7 +1508,7 @@ A search framework that can only select among predefined Deltas remains limited 
 
 The research loop is:
 
-\[
+$$
 \boxed{
 \begin{gathered}
 \text{Explore with Current Representation}\\
@@ -1524,7 +1524,7 @@ The research loop is:
 \text{Authorize, Monitor, Roll Back, and Relay}
 \end{gathered}
 }
-\]
+$$
 
 The central engineering discipline is that **new expressive power must not be confused with verified correctness or improved intelligence**. Versioned contracts, counterexamples, independent evaluation, and controlled promotion are necessary precisely because representational evolution can invalidate assumptions that ordinary state search takes for granted.
 

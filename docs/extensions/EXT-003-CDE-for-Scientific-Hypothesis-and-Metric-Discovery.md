@@ -82,11 +82,11 @@ All eight statements are proposed tests, not empirical findings.
 
 Let the versioned scientific exploration state be
 
-\[\mathcal S_t=(\mathcal H_t,\mathcal E_t,\mathcal X_t,\mathcal M_t,\mathcal A_t,\mathcal Q_t,\mathcal P_t,\mathcal B_t,\mathcal L_t).\]
+$$\mathcal S_t=(\mathcal H_t,\mathcal E_t,\mathcal X_t,\mathcal M_t,\mathcal A_t,\mathcal Q_t,\mathcal P_t,\mathcal B_t,\mathcal L_t).$$
 
-Here \(\mathcal H\) denotes hypothesis portfolio, \(\mathcal E\) evidence ledger, \(\mathcal X\) experiment designs and outcomes, \(\mathcal M\) measurement/metric contracts, \(\mathcal A\) assumptions and causal models, \(\mathcal Q\) open questions, \(\mathcal P\) policies and authorization, \(\mathcal B\) budgets, and \(\mathcal L\) lineage/path memory.
+Here $\mathcal H$ denotes hypothesis portfolio, $\mathcal E$ evidence ledger, $\mathcal X$ experiment designs and outcomes, $\mathcal M$ measurement/metric contracts, $\mathcal A$ assumptions and causal models, $\mathcal Q$ open questions, $\mathcal P$ policies and authorization, $\mathcal B$ budgets, and $\mathcal L$ lineage/path memory.
 
-A candidate Delta \(\delta\) produces a proposed state \(T(\mathcal S_t,\delta)\). Only a validated and authorized transition may be committed. The State Container is logical: it may be implemented as a graph, database, notebook, event log, or distributed registry.
+A candidate Delta $\delta$ produces a proposed state $T(\mathcal S_t,\delta)$. Only a validated and authorized transition may be committed. The State Container is logical: it may be implemented as a graph, database, notebook, event log, or distributed registry.
 
 Hypothesis truth is not a mutable boolean chosen by the agent. The state stores **claims, confidence representations, evidence, and decision status**, with explicit uncertainty.
 
@@ -146,9 +146,9 @@ Experiment generation and experiment execution are different authority levels. A
 
 ## 13. Expected Information Gain and Its Limits
 
-For a Bayesian model with hypotheses \(H\), design \(e\), and prospective observation \(Y\), expected information gain may be defined as
+For a Bayesian model with hypotheses $H$, design $e$, and prospective observation $Y$, expected information gain may be defined as
 
-\[\operatorname{EIG}(e)=\mathbb E_{Y\mid e,D}\!\left[\mathrm{KL}\big(p(H\mid D,Y,e)\Vert p(H\mid D)\big)\right].\]
+$$\mathrm{EIG}(e)=\mathbb E_{Y\mid e,D}\!\left[\mathrm{KL}\big(p(H\mid D,Y,e)\Vert p(H\mid D)\big)\right].$$
 
 This is useful only if likelihoods, priors, and observation models are appropriate. An experiment can have high EIG yet be too costly, unethical, poorly calibrated, or irrelevant to the final decision.
 
@@ -182,7 +182,7 @@ Metric Deltas can be more dangerous than solution Deltas because they may alter 
 
 A useful conceptual model is
 
-\[\begin{aligned}H_{t+1}&=F_H(H_t,E_t,M_t,\delta_H),\\X_{t+1}&=F_X(X_t,H_{t+1},C_t,\delta_X),\\E_{t+1}&=F_E(E_t,\mathrm{observations}(X_{t+1})),\\M_{t+1}&=F_M(M_t,E_{t+1},\delta_M).\end{aligned}\]
+$$\begin{aligned}H_{t+1}&=F_H(H_t,E_t,M_t,\delta_H),\\X_{t+1}&=F_X(X_t,H_{t+1},C_t,\delta_X),\\E_{t+1}&=F_E(E_t,\mathrm{observations}(X_{t+1})),\\M_{t+1}&=F_M(M_t,E_{t+1},\delta_M).\end{aligned}$$
 
 The equations describe coupled candidate processes, not a single synchronous algorithm. In practice, experiment outcomes arrive asynchronously and may be missing or disputed. Metric updates must not retroactively relabel old outcomes without preserving original evaluations.
 
