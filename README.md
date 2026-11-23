@@ -2,7 +2,7 @@
 
 ### A General Framework for Structural Search, Optimization, Metric Evolution, and Distributed Intelligence
 
-**Research framework · v1.0.0 draft · 2026-11-04**  
+**Research framework · v1.0.0 · 2026-11-23**  
 **Authors:** Sizhe Tan and GPT-Obot  
 **License:** Apache-2.0  
 **Status:** Conceptual research, proposed specifications, benchmark designs, and validation protocols. **Not a demonstrated universal optimizer or validated AGI/RSI system.**
@@ -136,7 +136,7 @@ The orchestrator is optional: the minimal CDE core does not require a distribute
 
 ## 5. Research map: 27 core manuscripts
 
-The planned v1.0.0 research corpus consists of **12 Foundations, 6 Specifications, 5 Cases, and 4 Extensions**. Manuscripts describe proposed architectures and validation plans; publication of a manuscript is not experimental validation.
+The v1.0.0 research corpus consists of **12 Foundations, 6 Specifications, 5 Cases, and 4 Extensions**. Manuscripts describe proposed architectures and validation plans; publication of a manuscript is not experimental validation.
 
 ### 5.1 Foundations — conceptual and algorithmic framework
 
@@ -185,7 +185,7 @@ The planned v1.0.0 research corpus consists of **12 Foundations, 6 Specification
 | EXT-003 | [CDE for Scientific Hypothesis and Metric Discovery](docs/extensions/EXT-003-CDE-for-Scientific-Hypothesis-and-Metric-Discovery.md) | Hypotheses, experiments, evidence, measurement |
 | EXT-004 | [CDE Collective Intelligence and Structural RSI](docs/extensions/EXT-004-CDE-Collective-Intelligence-and-Structural-RSI.md) | Collective learning, governance, structural RSI |
 
-**Reading recommendation:** Begin with [START-HERE.md](START-HERE.md) when available, then CDE-001 → CDE-002 → CDE-003 → SPEC-001 → SPEC-002. For implementation and testing, prioritize the specifications and case-study validation protocols. For the complete manuscript map, see [CONTENTS.md](CONTENTS.md) when available.
+**Reading recommendation:** Begin with [START-HERE.md](START-HERE.md), then CDE-001 → CDE-002 → CDE-003 → SPEC-001 → SPEC-002. For implementation and testing, prioritize the specifications and case-study validation protocols. For the complete manuscript map, see [CONTENTS.md](CONTENTS.md).
 
 ## 6. Ten planned architecture figures
 
@@ -263,7 +263,7 @@ CDE is designed to be compatible with broader **Structural Intelligence (SI)** r
 
 These are conceptual integration points. They do not establish operational compatibility or empirical improvements without implementation and tests.
 
-## 10. Proposed repository layout
+## 10. Repository layout
 
 ```text
 Constrained-Delta-Evolution/
@@ -313,7 +313,7 @@ No general-purpose runtime or benchmark leaderboard is implied by the manuscript
 
 **Authors:** Sizhe Tan and GPT-Obot.  
 **License:** Apache License 2.0.  
-**Version:** v1.0.0 research draft.  
+**Version:** v1.0.0 research release.  
 **DOI:** Not yet assigned; do not invent a DOI or cite one until a release has been archived and a DOI confirmed.
 
 ---

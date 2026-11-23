@@ -1,7 +1,7 @@
 # START HERE — Constrained Delta Evolution (CDE)
 
 **A reader's guide to structural search, constrained optimization, metric evolution, and distributed intelligence**  
-**Version:** v1.0.0 research draft · **Date:** 2026-11-04  
+**Version:** v1.0.0 research release · **Date:** 2026-11-23  
 **Authors:** Sizhe Tan and GPT-Obot · **License:** Apache-2.0  
 **Repository:** `Constrained-Delta-Evolution/`  
 **Research status:** Conceptual architecture, proposed specifications, case-study protocols, and falsifiable hypotheses. **No universal optimization, generalization, collective-learning, or recursive-self-improvement result is claimed as experimentally established.**

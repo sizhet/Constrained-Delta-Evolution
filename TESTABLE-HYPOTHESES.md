@@ -908,6 +908,6 @@ This file is a **research hypothesis register**, not a results paper. It intenti
 
 ---
 
-**Version:** v1.0.0 research draft  
+**Version:** v1.0.0 research release  
 **Authors:** Sizhe Tan and GPT-Obot  
 **License:** Apache-2.0

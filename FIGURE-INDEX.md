@@ -3,30 +3,28 @@
 **Project:** Constrained Delta Evolution: A General Framework for Structural Search, Optimization, Metric Evolution, and Distributed Intelligence  
 **Authors:** Sizhe Tan and GPT-Obot  
 **Version:** v1.0.0 (publication preparation)  
-**Date:** 2026-11-04  
+**Date:** 2026-11-23  
 **License:** Apache-2.0  
 **Repository location:** `FIGURE-INDEX.md`
 
 ## 1. Purpose and status
 
-This index is the authoritative *planned figure map* for the ten CDE illustrations. It specifies figure identifiers, exact filenames, captions, conceptual content, recommended manuscript placement, and editorial validation checks. The figures are **conceptual research diagrams**, not empirical evidence, proof of algorithmic guarantees, or reports of measured performance.
-
-**Asset-status clarification:** A composite overview image containing ten labeled panels has been generated during drafting. That composite is not automatically equivalent to ten separate PNG assets with the exact filenames below. Before release, export or regenerate each figure as its own PNG, verify its content and legibility, and place it in `figures/`. Do not mark individual files as present until verified.
+This index is the authoritative *figure map* for the ten CDE illustrations. It specifies figure identifiers, exact filenames, captions, conceptual content, recommended manuscript placement, and editorial validation checks. The figures are **conceptual research diagrams**, not empirical evidence, proof of algorithmic guarantees, or reports of measured performance.
 
 ## 2. Canonical figure inventory
 
 | Figure | Exact filename | Title | Primary manuscript |
 |---|---|---|---|
-| Fig-001 | `Fig-001-CDE-Grand-Architecture.png` | CDE Grand Architecture | `docs/foundations/CDE-008-CDE-as-a-General-Exploration-and-Optimization-Orchestrator.md` |
-| Fig-002 | `Fig-002-From-BTP-and-D-BTP-to-CDE.png` | From BTP and D-BTP to CDE | `docs/foundations/CDE-001-From-BTP-and-D-BTP-to-Constrained-Delta-Evolution.md` |
-| Fig-003 | `Fig-003-State-Container-and-Constraint-Governed-Delta.png` | State Container and Constraint-Governed Delta | `docs/foundations/CDE-002-State-Containers-and-Constraint-Governed-Transitions.md` |
-| Fig-004 | `Fig-004-Adaptive-M-to-N-Delta-Branching.png` | Adaptive M-to-N Delta Branching | `docs/foundations/CDE-003-Delta-Semantics-and-Adaptive-M-to-N-Branching.md` |
-| Fig-005 | `Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png` | Path Memory, NoSubtree, and Loop Back | `docs/foundations/CDE-004-Path-Memory-No-Subtree-Semantics-and-Loop-Back-Control.md` |
-| Fig-006 | `Fig-006-Search-DP-and-Branch-and-Bound-Integration.png` | Search, DP, and Branch-and-Bound Integration | `docs/foundations/CDE-005-Search-Dynamic-Programming-and-Branch-and-Bound-Integration.md` |
-| Fig-007 | `Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png` | Multi-Scale Delta Generation and Directional Exploration | `docs/foundations/CDE-006-Directional-Fields-and-Multi-Scale-Delta-Generation.md` |
-| Fig-008 | `Fig-008-Solution-and-Metric-Co-Evolution.png` | Solution and Metric Co-Evolution | `docs/foundations/CDE-007-Solution-Space-and-Metric-Space-Co-Evolution.md` |
-| Fig-009 | `Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png` | Distributed CDE Orchestrator and Structural Relay | `docs/foundations/CDE-009-Distributed-CDE-and-Delta-Exploration-Contracts.md` |
-| Fig-010 | `Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png` | Recursive Generator Evolution and Collective Learning | `docs/foundations/CDE-011-Recursive-Generator-and-Policy-Evolution.md` |
+| Fig-001 | [Fig-001-CDE-Grand-Architecture.png](figures/Fig-001-CDE-Grand-Architecture.png) | CDE Grand Architecture | `docs/foundations/CDE-008-CDE-as-a-General-Exploration-and-Optimization-Orchestrator.md` |
+| Fig-002 | [Fig-002-From-BTP-and-D-BTP-to-CDE.png](figures/Fig-002-From-BTP-and-D-BTP-to-CDE.png) | From BTP and D-BTP to CDE | `docs/foundations/CDE-001-From-BTP-and-D-BTP-to-Constrained-Delta-Evolution.md` |
+| Fig-003 | [Fig-003-State-Container-and-Constraint-Governed-Delta.png](figures/Fig-003-State-Container-and-Constraint-Governed-Delta.png) | State Container and Constraint-Governed Delta | `docs/foundations/CDE-002-State-Containers-and-Constraint-Governed-Transitions.md` |
+| Fig-004 | [Fig-004-Adaptive-M-to-N-Delta-Branching.png](figures/Fig-004-Adaptive-M-to-N-Delta-Branching.png) | Adaptive M-to-N Delta Branching | `docs/foundations/CDE-003-Delta-Semantics-and-Adaptive-M-to-N-Branching.md` |
+| Fig-005 | [Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png](figures/Fig-005-Path-Memory-No-Subtree-and-Loop-Back.png) | Path Memory, NoSubtree, and Loop Back | `docs/foundations/CDE-004-Path-Memory-No-Subtree-Semantics-and-Loop-Back-Control.md` |
+| Fig-006 | [Fig-006-Search-DP-and-Branch-and-Bound-Integration.png](figures/Fig-006-Search-DP-and-Branch-and-Bound-Integration.png) | Search, DP, and Branch-and-Bound Integration | `docs/foundations/CDE-005-Search-Dynamic-Programming-and-Branch-and-Bound-Integration.md` |
+| Fig-007 | [Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png](figures/Fig-007-Multi-Scale-Delta-Generation-and-Directional-Exploration.png) | Multi-Scale Delta Generation and Directional Exploration | `docs/foundations/CDE-006-Directional-Fields-and-Multi-Scale-Delta-Generation.md` |
+| Fig-008 | [Fig-008-Solution-and-Metric-Co-Evolution.png](figures/Fig-008-Solution-and-Metric-Co-Evolution.png) | Solution and Metric Co-Evolution | `docs/foundations/CDE-007-Solution-Space-and-Metric-Space-Co-Evolution.md` |
+| Fig-009 | [Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png](figures/Fig-009-Distributed-CDE-Orchestrator-and-Structural-Relay.png) | Distributed CDE Orchestrator and Structural Relay | `docs/foundations/CDE-009-Distributed-CDE-and-Delta-Exploration-Contracts.md` |
+| Fig-010 | [Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png](figures/Fig-010-Recursive-Generator-Evolution-and-Collective-Learning.png) | Recursive Generator Evolution and Collective Learning | `docs/foundations/CDE-011-Recursive-Generator-and-Policy-Evolution.md` |
 
 ## 3. Figure-by-figure captions and placement
 

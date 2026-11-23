@@ -2,7 +2,7 @@
 
 **Project:** Constrained Delta Evolution: A General Framework for Structural Search, Optimization, Metric Evolution, and Distributed Intelligence  
 **Authors:** Sizhe Tan and GPT-Obot  
-**Version:** v1.0.0 research draft · **Date:** 2026-11-04  
+**Version:** v1.0.0 research release · **Date:** 2026-11-23  
 **License:** Apache-2.0  
 **Role:** Cross-document vocabulary, notation, semantic distinctions, and conformance-oriented reading reference  
 **Scope:** 12 Foundations, 6 Specifications, 5 Cases, and 4 Extensions (27 research papers)

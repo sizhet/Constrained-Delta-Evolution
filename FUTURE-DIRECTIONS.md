@@ -3,7 +3,7 @@
 **Project:** Constrained Delta Evolution: A General Framework for Structural Search, Optimization, Metric Evolution, and Distributed Intelligence  
 **Authors:** Sizhe Tan and GPT-Obot  
 **Status:** Open research agenda, v1.0.0 draft  
-**Date:** 2026-11-04  
+**Date:** 2026-11-23  
 **License:** Apache-2.0  
 **Repository location:** `FUTURE-DIRECTIONS.md`
 

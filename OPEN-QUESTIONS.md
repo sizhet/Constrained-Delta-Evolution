@@ -2,7 +2,7 @@
 
 **Project:** Constrained Delta Evolution: A General Framework for Structural Search, Optimization, Metric Evolution, and Distributed Intelligence  
 **Authors:** Sizhe Tan and GPT-Obot  
-**Status:** Open research agenda, v1.0.0 draft (2026-11-04)  
+**Status:** Open research agenda, v1.0.0 draft (2026-11-23)  
 **License:** Apache-2.0  
 **Companion documents:** [README](README.md) · [START-HERE](START-HERE.md) · [CONTENTS](CONTENTS.md) · [GLOSSARY](GLOSSARY.md) · [FUTURE-DIRECTIONS](FUTURE-DIRECTIONS.md) · [TESTABLE-HYPOTHESES](TESTABLE-HYPOTHESES.md) · [VALIDATION-ROADMAP](VALIDATION-ROADMAP.md)
 
@@ -526,5 +526,5 @@ A useful result may be a verified improvement, a proof under explicit assumption
 
 ---
 
-**Citation context:** *Constrained Delta Evolution (CDE)*, Sizhe Tan and GPT-Obot, research draft, 2026.  
+**Citation context:** *Constrained Delta Evolution (CDE)*, Sizhe Tan and GPT-Obot, research release, 2026.  
 **License:** Apache-2.0.
