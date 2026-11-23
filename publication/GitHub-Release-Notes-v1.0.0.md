@@ -28,6 +28,10 @@ The framework studies adaptive branching, directional and multi-scale Delta gene
 
 A CDE task can be described abstractly by
 
+$$
+\mathcal{P}=(S,\Delta,T,C,G,L), \qquad S_{t+1}=T(S_t,\delta_t), \quad \delta_t\in G(S_t).
+$$
+
 \[
 \mathcal{P}=(S,\Delta,T,C,G,L), \qquad S_{t+1}=T(S_t,\delta_t), \quad \delta_t\in G(S_t),
 \]
