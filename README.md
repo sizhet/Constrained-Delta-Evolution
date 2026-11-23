@@ -314,7 +314,7 @@ No general-purpose runtime or benchmark leaderboard is implied by the manuscript
 **Authors:** Sizhe Tan and GPT-Obot.  
 **License:** Apache License 2.0.  
 **Version:** v1.0.0 research release.  
-**DOI:** Not yet assigned; do not invent a DOI or cite one until a release has been archived and a DOI confirmed.
+**DOI:** 10.5281/zenodo.24484138
 
 ---
 
