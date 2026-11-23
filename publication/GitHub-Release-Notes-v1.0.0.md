@@ -32,10 +32,6 @@ $$
 \mathcal{P}=(S,\Delta,T,C,G,L), \qquad S_{t+1}=T(S_t,\delta_t), \quad \delta_t\in G(S_t).
 $$
 
-\[
-\mathcal{P}=(S,\Delta,T,C,G,L), \qquad S_{t+1}=T(S_t,\delta_t), \quad \delta_t\in G(S_t),
-\]
-
 where the meaning and validity of the state, Delta, transition, constraints, generation mechanism, and path/learning context must be specified for the task. A proposed successor is not automatically a committed valid state: hard constraints, policy versions, and applicable validation requirements govern acceptance.
 
 ### 1.2 Adaptive M-to-N Delta branching
