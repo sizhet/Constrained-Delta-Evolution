@@ -7,7 +7,7 @@
 **License:** Apache-2.0  
 **Release tag:** `v1.0.0` (to be created upon publication)  
 **Publication date:** To be confirmed at release  
-**DOI:** Pending; do not insert an unassigned identifier  
+**DOI:** 10.5281/zenodo.24484138  
 **Release type:** Research papers, specifications, illustrative cases, and validation plans; **not** a validated software release
 
 > **Publication note:** This file is the proposed text for a future GitHub Release. Its presence in the repository does not mean that the tag has been created, the release has been published, or a DOI has been assigned. Replace the pending fields only after those events are confirmed.
